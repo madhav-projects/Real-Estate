@@ -16,7 +16,7 @@
     /* LuxeDwell text position */
     .luxe-text {
     position: absolute;
-    top: 20px;
+    top: 17px;
     left: 124px;
     z-index: 1000;
     font-weight: bold;

@@ -24,12 +24,30 @@
         @include('agents.header')
         <!-- header section ends -->
         <div class="container">
-            @include('admin.sidebar')
+           
             <div class="form-container">
                 <div id="message"></div>
                 <form action="{{url('/add_property')}}" method="post" id="property_type" enctype="multipart/form-data">
                     @csrf
                     <div class="form-section">
+                        <!-- Company Name -->
+                        <div class="form-group">
+                         <label for="company-name">Company Name</label>
+                         <select id="company-name" name="company_name" required>
+                            <option value="">Select Company</option>
+                            @foreach($companies as $company)
+                            <option value="{{ $company->realtron_company }}">{{ $company->realtron_company }}</option>
+                          @endforeach
+                          </select>
+                              </div>
+
+                        <!-- Agent Name (Automatically populated) -->
+                        <div class="form-group">
+                            <label for="agent-name">Agent Name</label>
+                            <input type="text" id="agent-name" name="agent_name" 
+                                   value="{{ Auth::user()->name }}" readonly>
+                        </div>
+
                         <div class="form-group">
                             <label for="property-type">Property Type</label>
                             <select id="property-type" name="property_type" required>
@@ -163,6 +181,7 @@
                                 <option value="Sold Out">Sold Out</option>
                             </select>
                         </div>
+
                     <div class="form-section button-section">
                         <button type="submit">Submit Property</button>
                     </div>
@@ -170,6 +189,7 @@
             </div>
         </div>
     </div>
+
     <script>
     $(function() {
         // Set CSRF token for AJAX requests if using Laravel or similar frameworks
@@ -213,6 +233,7 @@
     </script>
 </body>
 </html>
+
 <style>
 body {
     margin: 0;

@@ -58,8 +58,7 @@ Route::get('/show_category',[AdminController::class,'showcategory']);
 Route::delete('/delete_category/{id}', [AdminController::class, 'deleteCategory']);
 
 Route::get('/view_properties', [AdminController::class, 'view_properties']);
-
-Route::post('/add_property',[AdminController::class,'addproperty']);
+Route::post('/add_property',[AdminController::class,'addproperty'])->name('add_property');
 Route::get('/show_properties',[AdminController::class,'show_properties']);
 Route::get('/edit_property',[AdminController::class,'editProperty']);
 
