@@ -25,7 +25,7 @@
         @include('agents.header')
         <!-- header section ends -->
         <div class="row">
-            @include('admin.sidebar')
+           
 
             <div class="center col-md-9">
                 <div class="row">

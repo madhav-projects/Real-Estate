@@ -19,13 +19,12 @@
         }
     </style>
 </head>
-<body class="overflow-x-hidden">
-    <div class="hero_area">
+<div class="hero_area">
         <!-- header section starts -->
         @include('agents.header')
         <!-- header section ends -->
-        <div class="row">
-            @include('admin.sidebar')
+        <div class="container">
+        
 
             <div class="col-md-9" style="width: 80%;">
                 
@@ -65,7 +64,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
         </div>
   
     <script>
@@ -169,9 +168,8 @@
 </body>
 </html>
 
-
-
 <style>
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -179,172 +177,17 @@ body {
     flex-direction: column;
 }
 
-
 .hero_area {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.header_section {
-    background-color: #5e3806;
-    /* padding: 10px 0; */
-    border-bottom: 1px solid #ddd;
-    font-family: 'Poppins', sans-serif;
-}
 
-
-.header_section .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header_section .navbar {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.header_section .navbar-brand img {
-    max-width: 120px;
-    transition: transform 0.3s ease;
-}
-
-.header_section .navbar-nav {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    flex-grow: 1;
-    justify-content: center;
-    flex-direction: row;
-}
-
-.header_section .navbar-nav .nav-item {
-    margin: 0 15px;
-}
-
-.header_section .navbar-nav .nav-item a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 12px;
-    font-weight: bold;
-}
-
-.header_section .navbar-nav .nav-item a:hover,
-.header_section .navbar-nav .nav-item.active a {
-    color: #c0392b;
-}
-
-.header_section .navbar-nav .dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: white;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    margin-top: 10px;
-    padding: 0;
-    list-style: none;
-}
-
-.header_section .navbar-nav .dropdown-menu li {
-    padding: 10px;
-}
-
-.header_section .navbar-nav .dropdown-menu li a {
-    color: black;
-    text-decoration: none;
-    display: block;
-}
-
-.header_section .navbar-nav .dropdown:hover .dropdown-menu {
-    display: block;
-}
 
 .container {
     display: flex;
     width: 100%;
-}
-
-.sidebar {
-    width: 200px;
-    background-color: #5e3806;
-    color: white;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-}
-
-.sidebar nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar nav ul li {
-    padding: 15px;
-    position: relative;
-    transition: background-color 0.3s ease;
-}
-
-.sidebar nav ul li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-    transition: color 0.3s ease;
-}
-
-.sidebar nav ul li a:hover,
-.sidebar nav ul li a.active {
-    background-color: #463305;
-    color: #ffd700; /* Gold color for active link */
-}
-
-.sidebar nav ul ul {
-    display: none;
-    position: absolute;
-    left: 200px;
-    top: 0;
-    background-color: #4a3306;
-    padding: 0;
-    margin: 0;
-    min-width: 200px;
-    z-index: 1000;
-}
-
-.sidebar nav ul li:hover ul {
-    display: block;
-}
-
-.sidebar nav ul ul li {
-    padding: 10px;
-}
-
-.sidebar nav ul ul li a:hover {
-    background-color: #362504;
-}
-
-.sidebar nav ul li a::after {
-    content: ' ▼';
-    float: right;
-    transition: transform 0.3s ease;
-}
-
-.sidebar nav ul li:hover > a::after {
-    transform: rotate(180deg);
-}
-
-.sidebar nav ul ul li a::after {
-    content: '';
-}
-
-.sidebar nav ul li a.active::after {
-    transform: rotate(180deg);
-}
-
-.sidebar nav ul ul li a {
-    padding-left: 30px;
 }
 
 
@@ -399,14 +242,12 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 .table-container {
     overflow-x: auto;
-    /* Center the c overflow-x: auto; */
     margin: 1px -244px;
-    
     max-width: 1300px; /* Adjust max-width as needed */
 }
-
 
 .table-section form button {
     padding: 10px 20px;
@@ -428,7 +269,8 @@ body {
     margin-top: 20px;
 }
 
-.table-section th, .table-section td {
+.table-section th,
+.table-section td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
