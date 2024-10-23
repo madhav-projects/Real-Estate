@@ -3,8 +3,8 @@
         <ul>
             <li><a href="/home" class="active">Dashboard</a></li>
             <li><a href="{{url('/Realtrondetail')}}">Realtron Details</a></li>
-            <li><a href="{{url('view_properties')}}">Agent Details</a></li>
-            <li><a href="{{url('show_properties')}}">Property Details</a></li>
+            <li><a href="">Agent Details</a></li>
+            <li><a href="">Property Details</a></li>
             <li><a href="#">Contact, Feedback</a></li>
         </ul>
     </nav>

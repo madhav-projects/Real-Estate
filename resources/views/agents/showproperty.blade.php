@@ -12,28 +12,29 @@
     <style>
         #message {
             display: none;
-            /* margin-top: -153px; */
             padding: 8px;
             border-radius: 18px;
             margin-bottom: 20px;
         }
     </style>
 </head>
+<body>
 <div class="hero_area">
         <!-- header section starts -->
         @include('agents.header')
         <!-- header section ends -->
         <div class="container">
         
-
             <div class="col-md-9" style="width: 80%;">
                 
                 <div class="row">
-                    <h2  class="fs-5 fw-bold mt-4">Property Details</h2>
+                    <h2 class="fs-5 fw-bold mt-4">Property Details</h2>
                     <div class="table-responsive">
                         <table class="table table-section w-100">
                             <thead>
                                 <tr>
+                                    <th>company_name</th>
+                                    <th>username</th>
                                     <th>property_type</th>
                                     <th>selling_type</th>
                                     <th>bhk</th>
@@ -53,7 +54,6 @@
                                     <th>image2</th>
                                     <th>image3</th>
                                     <th>image4</th>
-                                  
                                     <th>action</th>
                                 </tr>
                             </thead>
@@ -76,23 +76,25 @@
                 }
             });
 
-           
-
-            // Function to fetch categories via AJAX
+            // Function to fetch properties via AJAX
             function fetchCategories() {
                 $.ajax({
-                    url: '{{ url('show_properties') }}', // Replace with your endpoint to fetch categories
+                    url: '{{ url('show_properties') }}', // Replace with your endpoint to fetch properties
                     method: 'GET',
                     success: function(response) {
-                        // console.log(response); // Log the response to inspect the data structure
-                        $('tbody').html("");
+                        $('tbody').html(""); // Clear table body
                         var tableBody = $('#Propertydetails');
-                        tableBody.empty(); // Clear existing rows before appending
+                        tableBody.empty(); // Clear existing rows
 
                         // Iterate through the properties and append to the table
                         if (response.property) {
                             response.property.forEach(function(property) {
+                                // Check if username exists, otherwise show 'N/A'
+                                var username = property.username ? property.username : 'N/A';
+
                                 var row = '<tr>' +
+                                    '<td>' + property.company_name + '</td>' +
+                                    '<td>' +  property.agent_name+ '</td>' +  // Use the username variable here
                                     '<td>' + property.property_type + '</td>' +
                                     '<td>' + property.selling_type + '</td>' +
                                     '<td>' + property.bhk + '</td>' +
@@ -108,11 +110,10 @@
                                     '<td>' + property.city + '</td>' +
                                     '<td>' + property.address + '</td>' +
                                     '<td>' + property.status + '</td>' +
-                                   '<td><img src="' + property.image1 + '" width="50px" height="50px"></td>' +
-                                '<td><img src="' + property.image2 + '" width="50px"></td>' +
-                                '<td><img src="' + property.image3 + '" width="50px"></td>' +
-                                '<td><img src="' + property.image4 + '" width="50px"></td>' +
-                                  
+                                    '<td><img src="' + property.image1 + '" width="50px" height="50px"></td>' +
+                                    '<td><img src="' + property.image2 + '" width="50px"></td>' +
+                                    '<td><img src="' + property.image3 + '" width="50px"></td>' +
+                                    '<td><img src="' + property.image4 + '" width="50px"></td>' +
                                     '<td><button class="btn btn-danger deleteBtn" data-id="' + property.id + '">Delete</button></td>' +
                                     '<button class="btn btn-primary editBtn" data-id="' + property.id + '">Edit</button>' +
                                     '</tr>';
@@ -125,11 +126,12 @@
                             var categoryId = $(this).data('id');
                             deleteCategory(categoryId);
                         });
+
                         // Bind edit action to newly created edit buttons
                         $('.editBtn').click(function() {
                             var propertyId = $(this).data('id');
                             window.location.href = '/edit_property?id=' + propertyId;
-                              });
+                        });
 
                     },
                     error: function(xhr, status, error) {
@@ -137,36 +139,32 @@
                     }
                 });
             }
-            //end  fetch category
 
             // Function to delete category via AJAX
             function deleteCategory(categoryId) {
-                // Ask for confirmation before deleting
                 var confirmation = confirm("Do you really want to delete this category?");
-
-                if(confirmation){
+                if (confirmation) {
                     $.ajax({
-                        url:'delete_category/' + categoryId,
-                        method:'DELETE',
-                        success:function(response){
-                            console.log(response);
+                        url: 'delete_category/' + categoryId,
+                        method: 'DELETE',
+                        success: function(response) {
                             $('button[data-id="' + categoryId +'"]').closest('tr').remove();
-
                         },
-                        error:function(xhr, status, error){
+                        error: function(xhr, status, error) {
                             console.error(xhr.responseText);
                         }
                     });
                 }
-               
             }
 
-            // Call fetchCategories after document is ready (optional)
+            // Call fetchCategories after document is ready
             fetchCategories();
         });
     </script>
-</body>
+</body> 
 </html>
+
+
 
 <style>
 
@@ -244,7 +242,7 @@ body {
 }
 
 .table-container {
-    overflow-x: auto;
+    /* overflow-x: auto; */
     margin: 1px -244px;
     max-width: 1300px; /* Adjust max-width as needed */
 }

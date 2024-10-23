@@ -142,22 +142,23 @@ if ($request->hasFile('image4')) {
     }
 
     public function show_properties()
-    {
-       
-        $property = property::all();
-        
-        // Return the fetched categories in JSON format along with a custom message
-        if(request()->expectsjson()){
+{
+    // Get the currently logged-in user
+    $user = auth()->user();
+
+    // Fetch all properties that belong to the currently logged-in user
+    $property = Property::where('agent_name', $user->name)->get(); // Assuming 'user_id' is the foreign key in the 'properties' table
+
+    // Return the fetched properties in JSON format for AJAX requests
+    if (request()->expectsJson()) {
         return response()->json([
             'message' => 'Properties fetched successfully',
             'property' => $property,
         ]);
-    } 
-    else{
+    } else {
         return view('agents.showproperty', compact('property'));
     }
 }
-
 
 
   
