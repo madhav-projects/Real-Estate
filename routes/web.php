@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndexController;
@@ -67,5 +68,8 @@ Route::get('/edit_property',[AdminController::class,'editProperty']);
 Route::get('/view_seller',[SellerController::class,'viewseller']);
 Route::get('/seller_contact/{id}',[SellerController::class,'sellercontact']);
 Route::post('/create_selleruser',[SellerController::class,'createseller']);
+Route::get('/fetch_agent_property',[HomeController::class,'fetch_agent_property']);
 
+// agebt
+Route::get('/fetch_task',[AgentController::class,'fetchtask']);
 require __DIR__.'/auth.php';

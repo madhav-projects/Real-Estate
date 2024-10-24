@@ -10,37 +10,28 @@
 
         <div class="collapse navbar-collapse justify-end" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item {{ Request::is('home') ? 'active' : '' }}">
                     <a class="nav-link" href="{{url('/home')}}">Home</a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Properties</a>
+                <li class="nav-item {{ Request::is('fetch_task') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{url('/fetch_task')}}">Task</a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url('/agenthome')}}">Task</a>
-                </li>
-
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('view_properties') ? 'active' : '' }}">
                     <a class="nav-link" href="{{url('/view_properties')}}">Add Properties</a>
                 </li>
-
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('show_properties') ? 'active' : '' }}">
                     <a class="nav-link" href="{{url('/show_properties')}}">Property Details</a>
                 </li>
-
                 <!-- Ganesh Section -->
                 <li class="nav-item">
-                    <x-app-layout></x-app-layout> <!-- This is where "Ganesh" will be rendered -->
+                    <x-app-layout></x-app-layout>
                 </li>
-
                 <!-- User Profile Section -->
-                @if(Auth::user()->id == 1)  <!-- Conditional for a specific user with ID 1 -->
+                @if(Auth::user()->id == 1)
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        {{ Auth::user()->name }} <!-- Display logged-in user's name -->
+                        {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="{{url('/profile')}}">Profile</a>
@@ -92,10 +83,26 @@
         text-decoration: none;
         color: #333;
         font-size: 16px;
+        padding: 10px 15px; /* Add padding for better click area */
+        transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Add transition for smooth effects */
+        border: 2px solid transparent;
     }
 
     .nav-link:hover {
-        color: #d4a253;
+        background-color: #d4a253; /* Hover background color */
+        color: white; /* Hover text color */
+        border-radius: 5px; /* Rounded corners for hover effect */
+        transform: translateY(-5px); /* Animate button upward on hover */
+        border: 2px solid #b3933a; /* Border for hover */
+    }
+
+    /* Active state for the current page */
+    .nav-item.active .nav-link {
+        background-color: #b3933a; /* Background color for the active item */
+        color: white; /* Text color for the active item */
+        border-radius: 5px; /* Rounded corners for active item */
+        transform: scale(1.05); /* Slightly enlarge the active item */
+        border: 2px solid #b3933a; /* Add a border to the active item */
     }
 
     .navbar-toggler {
@@ -109,7 +116,6 @@
         z-index: 1000;
         font-weight: bold;
         font-size: 30px;
-        font-size: 1.5em;
         color: black;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
@@ -117,11 +123,6 @@
     /* Align menu items to the right */
     .navbar-collapse {
         justify-content: flex-end;
-    }
-
-    /* Add spacing between menu items */
-    .nav-item {
-        padding: 0 10px;
     }
 
     /* Dropdown menu for user profile */
@@ -140,12 +141,10 @@
         display: block;
         width: 100%;
         padding: 0.5rem 1rem;
-        clear: both;
         color: #333;
-        text-align: inherit;
-        white-space: nowrap;
         background-color: transparent;
         border: 0;
+        transition: background-color 0.3s, color 0.3s;
     }
 
     .dropdown-item:hover {

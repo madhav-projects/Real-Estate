@@ -36,7 +36,7 @@
         </video>
          <div class="search_section">
                <h1>Find the Perfect Home</h1>
-               <p>Stop looking. Start finding with RL Groups</p>
+               <p>Stop looking. Start finding with LuxeDwell</p>
                <div class="search_form">
                   <form action="properties.html" method="get" class="form-inline justify-content-center">
                      <select class="form-control" name="type">

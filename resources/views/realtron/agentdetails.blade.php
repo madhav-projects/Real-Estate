@@ -45,34 +45,7 @@
             padding-left: 0;
             padding-right: 0;
         }
-        .luxe-text {
-         position: absolute;
-         top: 23px;
-         left: 122px;
-         z-index: 1000;
-         font-weight: bold;
-         font-size: 30px;
-         font-size: 1.5em;
-         color: black;
-         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      }
-
-        .hero_area {
-            width: 100%;
-        }
-        .header_section {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 10;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            /* padding: 6px 10px; */
-        }
+        
     </style>
 </head>
 <body class="overflow-x-hidden font-sans antialiased">

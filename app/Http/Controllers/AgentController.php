@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assigntask;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Property;
 use Illuminate\Support\Facades\Validator; // Import the Validator facade
+use Auth;
 
 class AgentController extends Controller
 {
-    public function selecttype(){
+    public function selecttype()
+    {
         return view('admin.selecttype');
     }
 
@@ -20,13 +23,13 @@ class AgentController extends Controller
         $validatedData = $request->validate([
             'category' => 'required|string|max:255',
         ]);
-    
-        // Create the category
-         $category=new Category;
 
-        $category->category_name=$validatedData['category'];
+        // Create the category
+        $category = new Category;
+
+        $category->category_name = $validatedData['category'];
         $category->save();
-    
+
         // Return a JSON response indicating success
         return response()->json([
             'success' => true,
@@ -34,47 +37,47 @@ class AgentController extends Controller
             'data' => $category
         ], 201);
     }
-    
-    public function showcategory(){
+
+    public function showcategory()
+    {
         // Assuming you're using Laravel Eloquent ORM
-        
+
         // Fetch all categories from the 'categories' table
         $categories = Category::all();
-        
+
         // Return the fetched categories in JSON format along with a custom message
         return response()->json([
             'message' => 'Categories fetched successfully',
             'categories' => $categories,
         ]);
     }
-    
+
 
     //write detele code here
-    
+
     public function deletecategory($id)
     {
-        $category=Category::find($id);
-        if($category)
-        {
+        $category = Category::find($id);
+        if ($category) {
             $category->delete();
             return response()->json([
-                'success'=>200,
-                'message'=>'category delete successfully'
+                'success' => 200,
+                'message' => 'category delete successfully'
             ]);
-        }else
-        {
+        } else {
             return response()->json([
-                'success'=>404,
-                'message'=>'No Category Found'
+                'success' => 404,
+                'message' => 'No Category Found'
             ]);
         }
     }
 
-    public function view_properties(){
-        $property=Property::all();
-        return view('admin.properties',compact('property'));
+    public function view_properties()
+    {
+        $property = Property::all();
+        return view('admin.properties', compact('property'));
     }
-    
+
     public function addproperty(Request $request)
     {
         // Validate the request
@@ -98,7 +101,7 @@ class AgentController extends Controller
             'image2' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image3' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image4' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-           
+
         ]);
 
         // Check if validation fails
@@ -128,42 +131,42 @@ class AgentController extends Controller
         $property->address = $request->address;
         $property->status = $request->status;
         // Handling image uploads
-       // Handling image uploads
+        // Handling image uploads
 
-if ($request->hasFile('image1')) {
-    $image1 = $request->file('image1');
-    $imageName1 = time().'.'.$image1->getClientOriginalExtension();
-    $image1->move(public_path('properties'), $imageName1);
-    $property->image1 = 'properties/'.$imageName1;
-}
+        if ($request->hasFile('image1')) {
+            $image1 = $request->file('image1');
+            $imageName1 = time() . '.' . $image1->getClientOriginalExtension();
+            $image1->move(public_path('properties'), $imageName1);
+            $property->image1 = 'properties/' . $imageName1;
+        }
 
-if ($request->hasFile('image2')) {
-    $image2 = $request->file('image2');
-    $imageName2 = time().'.'.$image2->getClientOriginalExtension();
-    $image2->move(public_path('properties'), $imageName2);
-    $property->image2 = 'properties/'.$imageName2;
-}
+        if ($request->hasFile('image2')) {
+            $image2 = $request->file('image2');
+            $imageName2 = time() . '.' . $image2->getClientOriginalExtension();
+            $image2->move(public_path('properties'), $imageName2);
+            $property->image2 = 'properties/' . $imageName2;
+        }
 
-// Handling image uploads
-if ($request->hasFile('image3')) {
-    $image3 = $request->file('image3');
-    $imageName3 = time().'.'.$image3->getClientOriginalExtension();
-    $image3->move(public_path('properties'), $imageName3);
-    $property->image3 = 'properties/'.$imageName3;
-}
+        // Handling image uploads
+        if ($request->hasFile('image3')) {
+            $image3 = $request->file('image3');
+            $imageName3 = time() . '.' . $image3->getClientOriginalExtension();
+            $image3->move(public_path('properties'), $imageName3);
+            $property->image3 = 'properties/' . $imageName3;
+        }
 
-if ($request->hasFile('image4')) {
-    $image4 = $request->file('image4');
-    $imageName4 = time().'.'.$image4->getClientOriginalExtension();
-    $image4->move(public_path('properties'), $imageName2);
-    $property->image4 = 'properties/'.$imageName4;
-}
+        if ($request->hasFile('image4')) {
+            $image4 = $request->file('image4');
+            $imageName4 = time() . '.' . $image4->getClientOriginalExtension();
+            $image4->move(public_path('properties'), $imageName2);
+            $property->image4 = 'properties/' . $imageName4;
+        }
 
 
 
         // Saving the floor plans
 
-     
+
         // Save the property
         $property->save();
 
@@ -177,40 +180,59 @@ if ($request->hasFile('image4')) {
 
     public function show_properties()
     {
-       
+
         $property = property::all();
-        
+
         // Return the fetched categories in JSON format along with a custom message
-        if(request()->expectsjson()){
-        return response()->json([
-            'message' => 'Properties fetched successfully',
-            'property' => $property,
-        ]);
-    } 
-    else{
-        return view('admin.showproperty', compact('property'));
+        if (request()->expectsjson()) {
+            return response()->json([
+                'message' => 'Properties fetched successfully',
+                'property' => $property,
+            ]);
+        } else {
+            return view('admin.showproperty', compact('property'));
+        }
     }
-}
 
-public function editProperty($id)
-{
-  
-    $property = Property::find($id);
-    if ($property) {
+    public function editProperty($id)
+    {
 
-        return response()->json([
-        'success' => true,
-        'property' => $property,
-    ], 200);
+        $property = Property::find($id);
+        if ($property) {
 
-    }else {
-        // Return an error message if the property is not found
-        return response()->json([
-            'success' => false,
-            'message' => 'Property not found.',
-        ], 404);
+            return response()->json([
+                'success' => true,
+                'property' => $property,
+            ], 200);
+
+        } else {
+            // Return an error message if the property is not found
+            return response()->json([
+                'success' => false,
+                'message' => 'Property not found.',
+            ], 404);
+        }
+
+    }
+
+    public function fetchtask()
+    {
+        $user = Auth::user(); // Get the authenticated user
+        $assigntask = Assigntask::where('agent_name', $user->name)->get(); // Fetch assigned tasks
+        // return response()->json($assigntask);
+
+        // Return the fetched categories in JSON format along with a custom message
+        if (request()->expectsjson()) {
+            return response()->json([
+                'message' => 'Properties fetched successfully',
+                'assigntask' => $assigntask,
+            ]);
+        } else {
+            return view('agents.task', compact('assigntask'));
+        }
+
     }
     
-}
+
 
 }

@@ -107,18 +107,7 @@
     z-index: -1;
     object-fit: cover;
 }
-        .header_section {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 10;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            /* padding: 6px 10px; */
-        }
+        
         .navbar-brand img {
             height: 40px;
         }

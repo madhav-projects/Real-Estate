@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RealtronController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,7 @@ Route::get('/update_property/{id}',[AdminController::class,'updateProperty']);
 //user part
 Route::get('/view_seller',[SellerController::class,'viewseller']);
 Route::post('/create_selleruser',[SellerController::class,'createseller']);
+Route::get('/fetch_agent_property',[HomeController::class,'fetch_agent_property']);
 
 
 

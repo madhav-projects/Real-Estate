@@ -30,13 +30,13 @@
         }
         .hero_area {
             position: relative;
-            background-image: url('{{ asset('images/contact bg.jpg') }}'); /* Update with the path to your background image */
+            background-image: url('{{ asset('images/contact bg.jpg') }}');
             background-size: cover;
             background-position: center;
-            height: 100vh; /* Adjusted height to full viewport height */
+            height: 100vh;
             display: grid;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
+            justify-content: center;
+            align-items: center;
             color: black;
             text-align: center;
         }
@@ -77,22 +77,22 @@
             margin-bottom: 0;
         }
         .form_section {
-            width: 500px; /* Adjusted maximum width for the form */
+            width: 500px;
             margin: 0 auto;
         }
         .form_section .seller-form {
-            width: 100%; /* Adjusted maximum width for the form */
+            width: 100%;
             background: rgba(255, 255, 255, 0.8);
-            padding: 20px; /* Reduced padding to make the form more compact */
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
-            margin-top: 50px; /* Added top margin for spacing */
+            margin-top: 50px;
         }
         .form_section h2 {
-            margin-bottom: 20px; /* Spacing between header and form */
-            font-size: 24px; /* Adjusted font size */
-            font-weight: 700; /* Adjusted font weight */
-            color: #333; /* Adjusted text color */
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
         }
         label {
             text-align: left;
@@ -100,15 +100,15 @@
             font-weight: 600;
         }
         .form-group {
-            margin-bottom: 5px; /* Reduced margin between form groups */
+            margin-bottom: 5px;
         }
         .form-control {
-            height: 40px; /* Adjusted input height */
-            font-size: 14px; /* Adjusted font size */
+            height: 40px;
+            font-size: 14px;
         }
         .btn-primary {
-            padding: 10px 20px; /* Adjusted padding of the submit button */
-            font-size: 16px; /* Adjusted font size of the submit button */
+            padding: 10px 20px;
+            font-size: 16px;
         }
         .btn-custom {
             background-color: rgb(0, 0, 1);
@@ -127,9 +127,7 @@
 <body>
     <div class="hero_area">
         <div class="container">
-            <!-- header section starts -->
-            @include('user.userheader')
-            <!-- end header section -->
+        @include('user.userheader')
             <!-- Form Section -->
             <section class="form_section">
             <div id="response-message" class="mt-4 alert" style="display: none;"></div>
@@ -189,44 +187,41 @@
     </div>
 
     <!-- Scripts -->
-    <!-- Ensure jQuery is loaded before custom.js -->
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('js/custom.js') }}"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-<script>
-    $(document).ready(function() {
-        // Setup CSRF token for Ajax requests
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        // Form submission handling for the seller form
-        $('#sellerdetails').submit(function(event) {
-            event.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                type: "POST",
-                url: "{{ url('/create_selleruser') }}",  // Change this to the correct endpoint if different this is uri
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    $('#response-message').removeClass('alert-danger').addClass('alert-success').html('YourDetails successfully sent to company!').show();
-                    $('#sellerdetails')[0].reset();
-                },
-                error: function(xhr, status, error) {
-                    $('#response-message').removeClass('alert-success').addClass('alert-danger').html('An error occurred. Please try again.').show();
-                    console.error('Error:', error);
+    <script>
+        $(document).ready(function() {
+            // Setup CSRF token for Ajax requests
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            // Form submission handling for the seller form
+            $('#sellerdetails').submit(function(event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('/create_selleruser') }}",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        $('#response-message').removeClass('alert-danger').addClass('alert-success').html('YourDetails successfully sent to company!').show();
+                        $('#sellerdetails')[0].reset();
+                    },
+                    error: function(xhr, status, error) {
+                        $('#response-message').removeClass('alert-success').addClass('alert-danger').html('An error occurred. Please try again.').show();
+                        console.error('Error:', error);
+                    }
+                });
+            });
         });
-    });
-</script>
-
-
+    </script>
 </body>
 </html>

@@ -36,7 +36,7 @@
         </video>
          <div class="search_section">
                <h1>Find the Perfect Home</h1>
-               <p>Stop looking. Start finding with RL Groups</p>
+               <p>Stop looking. Start finding with LuxeDwell</p>
                <div class="search_form">
                   <form action="properties.html" method="get" class="form-inline justify-content-center">
                      <select class="form-control" name="type">
@@ -95,55 +95,8 @@
     z-index: -1;
     object-fit: cover;
 }
-.luxe-text {
-         position: absolute;
-         top: 21px;
-         left: 150px;
-         z-index: 1000;
-         font-weight: bold;
-         font-size: 30px;
-         font-size: 1.5em;
-         color: black;
-         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      }
-        .header_section {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 10;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            /* padding: 6px 10px; */
-        }
-        .navbar-brand img {
-            height: 40px;
-        }
-        .navbar-nav {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .nav-item {
-            margin: 0 15px;
-        }
-        .nav-link {
-            text-decoration: none;
-            color: #333;
-            font-size: 16px;
-        }
-        .nav-link:hover {
-            color: #d4a253;
-        }
-        .search_section {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: 10px;
-            margin: auto;
-        }
+
+        
         .search_section h1 {
             font-size: 3rem;
             margin-bottom: 10px;
