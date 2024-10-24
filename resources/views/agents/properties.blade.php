@@ -27,6 +27,7 @@
             <div class="form-container">
                 <form action="{{url('/add_property')}}" method="post" id="property_type" enctype="multipart/form-data">
                     @csrf
+                    <h1 class="property-details-heading">Add Properties</h1>
                     <div class="form-section">
                         <!-- Company Name -->
                         <div class="form-group">
@@ -250,7 +251,18 @@
     flex-direction: column;
 } */
 
-
+.property-details-heading {
+    font-weight: bold;         /* Makes the text bold */
+    text-align: center;        /* Centers the text */
+    font-size: 24px;           /* Increases the font size */
+    position: relative;        /* Change from fixed to relative */
+    top: 0;                    /* Reset the top position */
+    left: 50%;                 /* Centers the heading horizontally */
+    transform: translateX(-50%); /* Adjusts the centering to account for width */
+    z-index: 1000;             /* Ensures the heading stays above other elements */
+    width: 100%;               /* Optional: Makes the heading full width */
+    margin-top: 20px;          /* Add margin to move it down from the top if needed */
+}
 .hero_area {
     display: flex;
     flex-direction: column;
@@ -266,6 +278,7 @@
     flex: 1;
     padding: 116px;
     background-color: #f4f4f4;
+    margin-top: 55px;
 }
 
 .form-section {

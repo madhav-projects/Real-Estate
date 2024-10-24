@@ -55,7 +55,8 @@ Route::post('/assign_agent', [RealtronController::class, 'assignAgent'])->name('
 Route::get('/selecttype',[AdminController::class,'selecttype']);//this for view page
 Route::post('/addcategory',[AdminController::class,'addcategory']);
 Route::get('/show_category',[AdminController::class,'showcategory']);
-Route::delete('/delete_category/{id}', [AdminController::class, 'deleteCategory']);
+Route::delete('/delete_category/{id}', [RealtronController::class, 'deleteCategory']);
+
 
 Route::get('/view_properties', [AdminController::class, 'view_properties']);
 Route::post('/add_property',[AdminController::class,'addproperty'])->name('add_property');

@@ -25,40 +25,42 @@
         <!-- header section ends -->
         <div class="container">
         
-            <div class="col-md-9" style="width: 80%;">
+            <div class="col-md-9" style="width: 100%;">
                 
                 <div class="row">
                     <h2 class="fs-5 fw-bold mt-4">Property Details</h2>
-                    <div class="table-responsive">
+                    <div class="table-responsive table-container">
                         <table class="table table-section w-100">
+                        <h1 class="property-details-heading">Property Details</h1>
+
                             <thead>
                                 <tr>
-                                    <th>company_name</th>
-                                    <th>username</th>
-                                    <th>property_type</th>
-                                    <th>selling_type</th>
-                                    <th>bhk</th>
-                                    <th>bedroom</th>
-                                    <th>bathroom</th>
-                                    <th>kitchen</th>
-                                    <th>balcony</th>
-                                    <th>hall</th>
-                                    <th>floor</th>
-                                    <th>total_floor</th>
-                                    <th>area_size</th>
-                                    <th>state</th>
-                                    <th>city</th>
-                                    <th>address</th>
-                                    <th>status</th>
-                                    <th>image1</th>
-                                    <th>image2</th>
-                                    <th>image3</th>
-                                    <th>image4</th>
-                                    <th>action</th>
+                                    <th>Company Name</th>
+                                    <th>Username</th>
+                                    <th>Property Type</th>
+                                    <th>Selling Type</th>
+                                    <th>BHK</th>
+                                    <th>Bedroom</th>
+                                    <th>Bathroom</th>
+                                    <th>Kitchen</th>
+                                    <th>Balcony</th>
+                                    <th>Hall</th>
+                                    <th>Floor</th>
+                                    <th>Total Floor</th>
+                                    <th>Area Size</th>
+                                    <th>State</th>
+                                    <th>City</th>
+                                    <th>Address</th>
+                                    <th>Status</th>
+                                    <th>Image 1</th>
+                                    <th>Image 2</th>
+                                    <th>Image 3</th>
+                                    <th>Image 4</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody id="Propertydetails">
-                               
+                                <!-- Content will be injected here -->
                             </tbody>
                         </table>
                     </div>
@@ -79,7 +81,7 @@
             // Function to fetch properties via AJAX
             function fetchCategories() {
                 $.ajax({
-                    url: '{{ url('show_properties') }}', // Replace with your endpoint to fetch properties
+                    url: '{{ url('show_properties') }}',
                     method: 'GET',
                     success: function(response) {
                         $('tbody').html(""); // Clear table body
@@ -89,12 +91,9 @@
                         // Iterate through the properties and append to the table
                         if (response.property) {
                             response.property.forEach(function(property) {
-                                // Check if username exists, otherwise show 'N/A'
-                                var username = property.username ? property.username : 'N/A';
-
                                 var row = '<tr>' +
                                     '<td>' + property.company_name + '</td>' +
-                                    '<td>' +  property.agent_name+ '</td>' +  // Use the username variable here
+                                    '<td>' + property.agent_name + '</td>' +
                                     '<td>' + property.property_type + '</td>' +
                                     '<td>' + property.selling_type + '</td>' +
                                     '<td>' + property.bhk + '</td>' +
@@ -103,7 +102,7 @@
                                     '<td>' + property.kitchen + '</td>' +
                                     '<td>' + property.balcony + '</td>' +
                                     '<td>' + property.hall + '</td>' +
-                                    '<td>' + property.floor+ '</td>' +
+                                    '<td>' + property.floor + '</td>' +
                                     '<td>' + property.total_floor + '</td>' +
                                     '<td>' + property.area_size + '</td>' +
                                     '<td>' + property.state + '</td>' +
@@ -114,8 +113,8 @@
                                     '<td><img src="' + property.image2 + '" width="50px"></td>' +
                                     '<td><img src="' + property.image3 + '" width="50px"></td>' +
                                     '<td><img src="' + property.image4 + '" width="50px"></td>' +
-                                    '<td><button class="btn btn-danger deleteBtn" data-id="' + property.id + '">Delete</button></td>' +
-                                    '<button class="btn btn-primary editBtn" data-id="' + property.id + '">Edit</button>' +
+                                    '<td><button class="btn btn-danger deleteBtn" data-id="' + property.id + '">Delete</button>' +
+                                    '<button class="btn btn-primary editBtn" data-id="' + property.id + '">Edit</button></td>' +
                                     '</tr>';
                                 tableBody.append(row);
                             });
@@ -123,8 +122,8 @@
 
                         // Bind delete action to newly created delete buttons
                         $('.deleteBtn').click(function() {
-                            var categoryId = $(this).data('id');
-                            deleteCategory(categoryId);
+                            var propertyId = $(this).data('id');
+                            deleteCategory(propertyId);
                         });
 
                         // Bind edit action to newly created edit buttons
@@ -142,10 +141,10 @@
 
             // Function to delete category via AJAX
             function deleteCategory(categoryId) {
-                var confirmation = confirm("Do you really want to delete this category?");
+                var confirmation = confirm("Do you really want to delete this property?");
                 if (confirmation) {
                     $.ajax({
-                        url: 'delete_category/' + categoryId,
+                        url: '{{ url('delete_category') }}/' + categoryId,
                         method: 'DELETE',
                         success: function(response) {
                             $('button[data-id="' + categoryId +'"]').closest('tr').remove();
@@ -163,12 +162,8 @@
     </script>
 </body> 
 </html>
-
-
-
 <style>
-
-body {
+    body {
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
@@ -181,84 +176,19 @@ body {
     width: 100%;
 }
 
-
-
 .container {
     display: flex;
     width: 100%;
 }
 
-
-.dashboard {
-    flex: 1;
-    padding: 20px;
-}
-
-.dashboard header {
-    margin-bottom: 20px;
-}
-
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.card {
-    flex: 1 1 calc(33.333% - 20px);
-    background-color: #ecf0f1;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.card-content h2 {
-    margin: 0;
-    font-size: 2em;
-}
-
-.card-content p {
-    margin: 5px 0 0;
-    font-size: 1.2em;
-    color: #7f8c8d;
+.table-container {
+    overflow-x: auto; /* Allows horizontal scroll if needed */
+    margin: 90px 0; /* Adjusted for proper spacing */
+    width: 100%; /* Full width to avoid overlap */
 }
 
 .table-section {
     margin-top: 20px;
-}
-
-.table-section form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.table-section form input {
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.table-container {
-    /* overflow-x: auto; */
-    margin: 1px -244px;
-    max-width: 1300px; /* Adjust max-width as needed */
-}
-
-.table-section form button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.table-section form button:hover {
-    background-color: #2980b9;
 }
 
 .table-section table {
@@ -293,53 +223,24 @@ body {
     cursor: pointer;
 }
 
-.table-section .accept {
-    background-color: #2ecc71;
-    color: white;
-}
-
-.table-section .reject {
-    background-color: #e74c3c;
-    color: white;
-}
-
 .table-section .delete {
     background-color: #e67e22;
     color: white;
 }
 
-.table-section button:hover {
+.property-details-heading {
+    font-weight: bold;         /* Makes the text bold */
+    text-align: center;        /* Centers the text */
+    font-size: 24px;           /* Increases the font size */
+    position: fixed;           /* Fixes the position of the heading */
+    top: 120px;                 /* Sets the distance from the top of the viewport */
+    left: 50%;                 /* Centers the heading horizontally */
+    transform: translateX(-50%); /* Adjusts the centering to account for width */
+    background-color: white;   /* Optional: Adds a background color for better visibility */
+    z-index: 1000;             /* Ensures the heading stays above other elements */
+    width: 100%;               /* Optional: Makes the heading full width */
+}
+/* .table-section button:hover {
     opacity: 0.8;
-}
-
-.center {
-    margin: auto;
-    width: 50%;
-    text-align: center;
-    margin-top: 10px;
-    border: 3px solid #fff;
-    padding: 20px; /* Add padding for better spacing */
-}
-
-.input_color {
-    color: black;
-    padding: 10px; /* Add padding for better spacing */
-    margin-bottom: 10px; /* Add margin to separate elements */
-    width: 35%; /* Adjust width for better alignment */
-    border: 1px solid #ccc; /* Add border */
-    border-radius: 5px; /* Add border radius for rounded corners */
-}
-
-input[type="submit"] {
-    background-color: #3498db; /* Button color */
-    color: white; /* Button text color */
-    padding: 10px 20px; /* Add padding for better spacing */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Add border radius for rounded corners */
-    cursor: pointer; /* Add pointer cursor on hover */
-}
-
-input[type="submit"]:hover {
-    background-color: #2980b9; /* Button hover color */
-}
+} */
 </style>

@@ -34,6 +34,7 @@ Route::delete('/delete_category/{id}', [AdminController::class, 'deleteCategory'
 //realtron part
 Route::get('/showagentregister', [RealtronController::class, 'showagent']);//here fetch the agent details in realtron page
 Route::get('/viewuser_request',[RealtronController::class,'userrequest']);//usersite request will be show in companysite
+Route::delete('/delete_category/{id}', [RealtronController::class, 'deleteCategory']);
 
 Route::post('/assign_agent', [RealtronController::class, 'assignAgent'])->name('assign_agent');//here taske will be assing to particular agent in that company
 

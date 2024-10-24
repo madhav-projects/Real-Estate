@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Realtron;
 use App\Models\User;
 use App\Models\Agent;
+use App\Models\property;
 use App\Models\Seller;
 use App\Models\Assigntask;
 use Illuminate\Support\Facades\Session; // Include the Agent model
@@ -343,8 +344,24 @@ public function Approve_detail(Request $request, $id)
 
     return response()->json(['success' => true, 'message' => 'Agent assigned successfully']);
 }
+public function deleteCategory($id) {
+    $property = Property::find($id);
 
-   
+    if ($property) {
+        $property->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Property deleted successfully'
+        ], 200);
+    } else {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Property not found'
+        ], 404);
+    }
 }
+}
+   
+
 
 

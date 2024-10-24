@@ -34,6 +34,21 @@
                 <li class="nav-item">
                     <x-app-layout></x-app-layout> <!-- This is where "Ganesh" will be rendered -->
                 </li>
+
+                <!-- User Profile Section -->
+                @if(Auth::user()->id == 1)  <!-- Conditional for a specific user with ID 1 -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{ Auth::user()->name }} <!-- Display logged-in user's name -->
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="{{url('/profile')}}">Profile</a>
+                        <a class="dropdown-item" href="{{url('/profile/edit')}}">Edit Profile</a>
+                        <a class="dropdown-item" href="{{url('/logout')}}">Logout</a>
+                    </div>
+                </li>
+                @endif
             </ul>
         </div>
     </nav>
@@ -88,29 +103,53 @@
     }
 
     .luxe-text {
-    position: absolute;
-    top: 21px;
-    left: 150px;
-    z-index: 1000;
-    font-weight: bold;
-    font-size: 30px;
-    font-size: 1.5em;
-    color: black;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
+        position: absolute;
+        top: 21px;
+        left: 150px;
+        z-index: 1000;
+        font-weight: bold;
+        font-size: 30px;
+        font-size: 1.5em;
+        color: black;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
 
     /* Align menu items to the right */
     .navbar-collapse {
         justify-content: flex-end;
     }
 
-    /* Adjust Ganesh's layout component */
-    .navbar-nav .x-app-layout {
-        margin-left: auto;
-    }
-
     /* Add spacing between menu items */
     .nav-item {
         padding: 0 10px;
+    }
+
+    /* Dropdown menu for user profile */
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 0.5rem;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 0.25rem;
+        min-width: 200px;
+    }
+
+    .dropdown-item {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        clear: both;
+        color: #333;
+        text-align: inherit;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+    }
+
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+        color: #d4a253;
     }
 </style>
