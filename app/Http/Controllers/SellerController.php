@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Realtron; // Assuming Realtron is your model's name
 use App\Models\Seller;
+use App\Models\Allproperty;
 use Illuminate\Support\Facades\Session; 
 class SellerController extends Controller
 {
@@ -76,6 +77,11 @@ class SellerController extends Controller
     }
    
    
+    public function allproperty($id){
+
+        $seller = Realtron::find($id);
+        return  view('user.all_property',compact('allproperty'));
+    }
 
 
 }

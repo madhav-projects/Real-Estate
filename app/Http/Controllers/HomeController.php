@@ -34,9 +34,7 @@ class HomeController extends Controller
     }
     public function fetch_agent_property()
     {
-        $user = Auth::user(); // Get the authenticated user
-        $properties = Property::where('agent_name', $user->name)->get(); // Fetch properties assigned to the agent
-    
+    $properties=Property::All();
         // Return the fetched properties in JSON format along with a custom message
         if (request()->expectsJson()) { // Corrected to expectsJson()
             return response()->json([
@@ -44,9 +42,28 @@ class HomeController extends Controller
                 'properties' => $properties, // Changed from $fetch_property to $properties
             ]);
         } else {
-            return view('agents.properties', compact('properties')); // Assuming you have a 'properties' view for agents
+            return view('user.buy', compact('properties')); // Assuming you have a 'properties' view for agents
         }
     }
     
+    public function all_properties($id){
+        $property = Property::findOrFail($id); // Fetch the property by ID
+        $images = array_filter([$property->image1, $property->image2, $property->image3]) ?: [];
+
+        return view('user.allproperties', compact('property')); // Pass property data to the view
+    }
+    // app/Http/Controllers/PropertyController.php
+// app/Http/Controllers/PropertyController.php
+public function get_property_images($id)
+{
+    $property = Property::findOrFail($id); // Retrieve the property by ID
+    
+    // Collect images into an array (assuming your property model has image1, image2, image3 fields)
+    $images = array_filter([$property->image1, $property->image2, $property->image3]) ?: [];
+
+    return view('user.allproperties', compact('property', 'images')); // Pass images and property data to view
+}
+
+
 
 }

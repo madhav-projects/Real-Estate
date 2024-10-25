@@ -6,101 +6,139 @@
     <title>Property List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script> <!-- Include Bootstrap JS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <style>
         body {
-            padding-top: 60px; /* Adjust based on navbar height */
-            font-family: Arial, sans-serif; /* Optional: Set a default font */
+            padding-top: 60px;
+            font-family: Arial, sans-serif;
         }
-        table {
+        .property-card {
+            margin-bottom: 20px;
+        }
+        .property-card img {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: -60px; /* Space between header and table */
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
         }
         h1.text-center.font-weight-bold {
-            text-align: center; /* Center the text */
-            font-weight: bold; /* Make the text bold */
-            margin-bottom: 20px; /* Space below the header */
-            font-size: 24px; /* Adjust the font size if needed */
-            padding: 60px; /* Add padding inside the header */
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 24px;
+            padding: 60px;
         }
         .alert {
             color: red;
             margin-top: 20px;
         }
+        .thumbnail-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .carousel-inner img {
+            height: 400px;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
-    @include('agents.header')
+    @include('user.userheader')
     <div class="container py-5">
-        <h1 class="text-center font-weight-bold">Properties for Sale</h1> <!-- Centered bold header above the table -->
+        <h1 class="text-center font-weight-bold">Properties for Sale</h1>
         <div id="alertMessage" class="alert" style="display: none;"></div>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Agent Name</th>
-                    <th>Property Name</th>
-                    <th>Price</th>
-                    <th>Location</th>
-                    <th>Available From</th>
-                </tr>
-            </thead>
-            <tbody id="propertyTableBody">
-                <!-- Rows will be populated by AJAX -->
-            </tbody>
-        </table>
+        
+        <!-- Carousel Section -->
+        <div id="propertyCarousel" class="carousel slide mb-5" data-ride="carousel" style="display: none;">
+            <div class="carousel-inner" id="carouselImages">
+                <!-- Carousel images will be populate
+                 d by AJAX -->
+            </div>
+            <a class="carousel-control-prev" href="#propertyCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#propertyCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <div id="propertyCards" class="row">
+            <!-- Property cards will be populated by AJAX -->
+        </div>
     </div>
 
     <script>
         function fetchProperties() {
             $.ajax({
-                url: '{{ url('fetch_agent_property') }}', // Use the correct endpoint to fetch properties
+                url: '{{ url("/fetch_agent_property") }}',
                 method: 'GET',
                 success: function(response) {
-                    console.log(response); // Log the response to inspect the data structure
-                    const propertyTableBody = $('#propertyTableBody');
+                    const propertyCards = $('#propertyCards');
                     const alertMessage = $('#alertMessage');
-                    propertyTableBody.empty(); // Clear any existing rows
-                    alertMessage.hide(); // Hide the alert message
+                    const carouselImages = $('#carouselImages');
+                    const propertyCarousel = $('#propertyCarousel');
 
-                    // Check if properties are returned
+                    propertyCards.empty();
+                    carouselImages.empty();
+                    alertMessage.hide();
+                    let firstProperty = true;
+
                     if (response.properties && response.properties.length > 0) {
-                        response.properties.forEach(function(property) {
-                            const row = `
-                                <tr>
-                                    <td>${property.id}</td>
-                                    <td>${property.agent_name}</td>
-                                    <td>${property.name}</td>
-                                    <td>${property.price}</td>
-                                    <td>${property.location}</td>
-                                    <td>${property.available_from}</td>
-                                </tr>
-                            `;
-                            propertyTableBody.append(row); // Append new row to the table body
+                        response.properties.forEach(function(property, index) {
+                            const price = property.price ? `$${property.price}` : 'Price Not Available';
+                            
+                            // Append property card
+                            const card = `
+    <div class="col-md-4 property-card">
+        <div class="card">
+            <a href="${property.image1}" target="_blank" data-title="${property.agent_name} - ${property.property_type}">
+                <img src="${property.image1}" alt="Image 1" class="card-img-top">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">${property.agent_name} - ${property.property_type}</h5>
+                <p class="card-text">
+                    <strong>Selling Type:</strong> ${property.selling_type}<br>
+                    <strong>Company Name:</strong> ${property.company_name}<br>
+                    
+                    <strong>Address:</strong> ${property.address}<br>
+                    <strong>Price:</strong> ${property.price}
+
+                    <a href="/show_allproperties/${property.id}">View Details</a>  
+                </p>
+            </div>
+        </div>
+    </div>
+`;
+
+                            propertyCards.append(card);
+
+                            // Add images to carousel if it's the first property
+                            if (firstProperty) {
+                                propertyCarousel.show();  // Show carousel if there's at least one property
+                                const carouselItem1 = `<div class="carousel-item active"><img src="${property.image1}" class="d-block w-100" alt="Property Image 1"></div>`;
+                                const carouselItem2 = `<div class="carousel-item"><img src="${property.image2}" class="d-block w-100" alt="Property Image 2"></div>`;
+                                const carouselItem3 = `<div class="carousel-item"><img src="${property.image3}" class="d-block w-100" alt="Property Image 3"></div>`;
+                                carouselImages.append(carouselItem1 + carouselItem2 + carouselItem3);
+                                firstProperty = false;
+                            }
                         });
                     } else {
-                        // Show alert message if no properties are found
                         alertMessage.text('No properties found for this user.').show();
                     }
                 },
                 error: function(xhr, status, error) {
                     console.error('Error fetching properties:', error);
-                    // Show an error message if the AJAX request fails
-                    const alertMessage = $('#alertMessage');
-                    alertMessage.text('Error fetching properties. Please try again later.').show();
+                    $('#alertMessage').text('Error fetching properties. Please try again later.').show();
                 }
             });
         }
 
-        // Fetch properties when the document is ready
         $(document).ready(function() {
             fetchProperties();
         });

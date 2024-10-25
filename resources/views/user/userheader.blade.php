@@ -15,7 +15,7 @@
                     <a class="nav-link animated-button" href="#">Properties</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link animated-button" href="#">Buy</a>
+                    <a class="nav-link animated-button" href="{{url('/fetch_agent_property')}}">Buy</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link animated-button" href="{{url('view_seller')}}">Sale</a>

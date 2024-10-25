@@ -121,7 +121,15 @@
                         <div class="form-group">
                             <label for="total-floor">Total Floor</label>
                             <select id="total-floor" name="total_floor" required>
+                                <option value="5 Floors">1 Floors</option>
+                                <option value="5 Floors">2 Floors</option>
+                                <option value="5 Floors">3 Floors</option>
+                                <option value="5 Floors">4 Floors</option>
                                 <option value="5 Floors">5 Floors</option>
+                                <option value="5 Floors">6 Floors</option>
+                                <option value="5 Floors">7 Floors</option>
+                                <option value="5 Floors">8 Floors</option>
+
                             </select>
                         </div>
 
