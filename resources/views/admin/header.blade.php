@@ -7,6 +7,20 @@
             <span class=""></span>
         </button>
         <div class="collapse navbar-collapse justify-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Realtrondetail">Realtron Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Agent Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Property Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact, Feedback</a>
+                </li>
+            </ul>
             <x-app-layout></x-app-layout>
         </div>
     </nav>
@@ -15,15 +29,15 @@
 <style>
     /* LuxeDwell text position */
     .luxe-text {
-    position: absolute;
-    top: 17px;
-    left: 124px;
-    z-index: 1000;
-    font-weight: bold;
-    font-size: 30px;
-    color: black;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
+        position: absolute;
+        top: 17px;
+        left: 124px;
+        z-index: 1000;
+        font-weight: bold;
+        font-size: 30px;
+        color: black; /* Set text color to black */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
 
     /* Make header fixed at the top */
     .header_section {
@@ -32,7 +46,7 @@
         left: 0;
         width: 100%;
         height: 80px; /* Set header height */
-        background-color: #ffffff; /* Set background color */
+        background-color: #ffffff; /* Set background color to white */
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow */
         z-index: 1000; /* Ensure it stays on top of other elements */
         border-bottom: 1px solid #ddd;
@@ -42,13 +56,6 @@
     /* Ensure page content doesn't hide behind the header */
     body {
         padding-top: 80px; /* Set padding equal to header height */
-    }
-
-    /* Container within the header */
-    .header_section .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
 
     /* Navbar adjustments */
@@ -80,7 +87,7 @@
     }
 
     .header_section .navbar-nav .nav-item a {
-        color: black;
+        color: black; /* Set link color to black */
         text-decoration: none;
         padding: 5px 8px;
         font-weight: bold;
@@ -88,7 +95,7 @@
 
     .header_section .navbar-nav .nav-item a:hover,
     .header_section .navbar-nav .nav-item.active a {
-        color: #c0392b;
+        color: #c0392b; /* Color on hover or active */
     }
 
     .header_section .navbar-nav .dropdown-menu {
@@ -106,7 +113,7 @@
     }
 
     .header_section .navbar-nav .dropdown-menu li a {
-        color: black;
+        color: black; /* Set dropdown link color to black */
         text-decoration: none;
         display: block;
     }

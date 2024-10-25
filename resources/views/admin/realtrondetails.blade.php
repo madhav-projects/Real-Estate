@@ -116,7 +116,7 @@
                     <div class="search-container">
                     <input type="text" id="searchInput" class="search-input" placeholder="Search agents...">
                 </div>
-                    <div class="table-responsive">
+                    <div class="table-section">
                         <table class="table table-section w-100">
                             <thead>
                                 <tr>
@@ -245,7 +245,7 @@
 </html>
 
 <style>
-body {
+    body {
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
@@ -258,86 +258,6 @@ body {
     width: 100%;
 }
 
-.header_section {
-    /* background-color: #5e3806; */
-    /* padding: 5px 0; */
-    border-bottom: 1px solid #ddd;
-    font-family: 'Poppins', sans-serif;
-}
-
-.header_section .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header_section .navbar {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.header_section .navbar-brand img {
-    max-width: 100px;
-    transition: transform 0.3s ease;
-}
-
-.header_section .navbar-nav {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    flex-grow: 1;
-    justify-content: center;
-    flex-direction: row;
-}
-
-.header_section .navbar-nav .nav-item {
-    margin: 0 15px;
-}
-
-.header_section .navbar-nav .nav-item a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 8px;
-    font-weight: bold;
-}
-
-.header_section .navbar-nav .nav-item a:hover,
-.header_section .navbar-nav .nav-item.active a {
-    color: #c0392b;
-}
-
-.header_section .navbar-nav .dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: white;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    margin-top: 10px;
-    padding: 0;
-    list-style: none;
-}
-
-.header_section .navbar-nav .dropdown-menu li {
-    padding: 10px;
-}
-
-.header_section .navbar-nav .dropdown-menu li a {
-    color: black;
-    text-decoration: none;
-    display: block;
-}
-
-.header_section .navbar-nav .dropdown:hover .dropdown-menu {
-    display: block;
-}
-
-.container-fluid {
-    padding-left: 0;
-    padding-right: 0;
-}
 
 .user-info {
     display: flex;
@@ -368,10 +288,6 @@ body {
     padding: 20px;
 }
 
-.dashboard header {
-    margin-bottom: 20px;
-}
-
 .cards {
     display: flex;
     flex-wrap: wrap;
@@ -395,11 +311,11 @@ body {
 .card-content p {
     margin: 5px 0 0;
     font-size: 1.2em;
-    /* color: #7f8c8d; */
 }
 
 .table-section {
     margin-top: 20px;
+    overflow-x: auto; /* Enable horizontal scrolling */
 }
 
 .table-section form {
@@ -439,7 +355,7 @@ body {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-    white-space: nowrap;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 .table-section th {
@@ -470,6 +386,7 @@ body {
     background-color: #e74c3c;
     color: white;
 }
+
 .table-section .delete {
     background-color: #e67e22;
     color: white;
@@ -558,3 +475,5 @@ input[type="submit"]:hover {
 .sidebar nav ul li ul li a:hover {
     background-color: #3b5998;
 }
+
+</style>
