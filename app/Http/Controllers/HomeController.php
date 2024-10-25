@@ -59,7 +59,7 @@ public function get_property_images($id)
     $property = Property::findOrFail($id); // Retrieve the property by ID
     
     // Collect images into an array (assuming your property model has image1, image2, image3 fields)
-    $images = array_filter([$property->image1, $property->image2, $property->image3]) ?: [];
+    $images = array_filter([$property->image1, $property->image2, $property->image3->images4]) ?: [];
 
     return view('user.allproperties', compact('property', 'images')); // Pass images and property data to view
 }

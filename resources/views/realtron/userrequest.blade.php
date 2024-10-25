@@ -44,12 +44,12 @@
         }
 
         .table-section th {
-            background-color: #4CAF50; /* Green color */
-            color: white;
-            padding: 12px;
-            text-align: left;
-            text-wrap: nowrap;
-        }
+    color: white; /* Retain the text color */
+    padding: 12px;
+    text-align: left;
+    text-wrap: nowrap;
+}
+
 
         .table-section td {
             padding: 12px;
@@ -71,11 +71,14 @@
         }
 
         .centered-header {
-            text-align: center;
-            font-weight: bold;
-            color: #4CAF50; /* Green color */
-            margin-bottom: 20px;
-        }
+    text-align: center;
+    font-weight: bold;
+    font-size: 23px;
+    color: black; /* Change color to black */
+    margin-bottom: -66px;
+    padding: 75px; /* Keep padding */
+}
+
 
         .hero_area {
             width: 100%;
@@ -151,7 +154,7 @@
                 <div class="selected-agent-display" id="selectedAgentDisplay">
                     <!-- Selected agent name will be displayed here -->
                 </div>
-                <h2 class="centered-header">Assign Agent Task</h2>
+               
                 <form id="newUserRequestForm">
                     <div class="mb-3">
                         <label for="agent_name" class="form-label">Agent Name</label>

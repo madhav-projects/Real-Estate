@@ -10,23 +10,23 @@
         <div class="collapse navbar-collapse justify-end" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="">Home</a>
+                    <a class="nav-link" href="{{url('/home')}}">Home</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Properties</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/showagentregister')}}">Agents</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/viewuser_request')}}">User Request</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Blog</a>
-                </li>
-                <li class="nav-item">
+                 </li> -->
+                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
-                </li>
+                </li> 
                 <x-app-layout></x-app-layout>
             </ul>
         </div>
@@ -36,7 +36,7 @@
 <style>
     .luxe-text {
         position: absolute;
-        top: 23px;
+        top: 18px;
         left: 122px;
         z-index: 1000;
         font-weight: bold;
@@ -85,20 +85,10 @@
     }
 
     /* Hover effect for navbar items */
-    .nav-link:hover {
-        background-color: #d4a253; /* Change background color on hover */
-        color: white; /* Change text color on hover */
-        transform: translateY(-5px); /* Animate upward movement */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow effect */
-    }
+   
 
     /* Active navbar item */
-    .nav-item.active .nav-link {
-        background-color: #b3933a; /* Highlight active menu */
-        color: white; /* Change text color for active item */
-        transform: scale(1.05); /* Slightly enlarge active item */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Shadow effect on active */
-    }
+    
 
     /* Responsive navbar toggler (for mobile) */
     .navbar-toggler {

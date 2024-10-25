@@ -108,7 +108,7 @@
     object-fit: cover;
 }
         
-        .navbar-brand img {
+        /* .navbar-brand img {
             height: 40px;
         }
         .navbar-nav {
@@ -127,7 +127,7 @@
         }
         .nav-link:hover {
             color: #d4a253;
-        }
+        } */
         .search_section {
             background: rgba(0, 0, 0, 0.5);
             padding: 20px;

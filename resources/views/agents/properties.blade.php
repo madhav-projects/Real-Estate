@@ -267,9 +267,10 @@
     top: 0;                    /* Reset the top position */
     left: 50%;                 /* Centers the heading horizontally */
     transform: translateX(-50%); /* Adjusts the centering to account for width */
-    z-index: 1000;             /* Ensures the heading stays above other elements */
+   
     width: 100%;               /* Optional: Makes the heading full width */
     margin-top: 20px;          /* Add margin to move it down from the top if needed */
+    padding: 15px;             /* Add padding (adjust the value as needed) */
 }
 .hero_area {
     display: flex;
@@ -284,7 +285,7 @@
 
 .form-container {
     flex: 1;
-    padding: 116px;
+    padding: 25px;
     background-color: #f4f4f4;
     margin-top: 55px;
 }
