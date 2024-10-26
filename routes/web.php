@@ -41,6 +41,8 @@ Route::post('/createagentregister',[RealtronController::class,'createagentregist
 Route::get('/Realtrondetail',[AdminController::class,'realtrondetails']);//realtron details fetch by admin site
 Route::post('/Approve_detail/{id}',[RealtronController::class,'approve_detail']);//approve and reject written in realtron controller
 Route::post('/Reject_detail/{id}',[RealtronController::class,'reject_detail']);
+Route::get('/Agentdetails',[AdminController::class,'agentdetails']);
+Route::get('/propertydetails',[AdminController::class,'properties']);
 
 
 //realtron part

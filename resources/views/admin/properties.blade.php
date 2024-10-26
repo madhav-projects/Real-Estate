@@ -112,7 +112,7 @@
 
             <div class="col-md-12" style="width: 100%;">
                 <div class="row">
-                    <h2 class="fs-5 fw-bold mt-4">Realtron Details</h2>
+                    <h2 class="fs-5 fw-bold mt-4">Properties Details</h2>
                     <div class="search-container">
                     <input type="text" id="searchInput" class="search-input" placeholder="Search agents...">
                 </div>
@@ -120,18 +120,29 @@
                         <table class="table table-section w-100">
                             <thead>
                                 <tr>
-                                    <th>username</th>
-                                    <th>Realtroncompany</th>
-                                    
-                                    <th>phone</th>
-                                    <th>email</th>
-                                    <th>password</th>
-                                    <th>address</th>
-                                    <th>city</th>
-                                    <th>area</th>
-                                    <th>role</th>
-                                    <th>status</th>
-                                    <th>Manage</th>
+                                <th>Company Name</th>
+                                    <th>Username</th>
+                                    <th>Property Type</th>
+                                    <th>Selling Type</th>
+                                    <th>BHK</th>
+                                    <th>Bedroom</th>
+                                    <th>Bathroom</th>
+                                    <th>Kitchen</th>
+                                    <th>Balcony</th>
+                                    <th>Hall</th>
+                                    <th>Floor</th>
+                                    <th>Total Floor</th>
+                                    <th>Area Size</th>
+                                    <th>State</th>
+                                    <th>City</th>
+                                    <th>Address</th>
+                                    <th>Status</th>
+                                    <th>Image 1</th>
+                                    <th>Image 2</th>
+                                    <th>Image 3</th>
+                                    <th>Image 4</th>
+                                    <th>Action</th>
+                                   
                                     <!-- <th>Action</th> -->
                                 </tr>
                             </thead>
@@ -145,8 +156,8 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<script>
-   $(function() {
+    <script>
+    $(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -155,34 +166,39 @@
 
         function fetchCategories() {
             $.ajax({
-                url: '{{ url('Realtrondetail') }}',
+                url: '{{ url('propertydetails') }}',
                 method: 'GET',
                 success: function(response) {
                     $('tbody').html("");
                     var tableBody = $('#realtrondetails');
                     tableBody.empty();
 
-                    if (response.realtron) {
-                        response.realtron.forEach(function(realtron) {
-                            if (realtron.role === 'realtron') {
-                                var row = '<tr>' +
-                                    '<td>' + realtron.username + '</td>' +
-                                    '<td>' + realtron.realtron_company + '</td>' +
-                                    '<td>' + realtron.phone + '</td>' +
-                                    '<td>' + realtron.email + '</td>' +
-                                    '<td>' + realtron.password + '</td>' +
-                                    '<td>' + realtron.address + '</td>' +
-                                    '<td>' + realtron.city + '</td>' +
-                                    '<td>' + realtron.area + '</td>' +
-                                    '<td>' + realtron.role + '</td>' +
-                                    '<td>' + realtron.status + '</td>' +
-                                    '<td>' +
-                                        '<button class="acceptBtn btn btn-primary" data-id="' + realtron.id + '">Accept</button> ' +
-                                        '<button class="btn btn-danger rejectBtn" data-id="' + realtron.id + '">Reject</button>' +
-                                    '</td>' +
-                                    '</tr>';
-                                tableBody.append(row);
-                            }
+                    if (response.propertydetails) {
+                        response.propertydetails.forEach(function(propertydetails) {
+                            var row = '<tr>' +
+                                '<td>' + propertydetails.company_name + '</td>' +
+                                '<td>' + propertydetails.agent_name + '</td>' +
+                                '<td>' + propertydetails.property_type + '</td>' +
+                                '<td>' + propertydetails.selling_type + '</td>' +
+                                '<td>' + propertydetails.bhk + '</td>' +
+                                '<td>' + propertydetails.bedroom + '</td>' +
+                                '<td>' + propertydetails.bathroom + '</td>' +
+                                '<td>' + propertydetails.kitchen + '</td>' +
+                                '<td>' + propertydetails.balcony + '</td>' +
+                                '<td>' + propertydetails.hall + '</td>' +
+                                '<td>' + propertydetails.floor + '</td>' +
+                                '<td>' + propertydetails.total_floor + '</td>' +
+                                '<td>' + propertydetails.area_size + '</td>' +
+                                '<td>' + propertydetails.state + '</td>' +
+                                '<td>' + propertydetails.city + '</td>' +
+                                '<td>' + propertydetails.address + '</td>' +
+                                '<td>' + propertydetails.status + '</td>' +
+                                '<td><img src="' + propertydetails.image1 + '" width="50px" height="50px"></td>' +
+                                '<td><img src="' + propertydetails.image2 + '" width="50px"></td>' +
+                                '<td><img src="' + propertydetails.image3 + '" width="50px"></td>' +
+                                '<td><img src="' + propertydetails.image4 + '" width="50px"></td>' +
+                                '</tr>';
+                            tableBody.append(row);
                         });
                     }
                 },
@@ -192,54 +208,12 @@
             });
         }
 
-        // Accept button functionality
-        $(document).on('click', '.acceptBtn', function() {
-            var id = $(this).data('id');
-            $.ajax({
-                url: '/Approve_detail/' + id,
-                method: 'POST',
-                success: function(response) {
-                    console.log('Server response:', response);
-                    if (response.success) {
-                        alert(response.message);
-                        location.reload();
-                    } else {
-                        alert('Failed to accept Realtron: ' + response.error);
-                        console.error('Response Error:', response.error);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                    alert('An error occurred: ' + xhr.responseText);
-                }
-            });
-        });
-
-        // Reject button functionality
-        $(document).on('click', '.rejectBtn', function() {
-            var id = $(this).data('id');
-            $.ajax({
-                url: '/Reject_detail/' + id,
-                method: 'POST',
-                success: function(response) {
-                    if (response.success) {
-                        alert('Realtron rejected successfully.');
-                        location.reload();
-                    } else {
-                        alert('Failed to reject Realtron.');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                }
-            });
-        });
-
-        // Search functionality
-        $('#searchInput').on('keyup', function() {
-            var value = $(this).val().toLowerCase();
-            $('#realtrondetails tr').filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        // Add search functionality
+        $('#searchInput').on('input', function() {
+            var searchText = $(this).val().toLowerCase();
+            $('#realtrondetails tr').each(function() {
+                var rowText = $(this).text().toLowerCase();
+                $(this).toggle(rowText.includes(searchText));
             });
         });
 

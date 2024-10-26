@@ -30,7 +30,8 @@ Route::get('/view_properties',[AdminController::class,'view_properties']);
 Route::post('/addcategory',[AdminController::class,'addcategory']);
 Route::get('/show_category',[AdminController::class,'showcategory']);
 Route::delete('/delete_category/{id}', [AdminController::class, 'deleteCategory']);
-
+Route::get('/Agentdetails',[AdminController::class,'agentdetails']);
+Route::get('/propertydetails',[AdminController::class,'properties']);
 
 //realtron part
 Route::get('/showagentregister', [RealtronController::class, 'showagent']);//here fetch the agent details in realtron page

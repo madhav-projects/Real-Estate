@@ -146,5 +146,33 @@ class AdminController extends Controller
         }
     }
 
+   
+     public function agentdetails() {
+        $agentdetails = Agent::all();
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Agent fetched',
+                'agentdetails' => $agentdetails,
+            ]);
+        } else {
+            return view('admin.agentdetails', compact('agentdetails'));
+        }
+    }
+
+
+    public function properties() {
+        $propertydetails = property::all();
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'property fetched',
+                'propertydetails' => $propertydetails,
+            ]);
+        } else {
+            return view('admin.properties', compact('propertydetails'));
+        }
+    }
+
 
 }
