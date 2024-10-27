@@ -894,10 +894,10 @@ select {
   justify-content: flex-end;
 }
 .justify-center {
-  justify-content: center;
+  justify-content: right;
 }
 .justify-between {
-  justify-content: space-between;
+  justify-content: right;
 }
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;

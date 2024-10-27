@@ -28,21 +28,6 @@
     flex-direction: column;
     background-color: #f4f4f4; /* Light gray background */
 }
-.luxe-text {
-    margin-left: -201px;
-    margin-top: 0px;
-    font-weight: bold;
-    font-size: 30px;
-    color: black;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-
-.hero_area {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
 
 .dashboard {
     flex: 1;

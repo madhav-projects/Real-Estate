@@ -1,78 +1,77 @@
-<main class="dashboard">
-    <header>
-        <h1>Welcome Admin!</h1>
-        <p>Dashboard</p>
-    </header>
-    <section class="cards">
-        <div class="card">
-            <div class="card-content">
-                <h2>4</h2>
-                <p>Registered Users</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
-                <h2>3</h2>
-                <p>Agents</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
-                <h2>1</h2>
-                <p>Builder</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
-                <h2>6</h2>
-                <p>Properties</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
-                <h2>2</h2>
-                <p>No. of Apartments</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
-                <h2>4</h2>
-                <p>No. of Houses</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
-                <h2>0</h2>
-                <p>No. of Buildings</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
-                <h2>0</h2>
-                <p>No. of Flats</p>
-            </div>
-        </div>
-    </section>
-    <section class="table-section">
-        <h2>Agent Details</h2>
-        <form id="agent-form">
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="text" id="agentName" placeholder="Agent Name" required>
-            <input type="text" id="agentID" placeholder="Agent ID" required>
-            <button type="submit">Add Agent</button>
-        </form>
-        <table>
-            <thead>
-                <tr>
-                    <th>Email</th>
-                    <th>Agent Name</th>
-                    <th>Agent ID</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="agent-table-body">
-                <!-- Rows will be added here by JavaScript -->
-            </tbody>
-        </table>
-    </section>
-</main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeDwell Admin Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: #fff;
+            height: 100vh;
+            position: fixed;
+            padding-top: 20px;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        .sidebar i {
+            margin-right: 10px;
+        }
+        .content {
+    margin-left: 250px;
+    padding: 20px;
+    flex-grow: 1;
+    text-align: center;   /* Center-align text */
+    font-weight: bold;    /* Make text bold */
+}
+
+        .home-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>LuxeDwell Admin</h2>
+        <a href="/home"><i>🏠</i> Home</a>
+        <a href="/Realtrondetail"><i>📊</i> Company Details</a>
+        <a href="/Agentdetails"><i>👤</i> Agent Details</a>
+        <a href="/propertydetails"><i>🏢</i> Property Details</a>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <h1>Welcome to the LuxeDwell Admin Dashboard</h1>
+       
+        
+        <!-- Home Page Image -->
+        <img src="images\titlecard.png" alt="Home Page Image" class="home-image">
+    </div>
+
+</body>
+</html>

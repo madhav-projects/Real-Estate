@@ -38,31 +38,39 @@
 }
 
 /* Make header fixed at the top */
-.header_section .navbar {
+
+/* .header_section .navbar {
     display: flex;
     align-items: center;
     width: 100%;
-    justify-content: space-between; /* Space between logo and nav items */
+    justify-content: space-between; 
+} */
+
+.header_section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
 }
 
 .header_section .navbar-nav {
+    margin-left: auto;  /* Pushes the navbar items to the right */
     display: flex;
-    align-items: center;
-    margin-left: auto; /* Align items to the right */
-    padding: 0;
+    gap: 15px;  /* Adds space between nav items */
 }
+
 
 /* Additional styles for nav items */
 .header_section .navbar-nav .nav-item {
     margin: 0 15px;
 }
 
-.header_section .navbar-nav .nav-item a {
-    color: black; /* Set link color to black */
+/* .header_section .navbar-nav .nav-item a {
+    color: black; 
     text-decoration: none;
     padding: 5px 8px;
     font-weight: bold;
-}
+} */
 
 .header_section .navbar-nav .nav-item .username {
     color: black; /* Set username color to black */
