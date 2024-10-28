@@ -22,6 +22,7 @@
 
         .table-section {
     margin-top: 20px;
+    
     overflow-x: auto; /* Enables horizontal scrolling */
 }
 
@@ -434,52 +435,6 @@ input[type="submit"]:hover {
 }
 
 /* Sidebar Styles */
-.sidebar {
-    width: 250px;
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    padding: 20px;
-    position: fixed;
-    top: 60px; /* Adjust based on header height */
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-}
 
-.sidebar nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar nav ul li {
-    margin-bottom: 15px;
-}
-
-.sidebar nav ul li a {
-    color: #ecf0f1;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.sidebar nav ul li a:hover {
-    background-color: #34495e;
-}
-
-.sidebar nav ul li ul {
-    padding-left: 20px;
-}
-
-.sidebar nav ul li ul li a {
-    background-color: #34495e;
-    padding-left: 15px;
-}
-
-.sidebar nav ul li ul li a:hover {
-    background-color: #3b5998;
-}
 
 </style>

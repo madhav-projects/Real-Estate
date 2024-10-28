@@ -231,6 +231,11 @@
     display: flex;
     flex-direction: column;
 }
+.home-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
 
 .hero_area {
     display: flex;
@@ -325,6 +330,7 @@
     background-color: #2980b9;
 }
 
+
 .table-section table {
     width: 100%;
     border-collapse: collapse;
@@ -408,52 +414,7 @@ input[type="submit"]:hover {
 }
 
 /* Sidebar Styles */
-.sidebar {
-    width: 250px;
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    padding: 20px;
-    position: fixed;
-    top: 60px; /* Adjust based on header height */
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-}
 
-.sidebar nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
 
-.sidebar nav ul li {
-    margin-bottom: 15px;
-}
-
-.sidebar nav ul li a {
-    color: #ecf0f1;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.sidebar nav ul li a:hover {
-    background-color: #34495e;
-}
-
-.sidebar nav ul li ul {
-    padding-left: 20px;
-}
-
-.sidebar nav ul li ul li a {
-    background-color: #34495e;
-    padding-left: 15px;
-}
-
-.sidebar nav ul li ul li a:hover {
-    background-color: #3b5998;
-}
 
 </style>

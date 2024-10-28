@@ -1,65 +1,85 @@
-<!-- <aside class="sidebar">
-    <nav>
-        <ul>
-            <li><a href="/home" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            <li><a href="{{url('/Realtrondetail')}}"><i class="fas fa-building"></i> Realtron Details</a></li>
-            <li><a href="#"><i class="fas fa-user"></i> Agent Details</a></li>
-            <li><a href="#"><i class="fas fa-home"></i> Property Details</a></li>
-            <li><a href="#"><i class="fas fa-envelope"></i> Contact, Feedback</a></li>
-        </ul>
-    </nav>
-</aside>
-<style>
-    /* Sidebar Styles */
-.sidebar {
-    width: 250px; /* Fixed width for sidebar */
-    background-color: #343a40; /* Dark background */
-    color: #f8f9fa; /* Light text color */
-    padding: 20px;
-    min-height: 100vh; /* Full height */
-    position: fixed; /* Keep it fixed to the left */
-    top: 80px; /* Space for fixed header */
-    left: 0;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    transition: width 0.3s; /* Transition for width change */
-}
-
-.sidebar nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar nav ul li {
-    margin-bottom: 15px;
-}
-
-.sidebar nav ul li a {
-    text-decoration: none;
-    color: #f8f9fa; /* Light color for links */
-    font-size: 16px;
-    display: flex; /* Aligns text and icon */
-    align-items: center; /* Center icon vertically */
-    padding: 10px 15px; /* Padding for clickable area */
-    border-radius: 4px; /* Rounded corners */
-    transition: background-color 0.3s; /* Transition for hover effect */
-}
-
-.sidebar nav ul li a:hover, 
-.sidebar nav ul li a.active {
-    background-color: #d4a253; /* Hover or active link background color */
-    color: #343a40; /* Dark text color on hover */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeDwell Admin Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: #fff;
+            height: 100vh;
+            position: fixed;
+            padding-top: 132px;
+        }
+        .sidebar h2 {
+    text-align: center;
+    margin-bottom: 3px;
+    padding: 15px;
+    background-color: #3c2626; /* Steel Blue */
+    color: white;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1.8em;
     font-weight: bold;
+    border: 3px solid #ffd000; /* Golden border */
 }
 
-.sidebar nav ul li a i {
-    margin-right: 10px; /* Spacing between icon and text */
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        .sidebar i {
+            margin-right: 10px;
+        }
+        
+        .content {
+    margin-left: 250px;
+    padding: 20px;
+    flex-grow: 1;
+    text-align: center;   /* Center-align text */
+    font-weight: bold;    /* Make text bold */
 }
 
-/* Optional: Add a media query for responsive design */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 200px; /* Smaller width on smaller screens */
-    }
-}
+       
+    </style>
+</head>
+<body>
 
-</style> -->
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>LuxeDwell Admin</h2>
+        <a href="/home"><i>🏠</i> Home</a>
+        <a href="/Realtrondetail"><i>📊</i> Company Details</a>
+        <a href="/Agentdetails"><i>👤</i> Agent Details</a>
+        <a href="/propertydetails"><i>🏢</i> Property Details</a>
+        <a href="/profile"><i>👤</i> Profile</a> <!-- Added Profile link -->
+
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <h1>Welcome to the LuxeDwell Admin Dashboard</h1>
+       
+        
+        <!-- Home Page Image -->
+        <img src="images\titlecard.png" alt="Home Page Image" class="home-image">
+    </div>
+
+</body>
+</html>
