@@ -21,8 +21,16 @@
         
 
         .table-section {
-    margin-top: 20px;
-    overflow-x: auto; /* Enables horizontal scrolling */
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    padding: 0px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin-top: -511px; /* Remove the negative margin */
+    max-width: calc(100% - 250px); /* Adjust width to allow space for the sidebar */
+    margin-left: auto;
+   
 }
 
 .table-section table {
@@ -106,9 +114,11 @@
     <div class="hero_area">
         <!-- header section starts -->
         @include('admin.header')
+        @include('admin.sidebar')
+            @include('admin.body1')
         <!-- header section ends -->
         <div class="row">
-            @include('admin.sidebar')
+            
             <div class="search-container">
   
 
@@ -277,10 +287,7 @@
     font-size: 1.2em;
 }
 
-.table-section {
-    margin-top: 20px;
-    overflow-x: auto; /* Enable horizontal scrolling */
-}
+
 
 .table-section form {
     display: flex;

@@ -33,6 +33,13 @@
             height: auto;
             border-radius: 10px;
         }
+        .content {
+    margin-left: 250px;
+    padding: 20px;
+    flex-grow: 1;
+    text-align: center;   /* Center-align text */
+    font-weight: bold;    /* Make text bold */
+}
 
     .hero_area {
         display: flex;

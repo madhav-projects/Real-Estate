@@ -106,9 +106,11 @@
     <div class="hero_area">
         <!-- header section starts -->
         @include('admin.header')
+        @include('admin.sidebar')
+            @include('admin.body1')
         <!-- header section ends -->
         <div class="row">
-            @include('admin.sidebar')
+            
 
             <div class="col-md-12" style="width: 100%;">
                 <div class="row">

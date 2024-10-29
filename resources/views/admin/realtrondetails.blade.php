@@ -20,10 +20,15 @@
         }
         
 
-        .table-section {
-    margin-top: 20px;
+        .table-section
+         {position: relative;
     
-    overflow-x: auto; /* Enables horizontal scrolling */
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin-top: -577px;
 }
 
 .table-section table {
@@ -103,20 +108,30 @@
         }
     </style>
 </head>
+
 <body class="overflow-x-hidden">
+    
     <div class="hero_area">
         <!-- header section starts -->
         @include('admin.header')
+        
+        @include('admin.body1')
+        @include('admin.sidebar')
         <!-- header section ends -->
+         
         <div class="row">
             @include('admin.sidebar')
+            
 
             <div class="col-md-12" style="width: 100%;">
                 <div class="row">
+                    
                     <h2 class="fs-5 fw-bold mt-4">Realtron Details</h2>
                     <div class="search-container">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Search agents...">
-                </div>
+                        <input type="text" id="searchInput" class="search-input" placeholder="Search...">
+                        <button class="search-button" id="searchButton">Search</button>
+                    </div>
+                    
                     <div class="table-section">
                         <table class="table table-section w-100">
                             <thead>
@@ -237,12 +252,12 @@
         });
 
         // Search functionality
-        $('#searchInput').on('keyup', function() {
-            var value = $(this).val().toLowerCase();
-            $('#realtrondetails tr').filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        $('#searchButton').on('click', function() {
+                var value = $('#searchInput').val().toLowerCase();
+                $('#realtrondetails tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
             });
-        });
 
         fetchCategories();
     });
@@ -258,6 +273,33 @@
     display: flex;
     flex-direction: column;
 }
+.search-container {
+    display: flex;
+
+    margin-bottom: 10px;
+}
+
+.search-input {
+    width: 300px; /* Adjust width as needed */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px; /* Space between input and button */
+}
+
+#searchButton {
+    padding: 5px 15px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 4px;
+    background-color: #3498db; /* Button color */
+    color: white;
+    cursor: pointer;
+}
+
+#searchButton:hover {
+    background-color: #2980b9; /* Darker shade on hover */
+}
+
 
 .hero_area {
     display: flex;
@@ -265,6 +307,22 @@
     width: 100%;
 }
 
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.col-md-12 {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    flex: 1;
+}
 
 .user-info {
     display: flex;
@@ -321,39 +379,21 @@
 }
 
 .table-section {
-    margin-top: 20px;
-    overflow-x: auto; /* Enable horizontal scrolling */
-}
-
-.table-section form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.table-section form input {
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.table-section form button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.table-section form button:hover {
-    background-color: #2980b9;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    padding: 0px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin-top: -511px; /* Remove the negative margin */
+    max-width: calc(100% - 250px); /* Adjust width to allow space for the sidebar */
+    margin-left: auto;
+   
 }
 
 .table-section table {
     width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
@@ -434,7 +474,12 @@ input[type="submit"]:hover {
     background-color: #2980b9;
 }
 
-/* Sidebar Styles */
 
+#message {
+    display: none;
+    padding: 8px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+}
 
 </style>
