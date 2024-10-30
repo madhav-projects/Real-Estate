@@ -12,6 +12,12 @@
         <!-- header section starts -->
        @include('admin.header')
         <!-- header section ends -->
+        <div class="statistic-boxes">
+        <a href="/Realtrondetail" class="stat-box">🏠 Company Details</a>
+    <a href="/Agentdetails" class="stat-box">👤 Agent Details</a>
+    <a href="/propertydetails" class="stat-box">🏢 Property Details</a>
+            
+        </div>
         <div class="container">
            @include('admin.sidebar')
            @include('admin.body')
@@ -28,6 +34,37 @@
         font-family: 'Arial', sans-serif;
         background-color: #f4f4f4; /* Light gray background */
     }
+    /* Statistic Boxes */
+.statistic-boxes {
+    position: absolute;
+    top: 170px; /* Adjust as needed */
+    left: 60%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+}
+
+.stat-box {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 31px 29px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 19px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.stat-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
     .home-image {
             max-width: 100%;
             height: auto;

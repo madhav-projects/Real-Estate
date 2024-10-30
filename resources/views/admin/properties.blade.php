@@ -18,12 +18,58 @@
             border-radius: 18px;
             margin-bottom: 20px;
         }
-        
-
-        .table-section {
-    margin-top: 20px;
-    overflow-x: auto; /* Enables horizontal scrolling */
+        @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
+        
+        .search-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    z-index: 1000; /* Ensures it's on top of other content */
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.search-bar {
+    width: 30%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    transition: all 0.3s ease; /* Animation effect */
+}
+
+/* Style for search button */
+.search-button {
+    padding: 15px 20px;
+    font-size: 19px;
+    border: none;
+    background-color: #3c2626;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animation effect */
+}
+
+/* Hover effects */
+.search-bar:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    transform: scale(1.02); /* Slightly expand on focus */
+}
+
+.search-button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05); /* Slightly grow on hover */
+}
+
+
 
 .table-section table {
     width: 100%;
@@ -42,15 +88,20 @@
 }
 
 .table-section th {
-    background-color: #f2f2f2;
+    background-color: #3c2626;
 }
 
 .table-section tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+.table-section tbody tr {
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
 
 .table-section tbody tr:hover {
-    background-color: #f1f1f1;
+    background-color: #d1e8ff; /* Row highlight on hover */
+    cursor: pointer;
 }
 
 .table-section button {
@@ -84,18 +135,7 @@
             padding-left: 0;
             padding-right: 0;
         }
-        .search-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
-        }
-
-        .search-input {
-            width: 300px;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+        
 
         .hero_area {
             width: 100%;
@@ -115,10 +155,10 @@
             <div class="col-md-12" style="width: 100%;">
                 <div class="row">
                     <h2 class="fs-5 fw-bold mt-4">Properties Details</h2>
-                    <div class="search-container">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Search agents...">
-                </div>
+                    
                     <div class="table-section">
+                    <input type="text" id="searchInput" placeholder="Search for agents..." class="search-bar">
+                    <button id="searchButton" class="search-button">Search</button>
                         <table class="table table-section w-100">
                             <thead>
                                 <tr>
@@ -143,9 +183,9 @@
                                     <th>Image 2</th>
                                     <th>Image 3</th>
                                     <th>Image 4</th>
-                                    <th>Action</th>
-                                   
                                     <!-- <th>Action</th> -->
+                                   
+                                   
                                 </tr>
                             </thead>
                             <tbody id="realtrondetails">
@@ -209,17 +249,21 @@
                 }
             });
         }
-
-        // Add search functionality
-        $('#searchInput').on('input', function() {
-            var searchText = $(this).val().toLowerCase();
-            $('#realtrondetails tr').each(function() {
-                var rowText = $(this).text().toLowerCase();
-                $(this).toggle(rowText.includes(searchText));
-            });
-        });
-
         fetchCategories();
+
+        $("#searchInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#realtrondetails tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    });
+});
+
+$("#searchButton").click(function() {
+    var value = $("#searchInput").val().toLowerCase();
+    $("#realtrondetails tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    });
+});
     });
 </script>
 
@@ -232,6 +276,20 @@
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
+}
+.table-section {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin-top: -511px; /* Remove the negative margin */
+    max-width: calc(101% - 278px); /* Adjust width to allow space for the sidebar */
+    margin-left: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+   
 }
 .home-image {
             max-width: 100%;
@@ -299,11 +357,11 @@
     margin: 5px 0 0;
     font-size: 1.2em;
 }
-
+/* 
 .table-section {
     margin-top: 20px;
-    overflow-x: auto; /* Enable horizontal scrolling */
-}
+    overflow-x: auto; 
+} */
 
 .table-section form {
     display: flex;
@@ -337,6 +395,10 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    
+}
+.table-section table:hover {
+    transform: scale(1.01); /* Slight zoom on hover */
 }
 
 .table-section th, .table-section td {
@@ -347,7 +409,14 @@
 }
 
 .table-section th {
-    background-color: #f2f2f2;
+    background-color: #3c2626;
+    color: white;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+.table-section th:hover {
+    background-color: #2980b9;
 }
 
 .table-section tbody tr:nth-child(even) {
