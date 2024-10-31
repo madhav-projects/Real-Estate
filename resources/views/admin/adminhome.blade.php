@@ -23,6 +23,11 @@
            @include('admin.body')
         </div>
     </div>
+
+    <div class="scrolling-text">
+        LuxeDwell: Unlocking doors to dreams, one Home and Plot at a time.
+    </div>
+
     
     <script src="script.js"></script>
 </body>
@@ -47,7 +52,7 @@
 
 .stat-box {
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 31px 29px;
+    padding: 21px 25px;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     font-size: 19px;
@@ -257,6 +262,32 @@
 
     .table-section button:hover {
         opacity: 0.8;
+    }
+
+    .scrolling-text {
+        position: fixed;
+        bottom: 20px;
+        width: 100%;
+         
+        color: black;
+        font-size: 1.2em;
+        text-align: center;
+        padding: 10px 0;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .scrolling-text {
+        animation: scroll-left 13s linear infinite;
+    }
+    @keyframes scroll-left {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(-100%);
+        }
     }
 
     @media (max-width: 768px) {

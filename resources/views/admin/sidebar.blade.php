@@ -13,7 +13,7 @@
             display: flex;
         }
         .sidebar {
-            width: 250px;
+            width: 270px;
             background-color: #333;
             color: #fff;
             height: 100vh;

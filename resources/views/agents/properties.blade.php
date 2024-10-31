@@ -23,6 +23,7 @@
         <!-- header section starts -->
         @include('agents.header')
         <!-- header section ends -->
+        <!-- @include('agents.body1') -->
         <div class="container">
             <div class="form-container">
                 <form action="{{url('/add_property')}}" method="post" id="property_type" enctype="multipart/form-data">
@@ -252,12 +253,20 @@
 
 
 <style>
-/* body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-} */
+
+.home-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            filter: blur(5px);
+        }
+        .content {
+    margin-left: 250px;
+    padding: 20px;
+    flex-grow: 1;
+    text-align: center;   /* Center-align text */
+    font-weight: bold;    /* Make text bold */
+}
 
 .property-details-heading {
     font-weight: bold;         /* Makes the text bold */
@@ -279,16 +288,26 @@
 }
 
 .container {
+    background-image: url('images/bgagent.png'); /* Set the background image on the container */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
-    width: 100%;
+    justify-content: center; /* Center the form within the container */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full screen height */
 }
 
 .form-container {
     flex: 1;
     padding: 25px;
-    background-color: #f4f4f4;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for readability */
     margin-top: 55px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Full width */
 }
+
 
 .form-section {
     display: flex;
