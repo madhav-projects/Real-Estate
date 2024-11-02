@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealEstate-Admin</title>
+    <title>RealEstate-Agent</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="images/logo md.png" type="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -295,14 +295,14 @@
     display: flex;
     justify-content: center; /* Center the form within the container */
     align-items: center; /* Center vertically */
-    height: 100vh; /* Full screen height */
+    height: 115vh; /* Full screen height */
 }
 
 .form-container {
     flex: 1;
     padding: 25px;
     background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for readability */
-    margin-top: 55px;
+    margin-top: 60px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%; /* Full width */

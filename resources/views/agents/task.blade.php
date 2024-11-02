@@ -7,30 +7,58 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        /* Full-page background image */
         body {
-            padding-top: 60px; /* Adjust based on navbar height */
-            font-family: Arial, sans-serif; /* Optional: Set a default font */
+            padding-top: 60px;
+            font-family: Arial, sans-serif;
+            background-image: url('images/bgagent.png'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
+        /* Centered container with translucent background for readability */
+        .container {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 8px;
+            max-width: px;
+            width: 100%;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: -60px; /* Space between header and table */
+            margin-top: 10px;
         }
+       
+
         th, td {
             border: 1px solid #ccc;
             padding: 8px;
             text-align: left;
+            background-color: rgba(255, 255, 255, 0.8);
         }
-        th {
-            background-color: #f2f2f2;
-        }
+
+     
+            th {
+              background-color: #3c2626;
+              color: white;
+               }
+
         h1.text-center.font-weight-bold {
-    text-align: center; /* Center the text */
-    font-weight: bold; /* Make the text bold */
-    margin-bottom: 20px; /* Space below the header */
-    font-size: 24px; /* Adjust the font size if needed */
-    padding: 60px; /* Add padding inside the header */
-}
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
 
         .alert {
             color: red;
@@ -40,9 +68,10 @@
 </head>
 <body>
     @include('agents.header')
-    <div class="container py-5">
-        <h1 class="text-center font-weight-bold">Task List</h1> <!-- Centered bold header above the table -->
+    <div class="container">
+        <h1 class="text-center font-weight-bold">Task List</h1>
         <div id="alertMessage" class="alert" style="display: none;"></div>
+        
         <table>
             <thead>
                 <tr>
@@ -61,16 +90,15 @@
     <script>
         function fetchTasks() {
             $.ajax({
-                url: '{{ url('fetch_task') }}', // Use Laravel's url helper for the endpoint
+                url: '{{ url('fetch_task') }}',
                 method: 'GET',
                 success: function(response) {
-                    console.log(response); // Log the response to inspect the data structure
+                    console.log(response);
                     const taskTableBody = $('#taskTableBody');
                     const alertMessage = $('#alertMessage');
-                    taskTableBody.empty(); // Clear any existing rows
-                    alertMessage.hide(); // Hide the alert message
+                    taskTableBody.empty();
+                    alertMessage.hide();
 
-                    // Check if tasks are returned
                     if (response.assigntask && response.assigntask.length > 0) {
                         response.assigntask.forEach(function(task) {
                             const row = `
@@ -81,23 +109,20 @@
                                     <td>${task.due_date}</td>
                                 </tr>
                             `;
-                            taskTableBody.append(row); // Append new row to the table body
+                            taskTableBody.append(row);
                         });
                     } else {
-                        // Show alert message if no tasks are found
                         alertMessage.text('No tasks found for this user.').show();
                     }
                 },
                 error: function(xhr, status, error) {
                     console.error('Error fetching tasks:', error);
-                    // Show an error message if the AJAX request fails
                     const alertMessage = $('#alertMessage');
                     alertMessage.text('Error fetching tasks. Please try again later.').show();
                 }
             });
         }
 
-        // Fetch tasks when the document is ready
         $(document).ready(function() {
             fetchTasks();
         });

@@ -1,6 +1,6 @@
 <div class="content">
         
-        <img src="images\titlecard.png" alt="Home Page Image" class="home-image">
+        <img src="images\bgagent.png" alt="Home Page Image" class="home-image">
     </div>
     
     <style>
@@ -16,7 +16,7 @@
         top: 0;
         left: 0;
         width: 100vw;
-        height: 100vh;
+        height: 220vh;
         display: flex;
         align-items: center;
         justify-content: center;
