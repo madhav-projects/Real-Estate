@@ -28,10 +28,10 @@
             <div class="col-md-9" style="width: 100%;">
                 
                 <div class="row">
-                    <h2 class="fs-5 fw-bold mt-4">Property Details</h2>
+                    
                     <div class="table-responsive table-container">
                         <table class="table table-section w-100">
-                        <h1 class="property-details-heading">Property Details</h1>
+                        
 
                             <thead>
                                 <tr>
@@ -164,11 +164,21 @@
 </html>
 <style>
     body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-}
+            padding-top: 60px;
+            font-family: Arial, sans-serif;
+            background-image: url('images/bgagent.png'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+
 
 .hero_area {
     display: flex;
@@ -177,13 +187,17 @@
 }
 
 .container {
-    display: flex;
-    width: 100%;
-}
+           
+            padding: 30px;
+            border-radius: 8px;
+            max-width:1324 px;
+            width: 100%;
+            
+        }
 
 .table-container {
     overflow-x: auto; /* Allows horizontal scroll if needed */
-    margin: 90px 0; /* Adjusted for proper spacing */
+    margin: 90px -68px; /* Adjusted for proper spacing */
     width: 100%; /* Full width to avoid overlap */
 }
 
@@ -228,19 +242,4 @@
     color: white;
 }
 
-.property-details-heading {
-    font-weight: bold;         /* Makes the text bold */
-    text-align: center;        /* Centers the text */
-    font-size: 24px;           /* Increases the font size */
-    position: fixed;           /* Fixes the position of the heading */
-    top: 120px;                 /* Sets the distance from the top of the viewport */
-    left: 50%;                 /* Centers the heading horizontally */
-    transform: translateX(-50%); /* Adjusts the centering to account for width */
-    background-color: white;   /* Optional: Adds a background color for better visibility */
-    z-index: 1000;             /* Ensures the heading stays above other elements */
-    width: 100%;               /* Optional: Makes the heading full width */
-}
-/* .table-section button:hover {
-    opacity: 0.8;
-} */
 </style>

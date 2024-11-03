@@ -12,8 +12,9 @@
 </head>
 <body class="overflow-x-hidden font-sans antialiased">
     <div class="hero_area">
+    @include('realtron.header')
         <div class="container">
-            @include('realtron.header')
+            
             <div class="row justify-content-center">
                 <div class="col-md-12 ms-3 mt-5" style="width: 100%;">
                 <h1 class="centered-header">User Request</h1>

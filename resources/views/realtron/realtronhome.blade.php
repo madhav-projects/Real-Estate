@@ -24,11 +24,12 @@
 </head>
 <body>
     <div class="hero_area">
+      <!-- header section starts -->
+      
+        <!-- end header section -->
     <div class="container">
 
-        <!-- header section starts -->
-       @include('realtron.header')
-        <!-- end header section -->
+    @include('realtron.header')
         <!-- search section -->
         <div class="hero_area">
         <video autoplay muted loop id="bgVideo">
@@ -87,7 +88,7 @@
             text-align: center;
             overflow: hidden;
         }
-        .luxe-text {
+        /* .luxe-text {
          position: absolute;
          top: 23px;
          left: 138px;
@@ -97,7 +98,7 @@
          font-size: 1.5em;
          color: black;
          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      }
+      } */
         #bgVideo {
     position: absolute;
     top: 0;

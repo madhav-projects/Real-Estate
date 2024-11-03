@@ -12,113 +12,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        #message {
-            display: none;
-            padding: 8px;
-            border-radius: 18px;
-            margin-bottom: 20px;
-        }
-
-        .container {
-            display: flex;
-            width: 100%;
-        }
-        .nav-link{
-            color: #333 !important;
-        }
-        .nav-item{
-            margin-left: 15px;
-            margin-right: 15px;
-        }
-        .table-responsive {
-            overflow-x: auto;
-        }
-
-        .table-section {
-            border-collapse: collapse;
-            width: 98%;
-            margin: 0 auto;
-            background-color: #f8f9fa; /* Light grey background */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        }
-
-        .table-section th {
-    color: white; /* Retain the text color */
-    padding: 12px;
-    text-align: left;
-    text-wrap: nowrap;
-}
-
-
-        .table-section td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd; /* Light grey border */
-        }
-
-        .table-section tr:nth-child(even) {
-            background-color: #f2f2f2; /* Alternate row color */
-        }
-
-        .table-section tr:hover {
-            background-color: #ddd; /* Hover color */
-        }
-
-        .container-fluid {
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        .centered-header {
-    text-align: center;
-    font-weight: bold;
-    font-size: 23px;
-    color: black; /* Change color to black */
-    margin-bottom: -66px;
-    padding: 75px; /* Keep padding */
-}
-
-
-        .hero_area {
-            width: 100%;
-        }
-
-        .modal-header {
-            background-color: #4CAF50; /* Green color */
-            color: white;
-        }
-
-        .btn-primary {
-            background-color: #4CAF50;
-            border-color: #4CAF50;
-        }
-
-        .form-section {
-            display: none; /* Hide the form initially */
-            margin-top: 20px;
-        }
-
-        .btn-center {
-            display: flex;
-            justify-content: center;
-        }
-       
-
-        .selected-agent-display {
-            text-align: center;
-            font-weight: bold;
-            color: #4CAF50;
-            margin-top: 20px;
-        }
-       
-    </style>
+   
 </head>
 <body class="overflow-x-hidden">
     <div class="hero_area">
+    @include('realtron.header')
     <div class="container">
         <!-- Include header section -->
-        @include('realtron.header')
+        
 
         <div class="row">
             <div class="col-md-12 mt-5">
@@ -289,8 +190,106 @@
     });
 });
 </script>
+<style>
+        #message {
+            display: none;
+            padding: 8px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+        }
 
-</script>
+        .container {
+            display: flex;
+            width: 100%;
+        }
+        .nav-link{
+            color: #333 !important;
+        }
+        .nav-item{
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
 
+        .table-section {
+            border-collapse: collapse;
+            width: 98%;
+            margin: 0 auto;
+            background-color: #f8f9fa; /* Light grey background */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .table-section th {
+    color: white; /* Retain the text color */
+    padding: 12px;
+    text-align: left;
+    text-wrap: nowrap;
+}
+
+
+        .table-section td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd; /* Light grey border */
+        }
+
+        .table-section tr:nth-child(even) {
+            background-color: #f2f2f2; /* Alternate row color */
+        }
+
+        .table-section tr:hover {
+            background-color: #ddd; /* Hover color */
+        }
+
+        .container-fluid {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .centered-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 23px;
+    color: black; /* Change color to black */
+    margin-bottom: -66px;
+    padding: 75px; /* Keep padding */
+}
+
+
+        .hero_area {
+            width: 100%;
+        }
+
+        .modal-header {
+            background-color: #4CAF50; /* Green color */
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        .form-section {
+            display: none; /* Hide the form initially */
+            margin-top: 20px;
+        }
+
+        .btn-center {
+            display: flex;
+            justify-content: center;
+        }
+       
+
+        .selected-agent-display {
+            text-align: center;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-top: 20px;
+        }
+       
+    </style>
 </body>
 </html>
