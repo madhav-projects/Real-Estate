@@ -97,6 +97,7 @@ class AgentController extends Controller
             'city' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'status' => 'required|string|max:255',
+            'price' => 'required|string|max:255',
             'image1' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image2' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image3' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -130,8 +131,8 @@ class AgentController extends Controller
         $property->state = $request->state;
         $property->address = $request->address;
         $property->status = $request->status;
-        // Handling image uploads
-        // Handling image uploads
+        $property->price = $request->price;
+
 
         if ($request->hasFile('image1')) {
             $image1 = $request->file('image1');
@@ -195,25 +196,16 @@ class AgentController extends Controller
     }
 
     public function editProperty($id)
-    {
-
-        $property = Property::find($id);
-        if ($property) {
-
-            return response()->json([
-                'success' => true,
-                'property' => $property,
-            ], 200);
-
-        } else {
-            // Return an error message if the property is not found
-            return response()->json([
-                'success' => false,
-                'message' => 'Property not found.',
-            ], 404);
-        }
-
+{
+    // Fetch property data by ID, and pass it to the view
+    $property = Property::find($id);
+    if ($property) {
+        return view('edit_property', compact('property'));
+    } else {
+        return redirect()->back()->with('error', 'Property not found.');
     }
+}
+
 
     public function fetchtask()
     {
@@ -233,6 +225,4 @@ class AgentController extends Controller
 
     }
     
-
-
 }

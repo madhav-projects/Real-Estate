@@ -70,6 +70,7 @@
                 url: '{{ url("/fetch_agent_property") }}',
                 method: 'GET',
                 success: function(response) {
+                    console.log(response); // Log the response to inspect it
                     const propertyCards = $('#propertyCards');
                     const alertMessage = $('#alertMessage');
                     propertyCards.empty();
@@ -77,23 +78,24 @@
 
                     if (response.properties && response.properties.length > 0) {
                         response.properties.forEach(function(property) {
+                            console.log(property); // Log each property to inspect its attributes
                             const card = `
-    <div class="col-md-4 property-card">
-        <div class="card">
-            <img src="${property.image1}" alt="Image 1" class="card-img-top" onclick="showInCarousel(${property.id}, '${property.image1}', '${property.image2}', '${property.image3}')">
-            <div class="card-body">
-                <h5 class="card-title">${property.agent_name} - ${property.property_type}</h5>
-                <p class="card-text">
-                    <strong>Selling Type:</strong> ${property.selling_type}<br>
-                    <strong>Company Name:</strong> ${property.company_name}<br>
-                    <strong>Address:</strong> ${property.address}<br>
-                    <strong>Price:</strong> ${property.price}
-                    <a href="/show_allproperties/${property.id}">View Details</a>  
-                </p>
-            </div>
-        </div>
-    </div>
-`;
+                                <div class="col-md-4 property-card">
+                                    <div class="card">
+                                        <img src="${property.image1}" alt="Image 1" class="card-img-top" onclick="showInCarousel(${property.id}, '${property.image1}', '${property.image2}', '${property.image3}')">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${property.agent_name} - ${property.property_type}</h5>
+                                            <p class="card-text">
+                                                <strong>Selling Type:</strong> ${property.selling_type}<br>
+                                                <strong>Company Name:</strong> ${property.company_name}<br>
+                                                <strong>Address:</strong> ${property.address}<br>
+                                                <strong>Price:</strong> ${property.price || 'Not available'}
+                                            </p>
+                                            <a href="/show_allproperties/${property.id}" class="btn btn-primary mt-2">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
                             propertyCards.append(card);
                         });
                     } else {
@@ -128,5 +130,5 @@
             fetchProperties();
         });
     </script>
-</body> 
+</body>
 </html>

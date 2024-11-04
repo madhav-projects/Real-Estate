@@ -10,16 +10,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="overflow-x-hidden font-sans antialiased">
+<body class="font-sans antialiased">
     <div class="hero_area">
-    @include('realtron.header')
+        @include('realtron.header')
         <div class="container">
-            
             <div class="row justify-content-center">
-                <div class="col-md-12 ms-3 mt-5" style="width: 100%;">
-                <h1 class="centered-header">User Request</h1>
+                <div class="col-md-12 ms-3 mt-5">
+                    <h1 class="centered-header">User Request</h1>
                     <div class="table-section">
-                    
                         <div class="table-responsive mt-3">
                             <table class="table table-section w-100">
                                 <thead>
@@ -52,97 +50,128 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    $(document).ready(function() {
+        // Set up CSRF token for AJAX requests
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // Fetch agents and populate the table
+        function fetchAgents() {
+            $.ajax({
+                url: '{{ url('showagentregister') }}',
+                method: 'GET',
+                success: function(response) {
+                    var tableBody = $('#Agentdetails');
+                    tableBody.empty();
+
+                    if (response.agent) {
+                        response.agent.forEach(function(agent) {
+                            var row = '<tr>' +
+                                '<td>' + agent.username + '</td>' +
+                                '<td>' + agent.agent_company + '</td>' +
+                                '<td>' + agent.phone + '</td>' +
+                                '<td>' + agent.email + '</td>' +
+                                '<td>' + agent.password + '</td>' +
+                                '<td>' + agent.address + '</td>' +
+                                '<td>' + agent.city + '</td>' +
+                                '<td>' + agent.area + '</td>' +
+                                '<td>' + agent.role + '</td>' +
+                                '<td>' + agent.pincode + '</td>' +
+                                '<td>' + agent.status + '</td>' +
+                                '<td>' + (agent.profile ? '<a href="' + agent.profile + '" target="_blank">View</a>' : 'N/A') + '</td>' +
+                                '<td>' +
+                                    '<button class="acceptBtn btn btn-primary" data-id="' + agent.id + '">Accept</button> ' +
+                                    '<button class="btn btn-danger rejectBtn" data-id="' + agent.id + '">Reject</button>' +
+                                '</td>' +
+                                '<td>' +
+                                    
+                                    '<button class="btn btn-danger deleteBtn" data-id="' + agent.id + '">Delete</button>' +
+                                '</td>' +
+                                '</tr>';
+                            tableBody.append(row);
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
                 }
             });
+        }
 
-            function fetchAgents() {
-                $.ajax({
-                    url: '{{ url('showagentregister') }}', // endpoint api
-                    method: 'GET',
-                    success: function(response) {
-                        var tableBody = $('#Agentdetails');
-                        tableBody.empty();
-
-                        if (response.agent) {
-                            response.agent.forEach(function(agent) {
-                                var row = '<tr>' +
-                                    '<td>' + agent.username + '</td>' +
-                                    '<td>' + agent.agent_company + '</td>' +
-                                    '<td>' + agent.phone + '</td>' +
-                                    '<td>' + agent.email + '</td>' +
-                                    '<td>' + agent.password + '</td>' +
-                                    '<td>' + agent.address + '</td>' +
-                                    '<td>' + agent.city + '</td>' +
-                                    '<td>' + agent.area + '</td>' +
-                                    '<td>' + agent.role + '</td>' +
-                                    '<td>' + agent.pincode + '</td>' +
-                                    '<td>' + agent.status + '</td>' +
-                                    '<td>' + (agent.profile ? '<a href="' + agent.profile + '" target="_blank">View</a>' : 'N/A') + '</td>' +
-                                    '<td>' +
-                                        '<button class="acceptBtn btn btn-primary" data-id="' + agent.id + '">Accept</button> ' +
-                                        '<button class="btn btn-danger rejectBtn" data-id="' + agent.id + '">Reject</button>' +
-                                    '</td>' +
-                                    '<td>' +
-                                        '<button class="btn btn-primary editBtn me-1" data-id="' + agent.id + '">Edit</button>' +
-                                        '<button class="btn btn-danger deleteBtn" data-id="' + agent.id + '">Delete</button>' +
-                                    '</td>' +
-                                    '</tr>';
-                                tableBody.append(row);
-                            });
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error:', error);
+        // Handle Accept button click
+        $(document).on('click', '.acceptBtn', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/Approve_detailagent/' + id,
+                method: 'POST',
+                success: function(response) {
+                    if (response.success) {
+                        alert(response.message || 'Agent approved successfully.');
+                        fetchAgents(); // Refresh table data
+                    } else {
+                        alert('Failed to accept agent.');
                     }
-                });
-            }
-
-            $(document).on('click', '.acceptBtn', function() {
-                var id = $(this).data('id');
-                $.ajax({
-                    url: '/Approve_detailagent/' + id,
-                    method: 'POST',
-                    success: function(response) {
-                        if (response.success) {
-                            alert(response.message);
-                            location.reload();
-                        } else {
-                            alert('Failed to accept Agent: ' + response.error);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error:', error);
-                        alert('An error occurred: ' + xhr.responseText);
-                    }
-                });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('An error occurred: ' + (xhr.responseText || error));
+                }
             });
-
-            $(document).on('click', '.rejectBtn', function() {
-                var id = $(this).data('id');
-                $.ajax({
-                    url: '/Reject_detailagent/' + id,
-                    method: 'POST',
-                    success: function(response) {
-                        if (response.success) {
-                            alert('Agent rejected successfully.');
-                            location.reload();
-                        } else {
-                            alert('Failed to reject Agent.');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error:', error);
-                    }
-                });
-            });
-
-            fetchAgents();
         });
-    </script>
+
+        // Handle Reject button click
+        $(document).on('click', '.rejectBtn', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/Reject_detailagent/' + id,
+                method: 'POST',
+                success: function(response) {
+                    if (response.success) {
+                        alert('Agent rejected successfully.');
+                        fetchAgents(); // Refresh table data
+                    } else {
+                        alert('Failed to reject agent.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('An error occurred: ' + (xhr.responseText || error));
+                }
+            });
+        });
+
+        // Handle Delete button click
+$(document).on('click', '.deleteBtn', function() {
+    var id = $(this).data('id');
+    if (confirm('Are you sure you want to delete this agent?')) {
+        $.ajax({
+            url: '/deleteAgent/' + id,
+            method: 'DELETE',
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message || 'Agent deleted successfully.');
+                    fetchAgents(); // Refresh table data
+                } else {
+                    alert('Failed to delete agent.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert('An error occurred: ' + (xhr.responseText || error));
+            }
+        });
+    }
+});
+
+
+        // Initial fetch to load agents when the page loads
+        fetchAgents();
+    });
+</script>
+
 </body>
 </html>
 
@@ -152,55 +181,62 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    background-image: url('images/bgcompany.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .hero_area {
-    display: flex;
-    flex-direction: column;
     width: 100%;
 }
 
-.table-section {
-    margin-top: 20px;
+.container {
+    max-width: 1258px;
+    margin: auto;
 }
 
 .centered-header {
     text-align: center;
     font-weight: bold;
-    font-size: 23px;
-    color: black; /* Change color to black */
-    margin-bottom: -66px;
-    padding: 60px; /* Keep padding */
+    font-size: 24px;
+    color: black;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.table-section {
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
 }
 
 .table-section .table {
     width: 100%;
     border-collapse: collapse;
-    background-color: transparent; /* Remove background color */
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: none; /* Remove shadow */
 }
 
 .table-section th, .table-section td {
     padding: 12px;
-    text-align: center;
+    text-align: left;
     color: #333;
     border: 1px solid #ddd;
 }
 
 .table-section th {
-    background-color: #f8f9fa; /* Light background for table headers */
-    color: #000; /* Change header text color */
+    background-color: #f8f9fa;
+    color: #000;
     font-weight: bold;
 }
 
 .table-section tbody tr:nth-child(even) {
-    background-color: #f9f9f9; /* Light gray for even rows */
+    background-color: #f9f9f9;
 }
 
 .table-section tbody tr:hover {
-    background-color: #e0f7fa; /* Light hover effect */
+    background-color: #e0f7fa;
 }
 
 .table-section button {
@@ -212,15 +248,23 @@ body {
 }
 
 .table-section .acceptBtn {
-    /* Remove specific styling for accept button */
+    background-color: #4CAF50;
+    color: white;
 }
 
-.table-section .rejectBtn, .table-section .deleteBtn {
-    /* Remove specific styling for reject and delete buttons */
+.table-section .rejectBtn {
+    background-color: #f44336;
+    color: white;
 }
 
 .table-section .editBtn {
-    /* Remove specific styling for edit button */
+    background-color: #008CBA;
+    color: white;
+}
+
+.table-section .deleteBtn {
+    background-color: #e53935;
+    color: white;
 }
 
 .table-section button:hover {

@@ -49,6 +49,7 @@ Route::get('/propertydetails',[AdminController::class,'properties']);
 Route::get('/showagentregister', [RealtronController::class, 'showagent']);//here fetch the agent details in realtron page
 Route::post('/Approve_detailagent/{id}',[RealtronController::class,'approve_detailagent']);//approve and reject written in realtron controller
 Route::post('/Reject_detailagent/{id}',[RealtronController::class,'reject_detailagent']);
+Route::delete('/deleteAgent/{id}', [RealtronController::class, 'deleteAgent']);
 
 Route::get('/viewuser_request',[RealtronController::class,'userrequest'])->name('viewuser_request');//usersite request will be show in companysite
 Route::post('/assign_agent', [RealtronController::class, 'assignAgent'])->name('assign_agent');//here taske will be assing to particular agent in that company
@@ -64,7 +65,8 @@ Route::delete('/delete_category/{id}', [RealtronController::class, 'deleteCatego
 Route::get('/view_properties', [AdminController::class, 'view_properties']);
 Route::post('/add_property',[AdminController::class,'addproperty'])->name('add_property');
 Route::get('/show_properties',[AdminController::class,'show_properties']);
-Route::get('/edit_property',[AdminController::class,'editProperty']);
+Route::get('/edit_property/{id}', [AgentController::class, 'editProperty'])->name('edit.property');
+
 
 //user controller
 Route::get('/view_seller',[SellerController::class,'viewseller']);

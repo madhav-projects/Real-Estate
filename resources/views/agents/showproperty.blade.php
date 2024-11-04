@@ -127,10 +127,13 @@
                         });
 
                         // Bind edit action to newly created edit buttons
-                        $('.editBtn').click(function() {
-                            var propertyId = $(this).data('id');
-                            window.location.href = '/edit_property?id=' + propertyId;
-                        });
+                          // Bind edit action to newly created edit buttons
+                     $('.editBtn').click(function() {
+                      var propertyId = $(this).data('id');
+                      console.log("Edit button clicked with ID:", propertyId); // Debug line
+                         window.location.href = '/edit_property?id=' + propertyId;
+                         });
+
 
                     },
                     error: function(xhr, status, error) {

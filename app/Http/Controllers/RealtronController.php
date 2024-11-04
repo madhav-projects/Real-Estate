@@ -324,6 +324,21 @@ public function Approve_detail(Request $request, $id)
         }
     }
 
+
+    public function deleteAgent($id)
+    {
+        try {
+            $agent = Agent::findOrFail($id);
+            $agent->delete();
+            return response()->json(['success' => true, 'message' => 'Agent deleted successfully.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'An error occurred: ' . $e->getMessage()]);
+        }
+    }
+    
+
+
+
     public function assignAgent(Request $request)
 {
     // Validate the request data

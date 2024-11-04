@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -36,7 +37,7 @@ Route::get('/propertydetails',[AdminController::class,'properties']);
 //realtron part
 Route::get('/showagentregister', [RealtronController::class, 'showagent']);//here fetch the agent details in realtron page
 Route::get('/viewuser_request',[RealtronController::class,'userrequest']);//usersite request will be show in companysite
-Route::delete('/delete_category/{id}', [RealtronController::class, 'deleteCategory']);
+Route::delete('/deleteAgent/{id}', [RealtronController::class, 'deleteAgent']);
 
 Route::post('/assign_agent', [RealtronController::class, 'assignAgent'])->name('assign_agent');//here taske will be assing to particular agent in that company
 
@@ -44,7 +45,8 @@ Route::post('/assign_agent', [RealtronController::class, 'assignAgent'])->name('
 Route::get('/view_properties',[AdminController::class,'view_properties']);
 Route::post('/add_property',[AdminController::class,'addproperty']);
 Route::get('/show_properties',[AdminController::class,'show_properties']);
-Route::get('/edit_property/{id}',[AdminController::class,'editProperty']);
+Route::get('/edit_property/{id}', [AgentController::class, 'editProperty'])->name('edit.property');
+
 Route::get('/update_property/{id}',[AdminController::class,'updateProperty']);
 
 //user part
