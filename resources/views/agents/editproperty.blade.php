@@ -91,173 +91,53 @@
         </div>
     </div>
 </div>
+
 <script>
-    $(function() {
-        // Set CSRF token for AJAX requests
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    $(document).ready(function() {
+    // Function to open the modal and fetch property details
+    function openEditPropertyModal(propertyId) {
+        // AJAX request to fetch property details
+        $.ajax({
+            url: 'editproperty' + propertyId, // Change this to your actual API endpoint
+            method: 'GET',
+            success: function(data) {
+                // Assuming 'data' contains the property details
+                $('#editPropertyId').val(data.id);
+                $('#editPropertyType').val(data.propertyType);
+                $('#editSellingType').val(data.sellingType);
+                $('#editBhk').val(data.bhk);
+                $('#editBedroom').val(data.bedroom);
+                $('#editBathroom').val(data.bathroom);
+                $('#editKitchen').val(data.kitchen);
+                $('#editBalcony').val(data.balcony);
+                $('#editHall').val(data.hall);
+                $('#editFloor').val(data.floor);
+                $('#editTotalFloor').val(data.totalFloor);
+                $('#editAreaSize').val(data.areaSize);
+                $('#editState').val(data.state);
+                $('#editCity').val(data.city);
+                $('#editAddress').val(data.address);
+                $('#editStatus').val(data.status);
+                $('#editImage1').val(data.image1);
+                $('#editImage2').val(data.image2);
+                $('#editImage3').val(data.image3);
+                $('#editImage4').val(data.image4);
+                
+                // Show the modal
+                $('#editPropertyModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching property details:', error);
+                // You might want to handle the error here, e.g., display a message to the user
             }
         });
+    }
 
-        // Function to fetch properties via AJAX
-        function fetchProperties() {
-            $.ajax({
-                url: '{{ url('show_properties') }}', // Replace with your endpoint to fetch properties
-                method: 'GET',
-                success: function(response) {
-                    // console.log(response); // Log the response to inspect the data structure
-                    $('tbody').html("");
-                    var tableBody = $('#Propertydetails');
-                    tableBody.empty(); // Clear existing rows before appending
-
-                    // Iterate through the properties and append to the table
-                    if (response.property) {
-                        response.property.forEach(function(property) {
-                            var row = '<tr>' +
-                                '<td>' + property.property_type + '</td>' +
-                                '<td>' + property.selling_type + '</td>' +
-                                '<td>' + property.bhk + '</td>' +
-                                '<td>' + property.bedroom + '</td>' +
-                                '<td>' + property.bathroom + '</td>' +
-                                '<td>' + property.kitchen + '</td>' +
-                                '<td>' + property.balcony + '</td>' +
-                                '<td>' + property.hall + '</td>' +
-                                '<td>' + property.floor+ '</td>' +
-                                '<td>' + property.total_floor + '</td>' +
-                                '<td>' + property.area_size + '</td>' +
-                                '<td>' + property.state + '</td>' +
-                                '<td>' + property.city + '</td>' +
-                                '<td>' + property.address + '</td>' +
-                                '<td>' + property.status + '</td>' +
-                                '<td><img src="' + property.image1 + '" width="50px" height="50px"></td>' +
-                                '<td><img src="' + property.image2 + '" width="50px"></td>' +
-                                '<td><img src="' + property.image3 + '" width="50px"></td>' +
-                                '<td><img src="' + property.image4 + '" width="50px"></td>' +
-                                '<td>' +
-                                '<button class="btn btn-danger deleteBtn" data-id="' + property.id + '">Delete</button> ' +
-                                '<button class="btn btn-primary editBtn" data-id="' + property.id + '">Edit</button>' +
-                                '</td>' +
-                                '</tr>';
-                            tableBody.append(row);
-                        });
-                    }
-
-                    // Bind delete action to newly created delete buttons
-                    $('.deleteBtn').click(function() {
-                        var propertyId = $(this).data('id');
-                        deleteProperty(propertyId);
-                    });
-
-                    // Bind edit action to newly created edit buttons
-                    $('.editBtn').click(function() {
-                        var propertyId = $(this).data('id');
-                        fetchPropertyDetails(propertyId);
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                }
-            });
-        }
-
-        // Function to fetch property details via AJAX
-        function fetchPropertyDetails(propertyId) {
-            $.ajax({
-                url: '{{ url('get_property') }}/' + propertyId, // Replace with your endpoint to fetch property details
-                method: 'GET',
-                success: function(response) {
-                    // Populate the edit form with the fetched property details
-                    $('#editPropertyId').val(response.property.id);
-                    $('#editPropertyType').val(response.property.property_type);
-                    $('#editSellingType').val(response.property.selling_type);
-                    $('#editBhk').val(response.property.bhk);
-                    $('#editBedroom').val(response.property.bedroom);
-                    $('#editBathroom').val(response.property.bathroom);
-                    $('#editKitchen').val(response.property.kitchen);
-                    $('#editBalcony').val(response.property.balcony);
-                    $('#editHall').val(response.property.hall);
-                    $('#editFloor').val(response.property.floor);
-                    $('#editTotalFloor').val(response.property.total_floor);
-                    $('#editAreaSize').val(response.property.area_size);
-                    $('#editState').val(response.property.state);
-                    $('#editCity').val(response.property.city);
-                    $('#editAddress').val(response.property.address);
-                    $('#editStatus').val(response.property.status);
-                    $('#editImage1').val(response.property.image1);
-                    $('#editImage2').val(response.property.image2);
-                    $('#editImage3').val(response.property.image3);
-                    $('#editImage4').val(response.property.image4);
-
-                    // Show the modal
-                    $('#editPropertyModal').modal('show');
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                }
-            });
-        }
-
-        // Function to delete property via AJAX
-        function deleteProperty(propertyId) {
-            // Ask for confirmation before deleting
-            var confirmation = confirm("Do you really want to delete this property?");
-            if (confirmation) {
-                $.ajax({
-                    url: '{{ url('delete_property') }}/' + propertyId, // Replace with your endpoint to delete property
-                    method: 'DELETE',
-                    success: function(response) {
-                        console.log(response);
-                        $('button[data-id="' + propertyId + '"]').closest('tr').remove();
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            }
-        }
-
-        // Handle edit form submission
-        $('#editPropertyForm').submit(function(e) {
-            e.preventDefault();
-            var propertyId = $('#editPropertyId').val();
-            var propertyData = {
-                property_type: $('#editPropertyType').val(),
-                selling_type: $('#editSellingType').val(),
-                bhk: $('#editBhk').val(),
-                bedroom: $('#editBedroom').val(),
-                bathroom: $('#editBathroom').val(),
-                kitchen: $('#editKitchen').val(),
-                balcony: $('#editBalcony').val(),
-                hall: $('#editHall').val(),
-                floor: $('#editFloor').val(),
-                total_floor: $('#editTotalFloor').val(),
-                area_size: $('#editAreaSize').val(),
-                state: $('#editState').val(),
-                city: $('#editCity').val(),
-                address: $('#editAddress').val(),
-                status: $('#editStatus').val(),
-                image1: $('#editImage1').val(),
-                image2: $('#editImage2').val(),
-                image3: $('#editImage3').val(),
-                image4: $('#editImage4').val()
-            };
-
-            $.ajax({
-                url: '{{ url('update_property') }}/' + propertyId, // Replace with your endpoint to update property
-                method: 'PUT',
-                data: propertyData,
-                success: function(response) {
-                    $('#editPropertyModal').modal('hide');
-                    fetchProperties(); // Refresh the property list
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                }
-            });
-        });
-
-        // Initial fetch of properties after document is ready
-        fetchProperties();
+    // Example of binding the function to a button click event
+    $('.edit-property-button').on('click', function() {
+        var propertyId = $(this).data('id'); // Get property ID from the button's data attribute
+        openEditPropertyModal(propertyId);
     });
+});
+
 </script>

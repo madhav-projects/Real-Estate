@@ -45,24 +45,34 @@ class HomeController extends Controller
             return view('user.buy', compact('properties')); // Assuming you have a 'properties' view for agents
         }
     }
+    public function all_properties($id)
+    {
+        // Fetch the specific property based on ID
+        $property = Property::find($id);
     
-    public function all_properties($id){
-        $property = Property::findOrFail($id); // Fetch the property by ID
-        $images = array_filter([$property->image1, $property->image2, $property->image3]) ?: [];
-
-        return view('user.allproperties', compact('property')); // Pass property data to the view
+        // Check if property exists, otherwise return an error message
+        if (!$property) {
+            return response()->json(['error' => 'Property not found.'], 404);
+        }
+    
+        // Return the property details as JSON
+        return response()->json(['property' => $property]);
     }
-    // app/Http/Controllers/PropertyController.php
-// app/Http/Controllers/PropertyController.php
-public function get_property_images($id)
-{
-    $property = Property::findOrFail($id); // Retrieve the property by ID
     
-    // Collect images into an array (assuming your property model has image1, image2, image3 fields)
-    $images = array_filter([$property->image1, $property->image2, $property->image3->images4]) ?: [];
 
-    return view('user.allproperties', compact('property', 'images')); // Pass images and property data to view
-}
+
+    
+    
+
+// public function get_property_images($id)
+// {
+//     $property = Property::findOrFail($id); // Retrieve the property by ID
+    
+//     // Collect images into an array (assuming your property model has image1, image2, image3 fields)
+//     $images = array_filter([$property->image1, $property->image2, $property->image3->images4]) ?: [];
+
+//     return view('user.allproperties', compact('property', 'images')); // Pass images and property data to view
+// }
 
 
 

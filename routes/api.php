@@ -47,6 +47,7 @@ Route::post('/add_property',[AdminController::class,'addproperty']);
 Route::get('/show_properties',[AdminController::class,'show_properties']);
 Route::get('/edit_property/{id}', [AgentController::class, 'editProperty'])->name('edit.property');
 
+
 Route::get('/update_property/{id}',[AdminController::class,'updateProperty']);
 
 //user part

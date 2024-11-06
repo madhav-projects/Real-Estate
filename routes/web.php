@@ -68,6 +68,7 @@ Route::get('/show_properties',[AdminController::class,'show_properties']);
 Route::get('/edit_property/{id}', [AgentController::class, 'editProperty'])->name('edit.property');
 
 
+
 //user controller
 Route::get('/view_seller',[SellerController::class,'viewseller']);
 Route::get('/seller_contact/{id}',[SellerController::class,'sellercontact']);

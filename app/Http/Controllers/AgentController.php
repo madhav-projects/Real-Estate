@@ -196,15 +196,18 @@ class AgentController extends Controller
     }
 
     public function editProperty($id)
-{
-    // Fetch property data by ID, and pass it to the view
-    $property = Property::find($id);
-    if ($property) {
-        return view('edit_property', compact('property'));
-    } else {
-        return redirect()->back()->with('error', 'Property not found.');
+    {
+        // Fetch property data by ID
+        $property = Property::find($id);
+    
+       
+        return response()->json([
+            'sucess'=>true,
+            'message'=>'fecthed',
+            'data'=>$property
+        ]);
     }
-}
+    
 
 
     public function fetchtask()

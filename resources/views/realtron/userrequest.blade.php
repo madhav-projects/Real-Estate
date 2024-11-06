@@ -171,6 +171,36 @@
     </script>
     <style>
        /* Main container and layout adjustments */
+       body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none; /* Remove background from the main body */
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 1; /* Set a higher z-index to keep the main content above the background */
+}
+
+/* Blurred background using ::before */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('images/bgcompany.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(8px); /* Adjust the blur level as desired */
+    z-index: -1; /* Ensure the blurred background stays behind the content */
+}
+
 .hero_area {
     width: 100%;
 }
@@ -194,7 +224,7 @@
 }
 
 .table-section th {
-    background-color: #4CAF50;
+    background-color: #3c2626;
     color: white;
     padding: 12px;
     text-align: left;
@@ -220,7 +250,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 23px;
-    color: black;
+    color: white;
     margin-bottom: 11px;
     padding-top: 57px;
 }

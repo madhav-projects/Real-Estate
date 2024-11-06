@@ -31,7 +31,7 @@
         <!-- search section -->
         <div class="hero_area">
         <video autoplay muted loop id="bgVideo">
-            <source src="images/user.mp4" type="video/mp4">
+            <source src="images/user1.mp4" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>
          <div class="search_section">

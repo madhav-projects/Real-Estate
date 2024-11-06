@@ -9,9 +9,36 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
+            margin: 0;
             padding-top: 60px;
             font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 98vw;
+            height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            z-index: 1;
         }
+
+        /* Fullscreen blurred background */
+        body::before {
+            content: "";
+            position: fixed; /* Fixed to cover the entire viewport */
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('images/bguser.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Keeps the image fixed during scroll */
+            filter: blur(8px);
+            z-index: -1; /* Behind content */
+        }
+
         .property-card {
             margin-bottom: 20px;
         }
@@ -27,6 +54,7 @@
             margin-bottom: 20px;
             font-size: 24px;
             padding: 14px;
+            color: white;
         }
         .alert {
             color: red;
@@ -70,7 +98,6 @@
                 url: '{{ url("/fetch_agent_property") }}',
                 method: 'GET',
                 success: function(response) {
-                    console.log(response); // Log the response to inspect it
                     const propertyCards = $('#propertyCards');
                     const alertMessage = $('#alertMessage');
                     propertyCards.empty();
@@ -78,7 +105,6 @@
 
                     if (response.properties && response.properties.length > 0) {
                         response.properties.forEach(function(property) {
-                            console.log(property); // Log each property to inspect its attributes
                             const card = `
                                 <div class="col-md-4 property-card">
                                     <div class="card">
@@ -103,7 +129,6 @@
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error('Error fetching properties:', error);
                     $('#alertMessage').text('Error fetching properties. Please try again later.').show();
                 }
             });

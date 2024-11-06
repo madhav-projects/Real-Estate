@@ -16,7 +16,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 ms-3 mt-5">
-                    <h1 class="centered-header">User Request</h1>
+                    <h1 class="centered-header">Agents</h1>
                     <div class="table-section">
                         <div class="table-responsive mt-3">
                             <table class="table table-section w-100">
@@ -182,11 +182,30 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: none; /* Remove background from the main body */
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 1; /* Set a higher z-index to keep the main content above the background */
+}
+
+/* Blurred background using ::before */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-image: url('images/bgcompany.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    filter: blur(8px); /* Adjust the blur level as desired */
+    z-index: -1; /* Ensure the blurred background stays behind the content */
 }
+
 
 .hero_area {
     width: 100%;
@@ -201,7 +220,7 @@ body {
     text-align: center;
     font-weight: bold;
     font-size: 24px;
-    color: black;
+    color: white;
     margin-bottom: 20px;
     padding: 20px;
 }
@@ -226,8 +245,8 @@ body {
 }
 
 .table-section th {
-    background-color: #f8f9fa;
-    color: #000;
+    background-color: #3c2626;
+    color: white;
     font-weight: bold;
 }
 

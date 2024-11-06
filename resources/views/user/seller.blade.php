@@ -25,41 +25,52 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-        }
-        .hero_area {
-            position: relative;
-            background-image: url('images/seller bg.jpg'); /* Update with actual path to the image */
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
+        } body {
+            margin: 0;
+            padding-top: 60px;
+            font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            color: white;
-            text-align: center;
-        }
-        .luxe-text {
-         position: absolute;
-         top: 21px;
-         left: 150px;
-         z-index: 1000;
-         font-weight: bold;
-         font-size: 30px;
-         font-size: 1.5em;
-         color: black;
-         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      }
-        .header_section {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 10;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
             align-items: center;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            z-index: 1;
         }
+
+        /* Fullscreen blurred background */
+        body::before {
+            content: "";
+            position: fixed; /* Fixed to cover the entire viewport */
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('images/bguser.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Keeps the image fixed during scroll */
+            filter: blur(8px);
+            z-index: -1; /* Behind content */
+        }
+
+        .hero_area {
+    position: relative;
+    background-image: url('images/seller bg.jpg'); /* Update with actual path to the image */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically */
+    align-items: center; /* Centers content horizontally */
+    color: white;
+    text-align: center;
+}
+
+   
         .navbar-brand img {
             height: 40px;
         }
@@ -82,7 +93,7 @@
         }
         .search_section {
             background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
+            padding: 211px;
             border-radius: 10px;
             margin: auto;
         }
