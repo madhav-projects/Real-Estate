@@ -45,19 +45,19 @@ class HomeController extends Controller
             return view('user.buy', compact('properties')); // Assuming you have a 'properties' view for agents
         }
     }
+   
     public function all_properties($id)
     {
         // Fetch the specific property based on ID
-        $property = Property::find($id);
-    
-        // Check if property exists, otherwise return an error message
-        if (!$property) {
-            return response()->json(['error' => 'Property not found.'], 404);
+        $property = Property::find($id); // Replace `Property` with your model name
+        if ($property) {
+            return response()->json(['property' => $property]);
+        } else {
+            return response()->json(['error' => 'Property not found'], 404);
         }
-    
-        // Return the property details as JSON
-        return response()->json(['property' => $property]);
     }
+    
+    
     
 
 

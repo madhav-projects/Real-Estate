@@ -20,12 +20,12 @@
                 <li class="nav-item">
                     <a class="nav-link animated-button" href="{{url('view_seller')}}">Sale</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link animated-button" href="#">Blog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link animated-button" href="{{url('/seller')}}">Contact</a>
-                </li>
+                </li> -->
                 <x-app-layout></x-app-layout>
             </ul>
         </div>
