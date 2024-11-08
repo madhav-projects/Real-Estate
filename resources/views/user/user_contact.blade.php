@@ -7,160 +7,171 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
-            background: linear-gradient(to bottom right, #007bff, #6f42c1);
-            color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
             font-family: Arial, sans-serif;
             margin: 0;
+            overflow: hidden;
+        }
+
+        /* Background image */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('{{ asset("images/bguser.png") }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(10px);
+            z-index: -1;
         }
 
         .contact-form-container {
             background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 39px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 612px;
             width: 100%;
-            max-width: 500px;
-            position: relative;
-        }
-
-        .contact-form-container::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            bottom: -10px;
-            left: -10px;
-            background: linear-gradient(135deg, #007bff 0%, #6f42c1 100%);
-            z-index: -1;
-            border-radius: 12px;
+            margin: 140px auto;
         }
 
         h2 {
             text-align: center;
-            margin-bottom: 30px;
-            color: #6f42c1;
+            color: #333;
             font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 2rem; /* Increase size as needed */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
         }
 
         .form-group label {
+            font-size: 0.9rem;
             font-weight: bold;
-            color: #6f42c1;
+            color: #333;
+            margin-bottom: 5px;
+            display: inline-block;
         }
 
-        .form-group input, .form-group textarea {
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 1rem;
             border: 1px solid #ddd;
-            border-radius: 6px;
-            padding-left: 40px;
+            border-radius: 5px;
             transition: border-color 0.3s;
         }
 
-        .form-group input:focus, .form-group textarea:focus {
+        .form-group input:focus,
+        .form-group textarea:focus {
             border-color: #6f42c1;
             outline: none;
         }
 
-        .form-group .input-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6f42c1;
+        .form-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
         }
 
         .btn-submit {
-            background-color: #6f42c1;
-            color: #ffffff;
-            border: none;
+            display: block;
             width: 100%;
             padding: 12px;
-            font-size: 16px;
-            border-radius: 6px;
-            transition: background-color 0.3s;
+            background-color: #333;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            text-align: center;
         }
 
         .btn-submit:hover {
-            background-color: #007bff;
-        }
-
-        .form-group {
-            position: relative;
-            margin-bottom: 20px;
+            background-color: #555;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 <body>
 
-    <div class="contact-form-container">
-        <h2>Contact Agent</h2>
-        <form id="contactForm">
-            @csrf
+@include('user.userheader')
+
+<div class="contact-form-container">
+    <h2>Contact Agent</h2> <!-- Header with "Contact Agent" title -->
+    <form id="contactForm">
+        @csrf
+        <div class="form-row">
             <div class="form-group">
-                <label for="userName">Your Name</label>
-                <i class="input-icon fas fa-user"></i>
+                <label for="userName">Your Name *</label>
                 <input type="text" class="form-control" id="userName" name="user_name" placeholder="Enter your name" required>
             </div>
             <div class="form-group">
-                <label for="userPhone">Your Phone Number</label>
-                <i class="input-icon fas fa-phone"></i>
+                <label for="userPhone">Your Phone Number *</label>
                 <input type="tel" class="form-control" id="userPhone" name="user_phone" placeholder="Enter your phone number" required>
             </div>
+        </div>
+        <div class="form-row">
             <div class="form-group">
-                <label for="userAddress">Your Address</label>
-                <i class="input-icon fas fa-map-marker-alt"></i>
+                <label for="userAddress">Your Address *</label>
                 <input type="text" class="form-control" id="userAddress" name="user_address" placeholder="Enter your address" required>
             </div>
             <div class="form-group">
-                <label for="agentName">Agent Name</label>
-                <i class="input-icon fas fa-user"></i>
+                <label for="agentName">Agent Name *</label>
                 <input type="text" class="form-control" id="agentName" name="agent_name" placeholder="Enter agent's name" required>
             </div>
-            <div class="form-group">
-                <label for="agentPhone">Agent Phone Number</label>
-                <i class="input-icon fas fa-phone"></i>
-                <input type="tel" class="form-control" id="agentPhone" name="agent_phone" placeholder="Enter agent's phone number" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <i class="input-icon fas fa-comment"></i>
-                <textarea class="form-control" id="message" name="message" rows="4" placeholder="Enter your message to the agent" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-submit">Send Message</button>
-        </form>
-    </div>
+        </div>
+        <div class="form-group">
+            <label for="agentPhone">Agent Phone Number *</label>
+            <input type="tel" class="form-control" id="agentPhone" name="agent_phone" placeholder="Enter agent's phone number" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea class="form-control" id="message" name="message" rows="4" placeholder="Enter your message to the agent" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message</button>
+    </form>
+</div>
 
-    <!-- FontAwesome Icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#contactForm').on('submit', function(e) {
-                e.preventDefault(); // Prevent default form submission
+<!-- jQuery and AJAX script -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#contactForm').on('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
 
-                // Collect form data
-                let formData = $(this).serialize();
+            // Collect form data
+            let formData = $(this).serialize();
 
-                // Send AJAX request
-                $.ajax({
-                    url: "{{ url('agent_Message') }}",
-                    type: "POST",
-                    data: formData,
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            alert(response.message); // Display the success message
-                            $('#contactForm')[0].reset(); // Clear the form if needed
-                        }
-                    },
-                    error: function(xhr) {
-                        alert("An error occurred. Please try again.");
+            // Send AJAX request
+            $.ajax({
+                url: "{{ url('agent_Message') }}",
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message); // Display the success message
+                        $('#contactForm')[0].reset(); // Clear the form if needed
                     }
-                });
+                },
+                error: function(xhr) {
+                    alert("An error occurred. Please try again.");
+                }
             });
         });
-    </script>
-</body> 
+    });
+</script>
+</body>
 </html>
