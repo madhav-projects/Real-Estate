@@ -46,16 +46,21 @@ class HomeController extends Controller
         }
     }
    
-    public function all_properties($id)
-    {
-        // Fetch the specific property based on ID
-        $property = Property::find($id); // Replace `Property` with your model name
-        if ($property) {
-            return response()->json(['property' => $property]);
-        } else {
-            return response()->json(['error' => 'Property not found'], 404);
-        }
+// HomeController.php
+public function all_properties($id)
+{
+    // Fetch the property based on its ID
+    $property = Property::find($id);
+
+    // Check if the property exists
+    if ($property) {
+        return view('user.allproperties', ['property' => $property]);
+    } else {
+        return view('user.allproperties', ['property' => null, 'message' => 'Property not found.']);
     }
+}
+
+
     
     
     

@@ -6,6 +6,7 @@ use App\Models\Assigntask;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Property;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Validator; // Import the Validator facade
 use Auth;
 
@@ -227,5 +228,38 @@ class AgentController extends Controller
         }
 
     }
-    
+    public function showContactPage()
+    {
+        return view('user.user_contact'); // Ensure this view is created in resources/views
+    }
+
+    /**
+     * Handle the contact form submission.
+     */
+    public function sendAgentMessage(Request $request)
+{
+    // Validate form data
+    $request->validate([
+        'user_name' => 'required|string|max:255',
+        'user_phone' => 'required|string|max:20',
+        'user_address' => 'required|string',
+        'agent_name' => 'required|string|max:255',
+        'agent_phone' => 'required|string|max:20',
+        'message' => 'required|string',
+    ]);
+
+    // Save data to the database
+    $contact = new Contact();
+    $contact->user_name = $request->user_name;
+    $contact->user_phone = $request->user_phone;
+    $contact->user_address = $request->user_address;
+    $contact->agent_name = $request->agent_name;
+    $contact->agent_phone = $request->agent_phone;
+    $contact->message = $request->message;
+    $contact->save();
+
+    // Respond with JSON
+    return response()->json(['status' => 'success', 'message' => 'Your message has been sent to the agent!']);
+}
+
 }

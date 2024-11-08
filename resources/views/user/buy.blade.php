@@ -110,7 +110,7 @@
                                     <div class="card">
                                         <img src="${property.image1}" alt="Image 1" class="card-img-top" onclick="showInCarousel(${property.id}, '${property.image1}', '${property.image2}', '${property.image3}')">
                                         <div class="card-body">
-                                            <h5 class="card-title">${property.agent_name} - ${property.property_type}</h5>
+                                             
                                             <p class="card-text">
                                                 <strong>Selling Type:</strong> ${property.selling_type}<br>
                                                 <strong>Company Name:</strong> ${property.company_name}<br>

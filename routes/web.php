@@ -77,6 +77,8 @@ Route::get('/fetch_agent_property',[HomeController::class,'fetch_agent_property'
 
 Route::get('/show_allproperties/{id}', [HomeController::class, 'all_properties']);
 Route::get('/get-property-images/{property}', [HomeController::class, 'get_property_images']);
+Route::get('/user_contact', [AgentController::class, 'showContactPage'])->name('user_contact');
+Route::post('/agent_Message', [AgentController::class, 'sendAgentMessage']);
 
 // agebt
 Route::get('/fetch_task',[AgentController::class,'fetchtask']);

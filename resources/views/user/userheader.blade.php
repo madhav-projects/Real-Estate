@@ -12,7 +12,7 @@
                     <a class="nav-link animated-button" href="{{url('/home')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link animated-button" href="">Properties</a>
+                    <a class="nav-link animated-button" href="{{'/body'}}">Properties</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link animated-button" href="{{url('/fetch_agent_property')}}">Buy</a>
