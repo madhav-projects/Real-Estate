@@ -41,12 +41,6 @@
             margin-bottom: 30px;
         }
 
-        .carousel-inner img {
-            height: 400px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
         .card {
             background: #ffffffdd;
             border: none;
@@ -54,6 +48,8 @@
             margin-top: 20px;
             border-radius: 12px;
             overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .card-body {
@@ -72,7 +68,7 @@
         .contact-btn {
             font-size: 0.9rem;
             padding: 8px 16px;
-            background-color: #007bff;
+            background-color: #333;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -86,20 +82,73 @@
 
         .icon {
             margin-right: 8px;
-            color: #007bff;
+            color: #000;
+        }
+
+        .icon:hover {
+            color: #333;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .property-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 20px;
         }
 
         .property-details p {
             margin-bottom: 8px;
             font-size: 1.1rem;
+            min-height: 32px;
+        }
+
+        /* Selected image styling */
+        .selected-image img {
+            width: 100%;
+            height: 524px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        /* Carousel thumbnails */
+        .carousel-thumbnails {
+        display: flex;
+        justify-content: center; /* Center-align images */
+        overflow-x: auto;
+        margin-top: 10px;
+        gap: 10px;
+        padding-bottom: 10px;
+    }
+        .carousel-thumbnails img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .carousel-thumbnails img:hover {
+            transform: scale(1.1);
         }
 
         @media (max-width: 768px) {
             h1.text-center.font-weight-bold {
                 font-size: 2rem;
             }
-            .carousel-inner img {
+
+            .selected-image img {
                 height: 250px;
+            }
+
+            .property-details {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .property-details {
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
@@ -111,65 +160,48 @@
         <h1 class="text-center font-weight-bold">Property Details</h1>
         
         @if($property)
-            <!-- Carousel Section -->
-            <div id="propertyCarousel" class="carousel slide mb-4" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{{ asset($property->image1) }}" class="d-block w-100" alt="Property Image 1">
-                    </div>
-                    @if($property->image2)
-                        <div class="carousel-item">
-                            <img src="{{ asset($property->image2) }}" class="d-block w-100" alt="Property Image 2">
-                        </div>
-                    @endif
-                    @if($property->image3)
-                        <div class="carousel-item">
-                            <img src="{{ asset($property->image3) }}" class="d-block w-100" alt="Property Image 3">
-                        </div>
-                    @endif
-                </div>
-                <a class="carousel-control-prev" href="#propertyCarousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon btn-carousel-control" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#propertyCarousel" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon btn-carousel-control" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+            <div class="selected-image mb-4">
+                <img id="mainImage" src="{{ asset($property->image1) }}" alt="Selected Property Image">
+            </div>
+
+            <!-- Image Thumbnails Carousel -->
+            <div class="carousel-thumbnails">
+                <img src="{{ asset($property->image1) }}" alt="Property Image 1" onclick="displayImage('{{ asset($property->image1) }}')">
+                @if($property->image2)
+                    <img src="{{ asset($property->image2) }}" alt="Property Image 2" onclick="displayImage('{{ asset($property->image2) }}')">
+                @endif
+                @if($property->image3)
+                    <img src="{{ asset($property->image3) }}" alt="Property Image 3" onclick="displayImage('{{ asset($property->image3) }}')">
+                @endif
+                @if($property->image4)
+                    <img src="{{ asset($property->image4) }}" alt="Property Image 4" onclick="displayImage('{{ asset($property->image4) }}')">
+                @endif
             </div>
 
             <!-- Property Details Card -->
-            <div class="card">
+            <div class="card mt-4">
                 <div class="card-body">
                     <div class="card-title">
                         {{ $property->agent_name }} - {{ $property->property_type }}
-                        
-                        <a href="{{ route('user_contact') }}" class="contact-btn">Contact Agent</a>
-
+                        <a href="{{ route('user_contact', ['id' => $property->agent_id]) }}" class="contact-btn">Contact Agent</a>
                     </div>
-                    <div class="property-details row">
-                        <!-- Column 1 -->
-                        <div class="col-md-6">
-                            <p><i class="fas fa-home icon"></i><strong>Property Type:</strong> {{ $property->property_type }}</p>
-                            <p><i class="fas fa-tags icon"></i><strong>Selling Type:</strong> {{ $property->selling_type }}</p>
-                            <p><i class="fas fa-bed icon"></i><strong>BHK:</strong> {{ $property->bhk }}</p>
-                            <p><i class="fas fa-bed icon"></i><strong>Bedroom:</strong> {{ $property->bedroom }}</p>
-                            <p><i class="fas fa-bath icon"></i><strong>Bathroom:</strong> {{ $property->bathroom }}</p>
-                            <p><i class="fas fa-utensils icon"></i><strong>Kitchen:</strong> {{ $property->kitchen }}</p>
-                            <p><i class="fas fa-wind icon"></i><strong>Balcony:</strong> {{ $property->balcony }}</p>
-                        </div>
-                        <!-- Column 2 -->
-                        <div class="col-md-6">
-                            <p><i class="fas fa-couch icon"></i><strong>Hall:</strong> {{ $property->hall }}</p>
-                            <p><i class="fas fa-layer-group icon"></i><strong>Floor:</strong> {{ $property->floor }}</p>
-                            <p><i class="fas fa-building icon"></i><strong>Total Floor:</strong> {{ $property->total_floor }}</p>
-                            <p><i class="fas fa-expand icon"></i><strong>Area Size:</strong> {{ $property->area_size }} sq ft</p>
-                            <p><i class="fas fa-city icon"></i><strong>City:</strong> {{ $property->city }}</p>
-                            <p><i class="fas fa-map-marker-alt icon"></i><strong>State:</strong> {{ $property->state }}</p>
-                            <p><i class="fas fa-map-pin icon"></i><strong>Address:</strong> {{ $property->address }}</p>
-                            <p><i class="fas fa-info-circle icon"></i><strong>Status:</strong> {{ $property->status }}</p>
-                            <p><i class="fas fa-dollar-sign icon"></i><strong>Price:</strong> ${{ $property->price ?? 'Not available' }}</p>
-                        </div>
+                    <div class="property-details">
+                        <p><i class="fas fa-home icon"></i><strong>Property Type:</strong> {{ $property->property_type }}</p>
+                        <p><i class="fas fa-tags icon"></i><strong>Selling Type:</strong> {{ $property->selling_type }}</p>
+                        <p><i class="fas fa-bed icon"></i><strong>BHK:</strong> {{ $property->bhk }}</p>
+                        <p><i class="fas fa-bed icon"></i><strong>Bedroom:</strong> {{ $property->bedroom }}</p>
+                        <p><i class="fas fa-bath icon"></i><strong>Bathroom:</strong> {{ $property->bathroom }}</p>
+                        <p><i class="fas fa-utensils icon"></i><strong>Kitchen:</strong> {{ $property->kitchen }}</p>
+                        <p><i class="fas fa-wind icon"></i><strong>Balcony:</strong> {{ $property->balcony }}</p>
+                        <p><i class="fas fa-couch icon"></i><strong>Hall:</strong> {{ $property->hall }}</p>
+                        <p><i class="fas fa-layer-group icon"></i><strong>Floor:</strong> {{ $property->floor }}</p>
+                        <p><i class="fas fa-building icon"></i><strong>Total Floor:</strong> {{ $property->total_floor }}</p>
+                        <p><i class="fas fa-expand icon"></i><strong>Area Size:</strong> {{ $property->area_size }} sq ft</p>
+                        <p><i class="fas fa-city icon"></i><strong>City:</strong> {{ $property->city }}</p>
+                        <p><i class="fas fa-map-marker-alt icon"></i><strong>State:</strong> {{ $property->state }}</p>
+                        <p><i class="fas fa-map-pin icon"></i><strong>Address:</strong> {{ $property->address }}</p>
+                        <p><i class="fas fa-info-circle icon"></i><strong>Status:</strong> {{ $property->status }}</p>
+                        <p><i class="fas fa-dollar-sign icon"></i><strong>Price:</strong> ${{ $property->price ?? 'Not available' }}</p>
                     </div>
                 </div>
             </div>
@@ -177,5 +209,20 @@
             <div class="alert alert-danger text-center mt-5">{{ $message ?? 'No property details available.' }}</div>
         @endif
     </div>
+    <div class="mt-4 text-center">
+    <p style="font-size: 1.2rem; color: white;">
+        LuxeDwell offers premium real estate solutions, helping you find your dream property with ease.
+        Our platform features a curated selection of homes and a seamless experience for both buyers and sellers.
+        Discover LuxeDwell for a luxurious and effortless property journey.
+    </p>
+</div>
+
+    <script>
+        function displayImage(imagePath) {
+            document.getElementById('mainImage').src = imagePath;
+        }
+    </script>
+   @include('user.footer')
+
 </body>
 </html>

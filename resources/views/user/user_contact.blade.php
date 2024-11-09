@@ -35,7 +35,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             max-width: 612px;
             width: 100%;
-            margin: 140px auto;
+            margin: 80px auto;
         }
 
         h2 {
@@ -103,6 +103,11 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+        .text-center {
+    font-weight: bold;
+    font-size: 2.5em;
+}
+
     </style>
 </head>
 <body>
@@ -110,7 +115,7 @@
 @include('user.userheader')
 
 <div class="contact-form-container">
-    <h2>Contact Agent</h2> <!-- Header with "Contact Agent" title -->
+<h1 class="text-center" style="font-weight: bold; font-size: 2.5em;">Contact Agent</h1>
     <form id="contactForm">
         @csrf
         <div class="form-row">

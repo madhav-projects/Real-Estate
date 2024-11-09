@@ -92,11 +92,12 @@
             color: #d4a253;
         }
         .search_section {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 211px;
-            border-radius: 10px;
-            margin: auto;
-        }
+        background: rgba(0, 0, 0, 0.5);
+        padding: 30px; /* Reduced padding for content */
+        border-radius: 10px;
+        margin-top: 50px; /* Adds margin to move it down */
+        text-align: center;
+    }
         .search_section h1 {
             font-size: 3rem;
             margin-bottom: 10px;
@@ -128,12 +129,16 @@
             text-align: center;
         }
         .box {
-            background-color: #f8f9fa; /* Light grey background */
-            border-radius: 5px;
-            padding: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
+        background-color: transparent; /* Transparent background */
+        border: none; /* Ensure no border */
+        padding: 15px;
+        margin-bottom: 20px;
+        height: 350px; /* Set a fixed height for all boxes */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: none; /* Remove shadow */
+    }
         .btn-contact {
             display: block;
             width: 100%;
@@ -158,7 +163,7 @@
             <!-- end header section -->
             <!-- search section -->
             <div class="search_section">
-                <h1>Choose The Company</h1>
+                <h1>Choose the Company </h1>
                 <i>It’s better to hang out with people better than you</i>
                 <div class="search_form">
                     <form action="properties.html" method="get" class="form-inline justify-content-center">
