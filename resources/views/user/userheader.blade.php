@@ -8,16 +8,17 @@
         </button>
         <div class="collapse navbar-collapse justify-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+               
+                <li class="nav-item {{ Request::is('home') ? 'active' : '' }}">
                     <a class="nav-link animated-button" href="{{url('/home')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link animated-button" href="{{url('/user_properties')}}">Properties</a>
+                    <a class="nav-link animated-button" href="">Properties</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('fetch_agent_property') ? 'active' : '' }}">
                     <a class="nav-link animated-button" href="{{url('/fetch_agent_property')}}">Buy</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('view_seller') ? 'active' : '' }}">
                     <a class="nav-link animated-button" href="{{url('view_seller')}}">Sale</a>
                 </li>
                 <!-- <li class="nav-item">

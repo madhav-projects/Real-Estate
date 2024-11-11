@@ -97,11 +97,13 @@
          top: 21px;
          left: 150px;
          z-index: 1000;
+         
          font-weight: bold;
          font-size: 30px;
          font-size: 1.5em;
          color: black;
-         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+         
+         text-shadow: 2px 2px 4px rgba(255, 255, 255, 164%);
       }
       .login-signup {
          position: absolute;
@@ -161,7 +163,7 @@
          position: fixed;
          top: 0;
          left: 0;
-         background-color: rgba(255, 255, 255, 16.9);
+         /* background-color: rgba(255, 255, 255, 16.9); */
          transition: background-color 0.3s ease;
          height: 85px;
       }
@@ -180,19 +182,19 @@
          }
       }
       .primeplex-caption {
-         position: absolute;
-         left: 26%;
-         top: 25%;
-         transform: translate(-50%, -50%);
-         color: black;
-         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-         background: rgb(255 255 255 / 70%); /* Black background with opacity */
-         padding: 10px;
-         border-radius: 5px;
-         font-size: 3em; /* Adjust font size as needed */
-         opacity: 0; /* Start hidden */
-         animation: fadeInUp 2s forwards; /* Apply animation */
-      }
+    position: absolute;
+    left: 26%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+    color: black;
+    text-shadow: 5px 2px 4px rgb(255 255 255 / 148%);
+    /* background: rgb(255 255 255 / 70%); */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 3em;
+    opacity: 0;
+    animation: fadeInUp 2s forwards;
+}
       @keyframes fadeInUp {
          0% {
             opacity: 0;
@@ -204,15 +206,27 @@
          }
       }
       .about-description {
-         margin: 20px 0;
+         margin: 6px 0;
          padding: 10px;
          font-size: 1.2em;
          text-align: center;
-         background-color: #f0f0f0;
+        
          border-radius: 10px;
-         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-         max-width: 600px;
+       
+         max-width: 1266px;
       }
+      .search_section{
+         position: relative;
+         top: -400px;
+         left: -10px;
+         width: 630px;
+         margin: 0 auto;
+         background: rgba(0, 0, 0, 0.5);
+         padding: 20px;
+         color: #fff;
+         text-align: center;
+      }
+      
    </style>
 </head>
 <body>
@@ -240,6 +254,7 @@
    <video autoplay muted loop playsinline class="background_video">
       <source src="images/login.mp4" type="video/mp4">
          </video>
+         
    <!-- Other content goes here -->
 </div>
 
@@ -248,29 +263,47 @@
          Welcome To LuxeDwell
       </div>
 
-      <!-- Scrolling Text -->
-      <div class="carousel-caption">
-         <h2>The best way to buy your House and plots</h2>
+       <div class="search_section">
+         
+               <h1>Find the Perfect Home</h1>
+               <p>Stop looking. Start finding with LuxeDwell</p>
+               <div class="search_form">
+                  <form action="properties.html" method="get" class="form-inline justify-content-center">
+                     <select class="form-control mr-2 mb-2" name="type">
+                           <option value="">Types</option>
+                           <option value="houses">Houses</option>
+                           <option value="plots">Plots</option>
+                           <option value="houses_plots">Houses & Plots</option>
+                     </select>
+                     <select class="form-control mr-2 mb-2" name="category">
+                           <option value="">Categories</option>
+                           <option value="rent">Buy</option>
+                           <option value="sale">Sale</option>
+                     </select>
+                     <select class="form-control mr-2 mb-2" name="city">
+                           <option value="">Cities</option>
+                           
+                     </select>
+
+                  
+                    
+                     <button type="submit" class="btn btn-success" style="top: -3px; position: relative;">Search Properties</button>
+                  </form>
+               </div>
+         </div>
       </div>
-      <div class="carousel-caption" style="display:none;">
-         <h2>The best way to buy your House and plots</h2>
       </div>
-      <div class="carousel-caption" style="display:none;">
-         <h2>The best way to buy your House and plots</h2>
-      </div>
-   </div>
 
    <!-- About Us Section -->
    <section id="about">
-      <h2>About Us</h2>
+   <h2 style="text-align: center;">About Us</h2>
       <!-- Add your existing About Us content here -->
       <div class="about-description">
          <p>LuxeDwell is committed to providing the best real estate services to help you find your dream home.</p>
          <p>We offer a wide range of properties to suit every budget and preference.</p>
       </div>
    </section>
-</body>
-</html>
+
 
 
    <!-- product section -->
@@ -278,7 +311,6 @@
   <section class="product_section layout_padding">
          <div class="container">
             <div class="heading_container heading_center">
-               <h1>About us</h1>
                <h2>
                   Our <span>Properties</span>
                </h2>

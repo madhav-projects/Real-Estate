@@ -10,14 +10,14 @@
 
         <div class="collapse navbar-collapse justify-end" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
+            <li class="nav-item {{ Request::is('home') ? 'active' : '' }}">
                     <a class="nav-link" href="{{url('/home')}}">Home</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('showagentregister') ? 'active' : '' }}">
                     <a class="nav-link" href="{{url('/showagentregister')}}">Agents</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('viewuser_request') ? 'active' : '' }}">
                     <a class="nav-link" href="{{url('/viewuser_request')}}">User Request</a>
                 </li>
 

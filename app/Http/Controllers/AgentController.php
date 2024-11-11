@@ -196,19 +196,52 @@ class AgentController extends Controller
         }
     }
 
-    public function editProperty($id)
-    {
-        // Fetch property data by ID
-        $property = Property::find($id);
+    // public function editProperty($id)
+    // {
+    //     // Fetch property data by ID
+    //     $property = Property::find($id);
     
        
-        return response()->json([
-            'sucess'=>true,
-            'message'=>'fecthed',
-            'data'=>$property
-        ]);
-    }
+    //     return response()->json([
+    //         'sucess'=>true,
+    //         'message'=>'fecthed',
+    //         'data'=>$property
+    //     ]);
+    // }
+
+    public function editProperty($id)
+{
+    // Fetch property data by ID
+    $property = Property::find($id);
     
+    // Check if the property exists
+    if (!$property) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Property not found',
+        ], 404);
+    }
+
+    // Return JSON response
+    return response()->json([
+        'success' => true,
+        'data' => $property,
+    ]);
+}
+
+
+    
+// public function edit($id)
+// {
+//     $property = Property::find($id); // Find property by ID
+
+//     if (!$property) {
+//         return response()->json(['success' => false, 'message' => 'Property not found.']);
+//     }
+
+//     // Return property details as JSON
+//     return response()->json(['success' => true, 'data' => $property]);
+// }
 
 
     public function fetchtask()

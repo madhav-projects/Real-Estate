@@ -47,21 +47,7 @@ class HomeController extends Controller
     }
    
 
-    public function user_properties()
-    {
-    $properties=Property::All();
-        // Return the fetched properties in JSON format along with a custom message
-        if (request()->expectsJson()) { // Corrected to expectsJson()
-            return response()->json([
-                'message' => 'Properties fetched successfully',
-                'properties' => $properties, // Changed from $fetch_property to $properties
-            ]);
-        } else {
-            return view('user.buy', compact('properties')); // Assuming you have a 'properties' view for agents
-        }
-    }
-
-
+    
 
 
 // HomeController.php

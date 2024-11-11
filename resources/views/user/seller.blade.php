@@ -128,23 +128,24 @@
             display: block;
             text-align: center;
         }
-        .box {
-        background-color: transparent; /* Transparent background */
-        border: none; /* Ensure no border */
-        padding: 15px;
-        margin-bottom: 20px;
-        height: 350px; /* Set a fixed height for all boxes */
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        box-shadow: none; /* Remove shadow */
-    }
+            .box {
+            margin: 10px; /* Adjust for horizontal and vertical spacing */
+            padding: 15px;
+            background-color: transparent;
+            border: none;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            }
+            
+
         .btn-contact {
             display: block;
             width: 100%;
             text-align: center;
             padding: 10px;
-            background-color: #007bff;
+            background-color: #571e23;
             color: white;
             border: none;
             border-radius: 5px;

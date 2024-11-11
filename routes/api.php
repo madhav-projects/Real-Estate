@@ -47,6 +47,8 @@ Route::post('/add_property',[AdminController::class,'addproperty']);
 Route::get('/show_properties',[AdminController::class,'show_properties']);
 Route::get('/edit_property/{id}', [AgentController::class, 'editProperty'])->name('edit.property');
 
+// Route::get('/property/{id}', [AgentController::class, 'edit'])->name('property.edit');
+
 
 Route::get('/update_property/{id}',[AdminController::class,'updateProperty']);
 
@@ -55,7 +57,7 @@ Route::get('/view_seller',[SellerController::class,'viewseller']);
 Route::post('/create_selleruser',[SellerController::class,'createseller']);
 Route::get('/fetch_agent_property',[HomeController::class,'fetch_agent_property']);
 Route::get('/get-property-images/{property}', [HomeController::class, 'get-property-images']);
-Route::get('/properties',[HomeController::class,'user_properties']);
+
 Route::get('/show_allproperties/{id}', [HomeController::class, 'all_properties']);
 
 Route::get('/user_contact', [AgentController::class, 'showContactPage']);

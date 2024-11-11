@@ -271,7 +271,6 @@ a:focus {
   position: relative;
   margin-top: 25px;
   padding: 35px;
-  background-color: #000;
   transition: all 0.3s;
   overflow: hidden;
   box-shadow: 5px 5px 5px -5px rgba(0, 0, 0, 0.2);
@@ -301,16 +300,34 @@ a:focus {
   transition: all 0.3s;
 }
 
-.product_section .box .detail-box {
-  text-align: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: block;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+.product_section {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line if they don't fit */
+  gap: 20px; /* Space between boxes */
+  justify-content: center;
 }
 
+.product_section .box {
+  flex: 1 1 300px; /* All boxes take equal width, minimum 300px */
+  display: flex;
+  flex-direction: column; /* Ensures content inside is stacked vertically */
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+  max-width: 271px; /* Limit max width */
+}
+
+.product_section .box .detail-box {
+  text-align: center;
+  width: 100%;
+}
+
+.product_section .box .detail-box p {
+  margin: 10px 0;
+}
 .product_section .box .detail-box h5 {
   font-size: 18px;
   margin-top: 10px;
@@ -388,14 +405,14 @@ a:focus {
 }
 
 .product_section .options .option1 {
-  background-color: #f7444e;
-  border: 1px solid #f7444e;
+  background-color: #571e23;
+  border: 1px solid #571e23;
   color: #ffffff;
 }
 
 .product_section .options .option1:hover {
   background-color: transparent;
-  color: #f7444e;
+  color: #571e23;
 }
 
 .product_section .options .option2 {
@@ -423,8 +440,8 @@ a:focus {
 .product_section .btn-box a {
   display: inline-block;
   padding: 10px 40px;
-  background-color: #f7444e;
-  border: 1px solid #f7444e;
+  background-color: #571e23;
+  border: 1px solid #571e23;
   color: #ffffff;
   border-radius: 0;
   -webkit-transition: all 0.3s;
@@ -433,7 +450,7 @@ a:focus {
 
 .product_section .btn-box a:hover {
   background-color: transparent;
-  color: #f7444e;
+  color: #000000;
 }
 
 
@@ -768,7 +785,7 @@ div.form_sub .field input[type="email"], div.form_sub .field input[type="email"]
 .form_sub input[type="email"] + input[type="submit"] {
     position: absolute;
     right: 0;
-    background: #f7444e;
+    background: #571e23;
     color: #fff;
     border: none;
     top: 0px;
