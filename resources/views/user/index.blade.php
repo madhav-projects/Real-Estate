@@ -34,30 +34,20 @@
             <source src="images/user1.mp4" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>
-         <div class="search_section">
-               <h1>Find the Perfect Home</h1>
-               <p>Stop looking. Start finding with LuxeDwell</p>
-               <div class="search_form">
-                  <form action="properties.html" method="get" class="form-inline justify-content-center">
-                     <select class="form-control" name="type">
-                           <option value="">Types</option>
-                           <option value="houses">Houses</option>
-                           <option value="plots">Plots</option>
-                           <option value="houses_plots">Houses & Plots</option>
-                     </select>
-                     <select class="form-control" name="category">
-                           <option value="">Categories</option>
-                           <option value="rent">Buy</option>
-                           <option value="sale">Sale</option>
-                     </select>
-                     <select class="form-control" name="city">
-                           <option value="">Cities</option>
-                           
-                     </select>
+        <div class="search_section">
+    <h1>Find the Perfect Home</h1>
+    <p>Stop looking. Start finding with LuxeDwell</p>
+    
+    <div class="button_group">
+    <a href="{{ url('/fetch_agent_property') }}" class="btn btn-success">Buy</a>
+    <a href="{{ url('/view_seller') }}" class="btn btn-success">Sale</a>
+</div>
 
+
+        
+    </div>
                   
                     
-                     <button type="submit" class="btn btn-success">Search Properties</button>
                   </form>
                </div>
          </div>
@@ -95,7 +85,10 @@
     z-index: -1;
     object-fit: cover;
 }
-
+.search_section {
+    opacity: 0; /* Start hidden for animation */
+    animation: fadeIn 1.5s ease forwards;
+}
         
         .search_section h1 {
             font-size: 3rem;
@@ -110,14 +103,41 @@
             min-width: 150px;
             margin-right: 10px;
         }
-        .search_form .btn-success {
-            background-color: #d4a253;
-            border-color: #d4a253;
-        }
-        .search_form .btn-success:hover {
-            background-color: #c49248;
-            border-color: #c49248;
-        }
+        .search_form {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Increased space between buttons */
+}
+.button_group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+.button_group .btn-success {
+    background-color: #d4a253;
+    border-color: #d4a253;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    min-width: 100px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+.button_group .btn-success:hover {
+    background-color: #c49248;
+    border-color: #c49248;
+    transform: scale(1.1);
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Slide up slightly as it fades in */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
     </style>
 
        <!-- end slider section -->

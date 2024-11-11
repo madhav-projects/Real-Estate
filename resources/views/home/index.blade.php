@@ -24,11 +24,10 @@
    <link href="css/responsive.css" rel="stylesheet" />
    <style>
       .hero_area {
-         position: relative;
-         height: 100vh;
-         background: url('images/house1.jpg') no-repeat center center;
-         background-size: cover;
-      }
+   position: relative;
+   height: 100vh;
+   overflow: hidden;
+}
       .carousel-caption {
          position: absolute;
          left: 50%;
@@ -119,6 +118,15 @@
          text-decoration: none;
          border-radius: 5px;
       }
+      .background_video {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   z-index: -1;
+}
       /* Dropdown menu styles */
       .dropdown-menu {
          display: none;
@@ -153,6 +161,7 @@
          position: fixed;
          top: 0;
          left: 0;
+         background-color: rgba(255, 255, 255, 16.9);
          transition: background-color 0.3s ease;
          height: 85px;
       }
@@ -227,6 +236,12 @@
             </div>
          </div>
       </div>
+      <div class="hero_area">
+   <video autoplay muted loop playsinline class="background_video">
+      <source src="images/login.mp4" type="video/mp4">
+         </video>
+   <!-- Other content goes here -->
+</div>
 
       <!-- PrimePlex Text -->
       <div class="primeplex-caption">

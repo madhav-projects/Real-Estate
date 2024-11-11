@@ -4,19 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Property</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
     <style>
-        /* Custom styling for the modal */
         .modal-header {
             background-color: #007bff;
             color: white;
         }
         .modal-title {
             font-weight: bold;
-        }
-        .btn-close {
-            color: white;
-            opacity: 0.8;
         }
         .modal-body {
             padding: 20px;
@@ -39,7 +34,6 @@
         .btn-primary:hover {
             background-color: #0056b3;
         }
-        /* Style the trigger button */
         .edit-property-button {
             margin: 20px;
             font-size: 16px;
@@ -49,11 +43,11 @@
 </head>
 <body>
     <!-- Edit Property Modal -->
-    <div id="editPropertyModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal fade" id="editPropertyModal" tabindex="-1" aria-labelledby="editPropertyModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Property</h5>
+                    <h5 class="modal-title" id="editPropertyModalLabel">Edit Property</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -86,24 +80,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Function to open the modal and fetch property details
             function openEditPropertyModal(propertyId) {
                 $.ajax({
                     url: '/property/' + propertyId, // Update this URL to match your API route
                     method: 'GET',
                     success: function(response) {
-                        // Check if the response structure matches the expected JSON format
                         if (response.success && response.data) {
                             const property = response.data;
 
-                            // Populate form fields with the fetched data
-                            $('#editPropertyId').val(property.id);
-                            $('#editPropertyType').val(property.property_type);
-                            $('#editSellingType').val(property.selling_type);
-                            $('#editAddress').val(property.address);
-                            
-                            // Show the modal
-                            $('#editPropertyModal').modal('show');
+                            // Populate each field using forEach to loop over keys
+                            Object.keys(property).forEach(function(key) {
+                                const field = $('#edit' + capitalizeFirstLetter(key));
+                                if (field.length) {
+                                    field.val(property[key]);
+                                }
+                            });
+
+                            const editModal = new bootstrap.Modal(document.getElementById('editPropertyModal'));
+                            editModal.show();
                         } else {
                             console.error("Unexpected response format:", response);
                         }
@@ -115,7 +109,11 @@
                 });
             }
 
-            // Bind the function to the button click event
+            // Function to capitalize the first letter of each key for matching form field IDs
+            function capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+
             $('.edit-property-button').on('click', function() {
                 const propertyId = $(this).data('id');
                 openEditPropertyModal(propertyId);

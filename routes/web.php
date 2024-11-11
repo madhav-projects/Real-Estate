@@ -74,6 +74,7 @@ Route::get('/view_seller',[SellerController::class,'viewseller']);
 Route::get('/seller_contact/{id}',[SellerController::class,'sellercontact']);
 Route::post('/create_selleruser',[SellerController::class,'createseller']);
 Route::get('/fetch_agent_property',[HomeController::class,'fetch_agent_property']);
+Route::get('/properties',[HomeController::class,'user_properties']);
 
 Route::get('/show_allproperties/{id}', [HomeController::class, 'all_properties']);
 Route::get('/get-property-images/{property}', [HomeController::class, 'get_property_images']);

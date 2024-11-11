@@ -115,7 +115,7 @@
                                                 <strong>Selling Type:</strong> ${property.selling_type}<br>
                                                 <strong>Company Name:</strong> ${property.company_name}<br>
                                                 <strong>Address:</strong> ${property.address}<br>
-                                                <strong>Price:</strong> ${property.price || 'Not available'}
+                                                <strong>Price:</strong> ${property.price }
                                             </p>
                                             <a href="/show_allproperties/${property.id}" class="btn btn-primary mt-2">View Details</a>
                                         </div>

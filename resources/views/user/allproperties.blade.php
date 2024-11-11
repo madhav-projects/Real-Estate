@@ -201,7 +201,7 @@
                         <p><i class="fas fa-map-marker-alt icon"></i><strong>State:</strong> {{ $property->state }}</p>
                         <p><i class="fas fa-map-pin icon"></i><strong>Address:</strong> {{ $property->address }}</p>
                         <p><i class="fas fa-info-circle icon"></i><strong>Status:</strong> {{ $property->status }}</p>
-                        <p><i class="fas fa-dollar-sign icon"></i><strong>Price:</strong> ${{ $property->price ?? 'Not available' }}</p>
+                        <p><i class="fas fa-dollar-sign icon"></i><strong>Price:</strong> ${{ $property->price }}</p>
                     </div>
                 </div>
             </div>
@@ -222,7 +222,7 @@
             document.getElementById('mainImage').src = imagePath;
         }
     </script>
-   @include('user.footer')
+
 
 </body>
 </html>
