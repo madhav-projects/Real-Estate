@@ -288,7 +288,7 @@
 }
 
 .container {
-    background-image: url('images/bgagent.png'); /* Set the background image on the container */
+    background-image: url('/images/bgagent.png'); /* Set the background image on the container */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

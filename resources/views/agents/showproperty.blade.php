@@ -70,101 +70,114 @@
         
         </div>
   
-    <script>
-        $(function() {
-            // Set CSRF token for AJAX requests
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        <script>
+    $(function() {
+        // Set CSRF token for AJAX requests
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // Function to fetch properties via AJAX
+        function fetchCategories() {
+            $.ajax({
+                url: '{{ url('show_properties') }}',
+                method: 'GET',
+                success: function(response) {
+                    $('tbody').html(""); // Clear table body
+                    var tableBody = $('#Propertydetails');
+                    tableBody.empty(); // Clear existing rows
+
+                    // Iterate through the properties and append to the table
+                    if (response.property) {
+                        response.property.forEach(function(property) {
+                            var actionButtons = 
+                                '<button class="btn btn-primary editBtn" data-id="' + property.id + '">Edit</button>' +
+                                '<button class="btn btn-danger deleteBtn" data-id="' + property.id + '">Delete</button>';
+
+                            // Add Generate button if the status is "Soldout"
+                            if (property.status === "Soldout") {
+                                actionButtons += 
+                                    '<button class="btn btn-secondary generateBtn" data-id="' + property.id + '">Generate</button>';
+                            }
+
+                            // Construct the row with conditional action buttons
+                            var row = '<tr>' +
+                                '<td>' + property.company_name + '</td>' +
+                                '<td>' + property.agent_name + '</td>' +
+                                '<td>' + property.property_type + '</td>' +
+                                '<td>' + property.selling_type + '</td>' +
+                                '<td>' + property.bhk + '</td>' +
+                                '<td>' + property.bedroom + '</td>' +
+                                '<td>' + property.bathroom + '</td>' +
+                                '<td>' + property.kitchen + '</td>' +
+                                '<td>' + property.balcony + '</td>' +
+                                '<td>' + property.hall + '</td>' +
+                                '<td>' + property.floor + '</td>' +
+                                '<td>' + property.total_floor + '</td>' +
+                                '<td>' + property.area_size + '</td>' +
+                                '<td>' + property.state + '</td>' +
+                                '<td>' + property.city + '</td>' +
+                                '<td>' + property.address + '</td>' +
+                                '<td>' + property.status + '</td>' +
+                                '<td>' + property.price + '</td>' +
+                                '<td><img src="' + property.image1 + '" width="50px" height="50px"></td>' +
+                                '<td><img src="' + property.image2 + '" width="50px"></td>' +
+                                '<td><img src="' + property.image3 + '" width="50px"></td>' +
+                                '<td><img src="' + property.image4 + '" width="50px"></td>' +
+                                '<td>' + actionButtons + '</td>' +
+                                '</tr>';
+                            tableBody.append(row);
+                        });
+                    }
+
+                    // Bind delete action to newly created delete buttons
+                    $('.deleteBtn').click(function() {
+                        var propertyId = $(this).data('id');
+                        deleteCategory(propertyId);
+                    });
+
+                    // Bind edit action to newly created edit buttons
+                    $('.editBtn').click(function() {
+                        var propertyId = $(this).data('id');
+                        window.location.href = '/edit_property/' + propertyId;
+                    });
+
+                    // Bind generate action to newly created generate buttons
+                    $('.generateBtn').click(function() {
+                        var propertyId = $(this).data('id');
+                        alert('Generate action for property ID: ' + propertyId); // Replace with actual generate functionality
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
                 }
             });
+        }
 
-            // Function to fetch properties via AJAX
-            function fetchCategories() {
+        // Function to delete category via AJAX
+        function deleteCategory(categoryId) {
+            var confirmation = confirm("Do you really want to delete this property?");
+            if (confirmation) {
                 $.ajax({
-                    url: '{{ url('show_properties') }}',
-                    method: 'GET',
+                    url: '{{ url('delete_category') }}/' + categoryId,
+                    method: 'DELETE',
                     success: function(response) {
-                        $('tbody').html(""); // Clear table body
-                        var tableBody = $('#Propertydetails');
-                        tableBody.empty(); // Clear existing rows
-
-                        // Iterate through the properties and append to the table
-                        if (response.property) {
-                            response.property.forEach(function(property) {
-                                var row = '<tr>' +
-                                    '<td>' + property.company_name + '</td>' +
-                                    '<td>' + property.agent_name + '</td>' +
-                                    '<td>' + property.property_type + '</td>' +
-                                    '<td>' + property.selling_type + '</td>' +
-                                    '<td>' + property.bhk + '</td>' +
-                                    '<td>' + property.bedroom + '</td>' +
-                                    '<td>' + property.bathroom + '</td>' +
-                                    '<td>' + property.kitchen + '</td>' +
-                                    '<td>' + property.balcony + '</td>' +
-                                    '<td>' + property.hall + '</td>' +
-                                    '<td>' + property.floor + '</td>' +
-                                    '<td>' + property.total_floor + '</td>' +
-                                    '<td>' + property.area_size + '</td>' +
-                                    '<td>' + property.state + '</td>' +
-                                    '<td>' + property.city + '</td>' +
-                                    '<td>' + property.address + '</td>' +
-                                    '<td>' + property.status + '</td>' +
-                                      '<td>' + property.price + '</td>'+
-                                    '<td><img src="' + property.image1 + '" width="50px" height="50px"></td>' +
-                                    '<td><img src="' + property.image2 + '" width="50px"></td>' +
-                                    '<td><img src="' + property.image3 + '" width="50px"></td>' +
-                                    '<td><img src="' + property.image4 + '" width="50px"></td>' +
-                                    '<td><button class="btn btn-danger deleteBtn" data-id="' + property.id + '">Delete</button>' +
-                                    '<button class="btn btn-primary editBtn" data-id="' + property.id + '">Edit</button></td>' +
-                                    '</tr>';
-                                tableBody.append(row);
-                            });
-                        }
-
-                        // Bind delete action to newly created delete buttons
-                        $('.deleteBtn').click(function() {
-                            var propertyId = $(this).data('id');
-                            deleteCategory(propertyId);
-                        });
-
-                        // Bind edit action to newly created edit buttons
-                          // Bind edit action to newly created edit buttons
-                     $('.editBtn').click(function() {
-                      var propertyId = $(this).data('id');
-                      console.log("Edit button clicked with ID:", propertyId); // Debug line
-                         window.location.href = '/edit_property/' + propertyId;
-                         });
-
-
+                        $('button[data-id="' + categoryId + '"]').closest('tr').remove();
                     },
                     error: function(xhr, status, error) {
-                        console.error('Error:', error);
+                        console.error(xhr.responseText);
                     }
                 });
             }
+        }
 
-            // Function to delete category via AJAX
-            function deleteCategory(categoryId) {
-                var confirmation = confirm("Do you really want to delete this property?");
-                if (confirmation) {
-                    $.ajax({
-                        url: '{{ url('delete_category') }}/' + categoryId,
-                        method: 'DELETE',
-                        success: function(response) {
-                            $('button[data-id="' + categoryId +'"]').closest('tr').remove();
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr.responseText);
-                        }
-                    });
-                }
-            }
+        // Call fetchCategories after document is ready
+        fetchCategories();
+    });
+</script>
 
-            // Call fetchCategories after document is ready
-            fetchCategories();
-        });
-    </script>
 </body> 
 </html>
 <style>

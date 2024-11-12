@@ -6,13 +6,20 @@
     <title>Edit Property</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-        body { background-color: #f7f9fc; font-family: 'Arial', sans-serif; }
+        body {
+            background-color: #f7f9fc;
+            font-family: 'Arial', sans-serif;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
         .container { margin-top: 50px; }
         .modal-content { border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
-        .modal-header { background-color: #007bff; color: white; text-align: center; }
+        .modal-header { background-color: #3c2626; color: white; text-align: center; }
         .form-control { border-radius: 8px; border: 1px solid #ced4da; }
-        .btn-primary { background-color: #007bff; border: none; width: 100%; }
-        .btn-primary:hover { background-color: #0056b3; }
+        .btn-primary { background-color: #3c2626; border: none; width: 48%; }
+        .btn-secondary { background-color: #3c2626; border: none; width: 48%; margin-right: 4%; }
+        .btn-primary:hover { background-color: #3c2626; }
     </style>
 </head>
 
@@ -60,7 +67,10 @@
                                 <label for="editPrice" class="form-label">Price</label>
                                 <input type="text" class="form-control" id="editPrice" value="{{ $property->price ?? '' }}">
                             </div>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary" id="cancelButton">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -108,6 +118,11 @@
                         alert('Failed to save property details. Please try again.');
                     }
                 });
+            });
+
+            // Cancel button click handler
+            $('#cancelButton').on('click', function () {
+                window.location.href = '/show_properties';
             });
         });
     </script>
