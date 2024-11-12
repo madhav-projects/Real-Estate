@@ -52,6 +52,7 @@
                                     <th>City</th>
                                     <th>Address</th>
                                     <th>Status</th>
+                                    <th>Price</th>
                                     <th>Image 1</th>
                                     <th>Image 2</th>
                                     <th>Image 3</th>
@@ -109,6 +110,7 @@
                                     '<td>' + property.city + '</td>' +
                                     '<td>' + property.address + '</td>' +
                                     '<td>' + property.status + '</td>' +
+                                      '<td>' + property.price + '</td>'+
                                     '<td><img src="' + property.image1 + '" width="50px" height="50px"></td>' +
                                     '<td><img src="' + property.image2 + '" width="50px"></td>' +
                                     '<td><img src="' + property.image3 + '" width="50px"></td>' +

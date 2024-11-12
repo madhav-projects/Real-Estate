@@ -16,46 +16,30 @@
             margin-top: 50px;
         }
 
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .modal-content {
             border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .card-header {
+        .modal-header {
             background-color: #007bff;
             color: white;
-            font-size: 1.25rem;
             text-align: center;
-            padding: 15px;
-        }
-
-        .form-label {
-            font-weight: 600;
         }
 
         .form-control {
             border-radius: 8px;
             border: 1px solid #ced4da;
-            padding: 12px;
-            font-size: 1rem;
         }
 
         .btn-primary {
             background-color: #007bff;
             border: none;
-            padding: 12px 20px;
-            font-weight: 600;
-            border-radius: 5px;
             width: 100%;
-            font-size: 1.1rem;
         }
 
         .btn-primary:hover {
             background-color: #0056b3;
-        }
-
-        .mb-3 {
-            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -75,30 +59,31 @@
                     <div class="modal-body">
                         <!-- Edit Property Form -->
                         <form id="propertyForm">
-                            <input type="hidden" id="editPropertyId">
+                            @csrf
+                            <input type="hidden" id="editPropertyId" value="{{ $property->id }}">
                             <div class="mb-3">
                                 <label for="editPropertyType" class="form-label">Property Type</label>
-                                <input type="text" class="form-control" id="editPropertyType" required>
+                                <input type="text" class="form-control" id="editPropertyType" value="{{ $property->property_type }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="editSellingType" class="form-label">Selling Type</label>
-                                <input type="text" class="form-control" id="editSellingType" required>
+                                <input type="text" class="form-control" id="editSellingType" value="{{ $property->selling_type }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="editAddress" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="editAddress" required>
+                                <input type="text" class="form-control" id="editAddress" value="{{ $property->address }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="editBhk" class="form-label">BHK</label>
-                                <input type="text" class="form-control" id="editBhk" required>
+                                <input type="text" class="form-control" id="editBhk" value="{{ $property->bhk }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="editCity" class="form-label">City</label>
-                                <input type="text" class="form-control" id="editCity" required>
+                                <input type="text" class="form-control" id="editCity" value="{{ $property->city }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="editPrice" class="form-label">Price</label>
-                                <input type="text" class="form-control" id="editPrice">
+                                <input type="text" class="form-control" id="editPrice" value="{{ $property->price ?? '' }}">
                             </div>
                             <button type="submit" class="btn btn-primary">Save Changes</button>
                         </form>
@@ -113,72 +98,45 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function () {
-            // Automatically trigger the modal on page load
+            // Trigger modal on page load
             $('#editPropertyModal').modal('show');
-
-            // Function to fetch property details and populate the form
-            function loadPropertyDetails(propertyId) {
-                $.ajax({
-                    url: '/edit_property/' + propertyId,  // Ensure this URL matches your route
-                    method: 'GET',
-                    success: function (response) {
-                        if (response.success && response.data) {
-                            // Loop over the properties (in case there are multiple)
-                            const properties = Array.isArray(response.data) ? response.data : [response.data]; // Handle single or multiple properties
-                            properties.forEach(function (property) {
-                                $('#editPropertyId').val(property.id);
-                                $('#editPropertyType').val(property.property_type);
-                                $('#editSellingType').val(property.selling_type);
-                                $('#editAddress').val(property.address);
-                                $('#editBhk').val(property.bhk);
-                                $('#editCity').val(property.city);
-                                $('#editPrice').val(property.price || ''); // Handle null/empty values
-                            });
-                        } else {
-                            console.error("Unexpected response format:", response);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error fetching property details:', error);
-                        alert('Failed to fetch property details. Please try again.');
-                    }
-                });
-            }
-
-            // Trigger the loadPropertyDetails function (use actual property ID here)
-            loadPropertyDetails(24);  // Replace `24` with the actual property ID you want to load
 
             // Form submission handler
             $('#propertyForm').on('submit', function (e) {
-                e.preventDefault();  // Prevent the default form submission
+                e.preventDefault();  // Prevent default form submission
 
-                const propertyId = $('#editPropertyId').val(); // Get the property ID from the hidden input field
+                const propertyId = $('#editPropertyId').val();  // Property ID from hidden input
                 const updatedProperty = {
+                    _token: '{{ csrf_token() }}',  // Include CSRF token
                     property_type: $('#editPropertyType').val(),
                     selling_type: $('#editSellingType').val(),
                     address: $('#editAddress').val(),
                     bhk: $('#editBhk').val(),
                     city: $('#editCity').val(),
-                    price: $('#editPrice').val(),
+                    price: $('#editPrice').val()
                 };
 
                 $.ajax({
-                    url: '/property/' + propertyId,  // Ensure this URL is the correct route for updating the property
-                    method: 'PUT',  // Use PUT for updating the resource
-                    data: updatedProperty,
-                    success: function (response) {
-                        if (response.success) {
-                            alert('Property updated successfully!');
-                            window.location.href = '/properties';  // Update this URL to your "Show Properties" page URL
-                        } else {
-                            alert('Failed to save property details. Please try again.');
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error saving property details:', error);
-                        alert('Failed to save property details. Please try again.');
-                    }
-                });
+    url: '/update_property/' + propertyId,
+    method: 'POST',
+    data: updatedProperty,
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function (response) {
+        if (response.success) {
+            alert('Property updated successfully!');
+            window.location.href = '/show_properties';
+        } else {
+            alert('Failed to save property details. Please try again.');
+        }
+    },
+    error: function (xhr, status, error) {
+        console.error('Error saving property details:', error);
+        alert('Failed to save property details. Please try again.');
+    }
+});
+
             });
         });
     </script>

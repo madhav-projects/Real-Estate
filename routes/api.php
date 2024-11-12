@@ -59,6 +59,7 @@ Route::get('/fetch_agent_property',[HomeController::class,'fetch_agent_property'
 Route::get('/get-property-images/{property}', [HomeController::class, 'get-property-images']);
 
 Route::get('/show_allproperties/{id}', [HomeController::class, 'all_properties']);
+Route::post('/update_property/{id}', [AgentController::class, 'updateProperty']);
 
 Route::get('/user_contact', [AgentController::class, 'showContactPage']);
 Route::post('/agent_Message', [AgentController::class, 'sendAgentMessage']);

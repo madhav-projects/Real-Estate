@@ -196,52 +196,48 @@ class AgentController extends Controller
         }
     }
 
-    // public function editProperty($id)
-    // {
-    //     // Fetch property data by ID
-    //     $property = Property::find($id);
-    
-       
-    //     return response()->json([
-    //         'sucess'=>true,
-    //         'message'=>'fecthed',
-    //         'data'=>$property
-    //     ]);
-    // }
+ 
 
-    public function editProperty($id)
+   public function editProperty($id)
 {
-    // Fetch property data by ID
-    $property = Property::find($id);
-    
-    // Check if the property exists
-    if (!$property) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Property not found',
-        ], 404);
-    }
+    $property = Property::findOrFail($id);
+    return view('agents.editproperty', compact('property'));
+}
 
-    // Return JSON response
-    return response()->json([
-        'success' => true,
-        'data' => $property,
-    ]);
+public function updateProperty(Request $request, $id)
+{
+    try {
+        $property = Property::findOrFail($id);
+
+        $property->update([
+            'company_name' => $request->input('company_name'),
+            'property_type' => $request->input('property_type'),
+            'selling_type' => $request->input('selling_type'),
+            'bhk' => $request->input('bhk'),
+            'bedroom' => $request->input('bedroom'),
+            'bathroom' => $request->input('bathroom'),
+            'kitchen' => $request->input('kitchen'),
+            'balcony' => $request->input('balcony'),
+            'hall' => $request->input('hall'),
+            'floor' => $request->input('floor'),
+            'total_floor' => $request->input('total_floor'),
+            'area_size' => $request->input('area_size'),
+            'state' => $request->input('state'),
+            'city' => $request->input('city'),
+            'address' => $request->input('address'),
+            'status' => $request->input('status'),
+            'price' => $request->input('price'),
+        ]);
+
+        return response()->json(['success' => true]);
+    } catch (\Exception $e) {
+        \Log::error('Error updating property: ' . $e->getMessage());
+        return response()->json(['success' => false, 'message' => 'Server error occurred.'], 500);
+    }
 }
 
 
     
-// public function edit($id)
-// {
-//     $property = Property::find($id); // Find property by ID
-
-//     if (!$property) {
-//         return response()->json(['success' => false, 'message' => 'Property not found.']);
-//     }
-
-//     // Return property details as JSON
-//     return response()->json(['success' => true, 'data' => $property]);
-// }
 
 
     public function fetchtask()

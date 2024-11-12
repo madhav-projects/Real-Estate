@@ -60,6 +60,7 @@ class AdminController extends Controller
             'city' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'status' => 'required|string|max:255',
+            'price' => 'required|string|max:255',
             'image1' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image2' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image3' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -90,6 +91,7 @@ class AdminController extends Controller
         $property->area_size = $request->area_size;
         $property->city = $request->city;
         $property->state = $request->state;
+        $property->price = $request->price;
         $property->address = $request->address;
         $property->status = $request->status;
 
