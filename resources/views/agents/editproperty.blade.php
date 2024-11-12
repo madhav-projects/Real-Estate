@@ -1,46 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Property</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-        body {
-            background-color: #f7f9fc;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .container {
-            margin-top: 50px;
-        }
-
-        .modal-content {
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-header {
-            background-color: #007bff;
-            color: white;
-            text-align: center;
-        }
-
-        .form-control {
-            border-radius: 8px;
-            border: 1px solid #ced4da;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            width: 100%;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
+        body { background-color: #f7f9fc; font-family: 'Arial', sans-serif; }
+        .container { margin-top: 50px; }
+        .modal-content { border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .modal-header { background-color: #007bff; color: white; text-align: center; }
+        .form-control { border-radius: 8px; border: 1px solid #ced4da; }
+        .btn-primary { background-color: #007bff; border: none; width: 100%; }
+        .btn-primary:hover { background-color: #0056b3; }
     </style>
 </head>
 
@@ -74,12 +46,15 @@
                                 <input type="text" class="form-control" id="editAddress" value="{{ $property->address }}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="editBhk" class="form-label">BHK</label>
-                                <input type="text" class="form-control" id="editBhk" value="{{ $property->bhk }}" required>
-                            </div>
-                            <div class="mb-3">
                                 <label for="editCity" class="form-label">City</label>
                                 <input type="text" class="form-control" id="editCity" value="{{ $property->city }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editStatus" class="form-label">Status</label>
+                                <select class="form-control" id="editStatus" required>
+                                    <option value="Available" {{ $property->status == 'Available' ? 'selected' : '' }}>Available</option>
+                                    <option value="Soldout" {{ $property->status == 'Soldout' ? 'selected' : '' }}>Soldout</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="editPrice" class="form-label">Price</label>
@@ -111,35 +86,30 @@
                     property_type: $('#editPropertyType').val(),
                     selling_type: $('#editSellingType').val(),
                     address: $('#editAddress').val(),
-                    bhk: $('#editBhk').val(),
                     city: $('#editCity').val(),
+                    status: $('#editStatus').val(),
                     price: $('#editPrice').val()
                 };
 
                 $.ajax({
-    url: '/update_property/' + propertyId,
-    method: 'POST',
-    data: updatedProperty,
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
-    success: function (response) {
-        if (response.success) {
-            alert('Property updated successfully!');
-            window.location.href = '/show_properties';
-        } else {
-            alert('Failed to save property details. Please try again.');
-        }
-    },
-    error: function (xhr, status, error) {
-        console.error('Error saving property details:', error);
-        alert('Failed to save property details. Please try again.');
-    }
-});
-
+                    url: '/update_property/' + propertyId,
+                    method: 'POST',
+                    data: updatedProperty,
+                    success: function (response) {
+                        if (response.success) {
+                            alert('Property updated successfully!');
+                            window.location.href = '/show_properties';
+                        } else {
+                            alert('Failed to save property details. Please try again.');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error saving property details:', error);
+                        alert('Failed to save property details. Please try again.');
+                    }
+                });
             });
         });
     </script>
 </body>
-
 </html>

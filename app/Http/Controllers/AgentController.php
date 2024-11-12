@@ -204,37 +204,40 @@ class AgentController extends Controller
     return view('agents.editproperty', compact('property'));
 }
 
-public function updateProperty(Request $request, $id)
+public function update(Request $request, $id)
 {
-    try {
-        $property = Property::findOrFail($id);
+    // Validate request
+    $request->validate([
+        'property_type' => 'required|string',
+        'selling_type' => 'required|string',
+        'address' => 'required|string',
+        'status' => 'required|string|in:Available,Soldout', // Add validation for status
+        'city' => 'required|string',
+        'price' => 'nullable|numeric'
+    ]);
 
-        $property->update([
-            'company_name' => $request->input('company_name'),
-            'property_type' => $request->input('property_type'),
-            'selling_type' => $request->input('selling_type'),
-            'bhk' => $request->input('bhk'),
-            'bedroom' => $request->input('bedroom'),
-            'bathroom' => $request->input('bathroom'),
-            'kitchen' => $request->input('kitchen'),
-            'balcony' => $request->input('balcony'),
-            'hall' => $request->input('hall'),
-            'floor' => $request->input('floor'),
-            'total_floor' => $request->input('total_floor'),
-            'area_size' => $request->input('area_size'),
-            'state' => $request->input('state'),
-            'city' => $request->input('city'),
-            'address' => $request->input('address'),
-            'status' => $request->input('status'),
-            'price' => $request->input('price'),
-        ]);
+    // Find the property and update it
+    $property = Property::find($id);
+    if (!$property) {
+        return response()->json(['success' => false, 'message' => 'Property not found'], 404);
+    }
 
-        return response()->json(['success' => true]);
-    } catch (\Exception $e) {
-        \Log::error('Error updating property: ' . $e->getMessage());
-        return response()->json(['success' => false, 'message' => 'Server error occurred.'], 500);
+    // Assign updated values to the property model
+    $property->property_type = $request->property_type;
+    $property->selling_type = $request->selling_type;
+    $property->address = $request->address;
+    $property->status = $request->status; // Add status field
+    $property->city = $request->city;
+    $property->price = $request->price;
+
+    // Save and respond
+    if ($property->save()) {
+        return response()->json(['success' => true, 'message' => 'Property updated successfully!']);
+    } else {
+        return response()->json(['success' => false, 'message' => 'Failed to update property.']);
     }
 }
+
 
 
     

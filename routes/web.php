@@ -66,7 +66,8 @@ Route::get('/view_properties', [AdminController::class, 'view_properties']);
 Route::post('/add_property',[AdminController::class,'addproperty'])->name('add_property');
 Route::get('/show_properties',[AdminController::class,'show_properties']);
 Route::get('/edit_property/{id}', [AgentController::class, 'editProperty'])->name('edit.property');
-Route::post('/update_property/{id}', [AgentController::class, 'updateProperty']);
+Route::post('/update_property/{id}', [AgentController::class, 'update'])->name('update_property');
+
 
 // Route::get('/property/{id}', [AgentController::class, 'edit'])->name('property.edit');
 
