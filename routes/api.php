@@ -60,7 +60,7 @@ Route::get('/get-property-images/{property}', [HomeController::class, 'get-prope
 
 Route::get('/show_allproperties/{id}', [HomeController::class, 'all_properties']);
 Route::post('/update_property/{id}', [AgentController::class, 'update'])->name('update_property');
-
+Route::get('/generate/{id}', [AgentController::class, 'showGeneratePage'])->name('generate.page');
 
 Route::get('/user_contact', [AgentController::class, 'showContactPage']);
 Route::post('/agent_Message', [AgentController::class, 'sendAgentMessage']);

@@ -294,4 +294,12 @@ public function update(Request $request, $id)
     return response()->json(['status' => 'success', 'message' => 'Your message has been sent to the agent!']);
 }
 
+public function showGeneratePage($id)
+{
+    $property = Property::findOrFail($id);
+    return view('agents.generate', compact('property'));
+}
+
+
+
 }

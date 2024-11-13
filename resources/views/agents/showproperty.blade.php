@@ -10,11 +10,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
+        /* Additional Styles */
         #message {
             display: none;
             padding: 8px;
             border-radius: 18px;
             margin-bottom: 20px;
+        }
+        .modal-header, .modal-footer {
+            border: none;
         }
     </style>
 </head>
@@ -70,6 +74,7 @@
         
         </div>
   
+        
         <script>
     $(function() {
         // Set CSRF token for AJAX requests
@@ -146,9 +151,10 @@
 
                     // Bind generate action to newly created generate buttons
                     $('.generateBtn').click(function() {
-                        var propertyId = $(this).data('id');
-                        alert('Generate action for property ID: ' + propertyId); // Replace with actual generate functionality
-                    });
+                            var propertyId = $(this).data('id');
+                            // Redirect to the route for generating details
+                            window.location.href = '/generate/' + propertyId;
+                        });
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);

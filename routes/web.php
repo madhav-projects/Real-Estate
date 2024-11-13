@@ -60,6 +60,7 @@ Route::get('/selecttype',[AdminController::class,'selecttype']);//this for view 
 Route::post('/addcategory',[AdminController::class,'addcategory']);
 Route::get('/show_category',[AdminController::class,'showcategory']);
 Route::delete('/delete_category/{id}', [RealtronController::class, 'deleteCategory']);
+Route::get('/generate/{id}', [AgentController::class, 'showGeneratePage'])->name('generate.page');
 
 
 Route::get('/view_properties', [AdminController::class, 'view_properties']);
