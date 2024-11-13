@@ -13,13 +13,13 @@
         <h1>Property Details</h1>
         <p>Company Name: <span id="companyName">{{ $property->company_name }}</span></p>
         <p>Agent Name: <span id="agentName">{{ $property->agent_name }}</span></p>
-        <p>Price: $<span id="price">{{ number_format($property->price, 2) }}</span></p>
+        <p>Price: ₹<span id="price">{{ number_format($property->price, 2) }}</span></p>
 
         <h2>Price Breakdown</h2>
-        <p>Admin Share (5%): $<span id="adminShare">{{ number_format($property->price * 0.05, 2) }}</span></p>
-        <p>Company Share (10%): $<span id="companyShare">{{ number_format($property->price * 0.10, 2) }}</span></p>
-        <p>Agent Share (15%): $<span id="agentShare">{{ number_format($property->price * 0.15, 2) }}</span></p>
-        <p>User Share (70%): $<span id="userShare">{{ number_format($property->price * 0.70, 2) }}</span></p>
+        <p>Admin Share (5%): ₹<span id="adminShare">{{ number_format($property->price * 0.05, 2) }}</span></p>
+        <p>Company Share (10%): ₹<span id="companyShare">{{ number_format($property->price * 0.10, 2) }}</span></p>
+        <p>Agent Share (15%): ₹<span id="agentShare">{{ number_format($property->price * 0.15, 2) }}</span></p>
+        <p>User Share (70%): ₹<span id="userShare">{{ number_format($property->price * 0.70, 2) }}</span></p>
 
         <div class="button-container">
             <button onclick="window.history.back();">Go Back</button>
