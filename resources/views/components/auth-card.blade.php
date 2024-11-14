@@ -53,7 +53,8 @@
     }
 
     .py-8 {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 424px;
     }
 </style>

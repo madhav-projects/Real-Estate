@@ -14,11 +14,14 @@
         }
         .centered-content img {
             display: block;
-            margin: 0 auto;
+            margin: 2 auto;
+            width: 230px;
         }
         .centered-content h1 {
             font-weight: bold;
             font-size: 48px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 164%);
+            height: 40px;
         }
     </style>
 </head>

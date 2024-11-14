@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Property;
 use App\Models\Contact;
+use App\Models\Generate;
 use Illuminate\Support\Facades\Validator; // Import the Validator facade
 use Auth;
 
@@ -300,6 +301,27 @@ public function showGeneratePage($id)
     return view('agents.generate', compact('property'));
 }
 
+// PropertyController.php
+// PropertyController.phppublic function saveProperty(Request $request)
+public function saveProperty(Request $request)
+{
+    // Retrieve data from the request
+    $property = new Generate();
+    $property->company_name = $request->input('company_name');
+    $property->agent_name = $request->input('agent_name');
+    $property->price = $request->input('price');
+    $property->admin_share = $request->input('admin_share');
+    $property->company_share = $request->input('company_share');
+    $property->agent_share = $request->input('agent_share');
+    $property->user_share = $request->input('user_share');
+
+    // Save to the database and send response
+    if ($property->save()) {
+        return response()->json(['message' => 'Property details saved successfully!']);
+    } else {
+        return response()->json(['message' => 'Error saving property details. Please try again.'], 500);
+    }
+}
 
 
 }

@@ -52,6 +52,7 @@ Route::get('/edit_property/{id}', [AgentController::class, 'editProperty'])->nam
 
 Route::get('/update_property/{id}',[AdminController::class,'updateProperty']);
 
+Route::post('/property/save', [AgentController::class, 'store'])->name('property.store');
 //user part
 Route::get('/view_seller',[SellerController::class,'viewseller']);
 Route::post('/create_selleruser',[SellerController::class,'createseller']);
