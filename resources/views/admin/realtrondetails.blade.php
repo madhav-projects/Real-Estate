@@ -18,10 +18,10 @@
             border-radius: 18px;
             margin-bottom: 20px;
         }
-        @keyframes fadeIn {
+        /* @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
-}
+} */
         .search-container {
     position: fixed;
     top: 20px;
@@ -41,7 +41,7 @@
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
-    transition: all 0.3s ease; /* Animation effect */
+    transition: all 0.3s ease;
 }
 
 /* Style for search button */
@@ -53,7 +53,7 @@
     color: white;
     cursor: pointer;
     border-radius: 0 5px 5px 0;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Animation effect */
+    /* transition: background-color 0.3s ease, transform 0.2s ease;  */
 }
 
 /* Hover effects */
@@ -92,7 +92,7 @@
 
 .table-section th, .table-section td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 5px;
     text-align: left;
     white-space: nowrap; /* Prevents wrapping of table content */
 }
@@ -410,14 +410,14 @@ $("#searchButton").click(function() {
     position: relative;
     background-size: cover;
     background-position: center;
-    padding: 0px;
+    padding: 8px;
     border-radius: 10px;
     overflow-x: auto;
-    margin-top: -511px; /* Remove the negative margin */
+    margin-top: -670px; /* Remove the negative margin */
     max-width: calc(100% - 250px); /* Adjust width to allow space for the sidebar */
     margin-left: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.5s ease-in-out; 
+    /* animation: fadeIn 0.5s ease-in-out;  */
    
 }
 
@@ -429,9 +429,9 @@ $("#searchButton").click(function() {
     transition: transform 0.2s ease-in-out;
 }
 
-.table-section table:hover {
-    transform: scale(1.01); /* Slight zoom on hover */
-}
+/* .table-section table:hover {
+    transform: scale(1.01);
+} */
 .table-section th, .table-section td {
     border: 1px solid #ddd;
     padding: 8px;

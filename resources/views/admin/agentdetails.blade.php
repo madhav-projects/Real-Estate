@@ -60,12 +60,12 @@
 .search-bar:focus {
     border-color: #2980b9;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-    transform: scale(1.02); /* Slightly expand on focus */
+    /* transform: scale(1.02);  */
 }
 
 .search-button:hover {
     background-color: #2980b9;
-    transform: scale(1.05); /* Slightly grow on hover */
+    /* transform: scale(1.05);  */
 }
 
         .table-section {
@@ -75,8 +75,8 @@
     padding: 20px;
     border-radius: 10px;
     overflow-x: auto;
-    margin-top: -540px; /* Remove the negative margin */
-    max-width: calc(99% - 254px); /* Adjust width to allow space for the sidebar */
+    margin-top: -657px; /* Remove the negative margin */
+    max-width: calc(99% - 251px); /* Adjust width to allow space for the sidebar */
     margin-left: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     animation: fadeIn 0.5s ease-in-out;
@@ -100,7 +100,7 @@
 }
 
 .table-section th {
-    background-color: #333;
+    background-color: #3c2626;
 }
 
 .table-section tbody tr:nth-child(even) {
@@ -379,7 +379,7 @@ $("#searchButton").click(function() {
 }
 
 .table-section th {
-    background-color: #333;
+    background-color: #3c2626;
     color: white;
     font-weight: bold;
     border-bottom: 2px solid #ddd;
@@ -389,9 +389,9 @@ $("#searchButton").click(function() {
 .table-section tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
-.table-section table:hover {
-    transform: scale(1.01); /* Slight zoom on hover */
-}
+/* .table-section table:hover {
+    transform: scale(1.01); 
+} */
 .table-section th:hover {
     background-color: #2980b9;
 }

@@ -35,7 +35,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             max-width: 612px;
             width: 100%;
-            margin: 80px auto;
+            margin: 161px auto;
         }
 
         h2 {
@@ -138,10 +138,10 @@
                 <input type="text" class="form-control" id="agentName" name="agent_name" placeholder="Enter agent's name" required>
             </div>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="agentPhone">Agent Phone Number *</label>
             <input type="tel" class="form-control" id="agentPhone" name="agent_phone" placeholder="Enter agent's phone number" required>
-        </div>
+        </div> -->
         <div class="form-group">
             <label for="message">Message *</label>
             <textarea class="form-control" id="message" name="message" rows="4" placeholder="Enter your message to the agent" required></textarea>

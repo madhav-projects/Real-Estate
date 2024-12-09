@@ -24,6 +24,11 @@
     <p><strong>Agent Share (15%):</strong> ₹<span id="agentShare">{{ number_format($property->price * 0.15, 2) }}</span></p>
     <p><strong>User Share (70%):</strong> ₹<span id="userShare">{{ number_format($property->price * 0.70, 2) }}</span></p>
 
+    <!-- Hidden inputs to store additional IDs -->
+
+<input type="hidden" id="agentId" value="{{ auth()->user()->id }}">
+
+
     <div class="button-container">
         <button onclick="window.history.back();">Go Back</button>
         <button id="submitBtn">Submit</button>
@@ -35,12 +40,15 @@
     <style>
         /* Reset some defaults */
         body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #b33e00, #f5a623); /* Using deep brown and yellow gradient */
-            padding: 40px;
-            color: #333;
-        }
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-image: url('/images/bgagent.png'); /* Replace with the path to your image */
+    background-size: cover; /* Ensures the image covers the entire screen */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    padding: 40px;
+    color: #333;
+}
 
         /* Container for centering content */
         .container {
@@ -182,7 +190,8 @@
                 admin_share: parseFloat($('#adminShare').text().replace(/,/g, '')),
                 company_share: parseFloat($('#companyShare').text().replace(/,/g, '')),
                 agent_share: parseFloat($('#agentShare').text().replace(/,/g, '')),
-                user_share: parseFloat($('#userShare').text().replace(/,/g, ''))
+                user_share: parseFloat($('#userShare').text().replace(/,/g, '')),
+                agent_id: $('#agentId').val()
             };
 
             // AJAX request to send data to the server

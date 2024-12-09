@@ -315,9 +315,23 @@ public function saveProperty(Request $request)
     $property->agent_share = $request->input('agent_share');
     $property->user_share = $request->input('user_share');
 
-    // Save to the database and send response
+    // Save to the database
     if ($property->save()) {
-        return response()->json(['message' => 'Property details saved successfully!']);
+        // Prepare email details
+        $details = [
+            'message' => 'A new property report has been generated.',
+            'company_name' => $property->company_name,
+            'agent_name' => $property->agent_name,
+            'price' => $property->price,
+            'admin_share' => $property->admin_share,
+            'company_share' => $property->company_share,
+            'agent_share' => $property->agent_share,
+            'user_share' => $property->user_share,
+        ];
+
+       
+
+        return response()->json(['message' => 'Property details saved and email sent successfully!']);
     } else {
         return response()->json(['message' => 'Error saving property details. Please try again.'], 500);
     }

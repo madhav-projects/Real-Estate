@@ -9,12 +9,12 @@
         <div class="collapse navbar-collapse justify-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
                
-                <li class="nav-item {{ Request::is('home') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('home') ? 'active' : '' }}">
                     <a class="nav-link animated-button" href="{{url('/home')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link animated-button" href="">Properties</a>
-                </li>
+                </li> -->
                 <li class="nav-item {{ Request::is('fetch_agent_property') ? 'active' : '' }}">
                     <a class="nav-link animated-button" href="{{url('/fetch_agent_property')}}">Buy</a>
                 </li>

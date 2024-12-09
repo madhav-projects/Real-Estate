@@ -183,7 +183,7 @@
       }
       .primeplex-caption {
     position: absolute;
-    left: 26%;
+    left: 30%;
     top: 25%;
     transform: translate(-50%, -50%);
     color: black;
@@ -206,15 +206,13 @@
          }
       }
       .about-description {
-         margin: 6px 0;
-         padding: 10px;
-         font-size: 1.2em;
-         text-align: center;
-        
-         border-radius: 10px;
-       
-         max-width: 1266px;
-      }
+    margin: 6px 150px;
+    padding: 9px;
+    font-size: 1.2em;
+    text-align: center;
+    border-radius: 10px;
+    max-width: 1266px;
+}
       .search_section{
          position: relative;
          top: -400px;
@@ -282,6 +280,8 @@
                      </select>
                      <select class="form-control mr-2 mb-2" name="city">
                            <option value="">Cities</option>
+                           <option value="sale">Chennai</option>
+                           <option value="sale">Chittoor</option>
                            
                      </select>
 

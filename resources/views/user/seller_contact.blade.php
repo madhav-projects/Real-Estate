@@ -13,7 +13,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="shortcut icon" href="{{ asset('images/logo md.png') }}" type="">
-    <title>RealEstate</title>
+    <title>LuxeDwell</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}" />
     <!-- Font Awesome Style -->

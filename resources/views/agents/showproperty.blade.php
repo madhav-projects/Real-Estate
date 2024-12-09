@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealEstate-Admin</title>
+    <title>RealEstate-Agent</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="images/logo md.png" type="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
