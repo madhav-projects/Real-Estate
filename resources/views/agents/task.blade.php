@@ -88,44 +88,48 @@
     </div>
 
     <script>
-        function fetchTasks() {
-            $.ajax({
-                url: '{{ url('fetch_task') }}',
-                method: 'GET',
-                success: function(response) {
-                    console.log(response);
-                    const taskTableBody = $('#taskTableBody');
-                    const alertMessage = $('#alertMessage');
-                    taskTableBody.empty();
-                    alertMessage.hide();
+       function fetchTasks() {
+    $.ajax({
+        url: '{{ url('fetch_task') }}',
 
-                    if (response.assigntask && response.assigntask.length > 0) {
-                        response.assigntask.forEach(function(task) {
-                            const row = `
-                                <tr>
-                                    <td>${task.id}</td>
-                                    <td>${task.agent_name}</td>
-                                    <td>${task.task}</td>
-                                    <td>${task.due_date}</td>
-                                </tr>
-                            `;
-                            taskTableBody.append(row);
-                        });
-                    } else {
-                        alertMessage.text('No tasks found for this user.').show();
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error fetching tasks:', error);
-                    const alertMessage = $('#alertMessage');
-                    alertMessage.text('Error fetching tasks. Please try again later.').show();
-                }
-            });
+        method: 'GET',
+        success: function(response) {
+            console.log('Success:', response); // Log the response for debugging
+            const taskTableBody = $('#taskTableBody');
+            const alertMessage = $('#alertMessage');
+            taskTableBody.empty(); // Clear existing rows
+            alertMessage.hide();
+
+            if (response.assigntask && response.assigntask.length > 0) {
+                // Iterate through the fetched tasks and create table rows
+                response.assigntask.forEach(function(task) {
+                    const row = `
+                        <tr>
+                            <td>${task.id}</td>
+                            <td>${task.agent_name}</td>
+                            <td>${task.task}</td>
+                            <td>${task.due_date}</td>
+                        </tr>
+                    `;
+                    taskTableBody.append(row); // Append row to table body
+                });
+            } else {
+                alertMessage.text('No tasks found for this user.').show();
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error); // Log any errors
+            const alertMessage = $('#alertMessage');
+            alertMessage.text('Error fetching tasks. Please try again later.').show();
         }
+    });
+}
 
-        $(document).ready(function() {
-            fetchTasks();
-        });
+$(document).ready(function() {
+    fetchTasks(); // Fetch tasks when the document is ready
+});
+
+
     </script>
 </body>
 </html>

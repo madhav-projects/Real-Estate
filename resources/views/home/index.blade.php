@@ -183,28 +183,39 @@
       }
       .primeplex-caption {
     position: absolute;
-    left: 30%;
-    top: 25%;
+    left: 27%;
+    top: 2%;
     transform: translate(-50%, -50%);
-    color: black;
-    text-shadow: 5px 2px 4px rgb(255 255 255 / 148%);
-    /* background: rgb(255 255 255 / 70%); */
     padding: 10px;
     border-radius: 5px;
     font-size: 3em;
     opacity: 0;
-    animation: fadeInUp 2s forwards;
+    animation: fadeInUp 2s forwards, logoGradientAnimation 5s infinite;
+    background: linear-gradient(45deg, #FF5733, #FFC300, #DAF7A6, #C70039); /* Replace with your logo colors */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-      @keyframes fadeInUp {
-         0% {
-            opacity: 0;
-            transform: translateY(20px);
-         }
-         100% {
-            opacity: 1;
-            transform: translateY(0);
-         }
-      }
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes logoGradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+} 
+
       .about-description {
     margin: 6px 150px;
     padding: 9px;
@@ -213,17 +224,17 @@
     border-radius: 10px;
     max-width: 1266px;
 }
-      .search_section{
-         position: relative;
-         top: -400px;
-         left: -10px;
-         width: 630px;
-         margin: 0 auto;
-         background: rgba(0, 0, 0, 0.5);
-         padding: 20px;
-         color: #fff;
-         text-align: center;
-      }
+.search_section {
+    position: relative;
+    top: -535px;
+    left: -10px;
+    width: 705px;
+    margin: 67px auto;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 39px;
+    color: #fff;
+    text-align: center;
+}
       
    </style>
 </head>

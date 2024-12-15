@@ -221,8 +221,8 @@ body::before {
     font-weight: bold;
     font-size: 24px;
     color: white;
-    margin-bottom: 20px;
-    padding: 20px;
+    margin-bottom: -14px;
+    /* padding: 20px; */
 }
 
 .table-section {

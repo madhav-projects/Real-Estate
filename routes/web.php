@@ -71,7 +71,8 @@ Route::get('/view_properties', [AdminController::class, 'view_properties']);
 Route::post('/add_property',[AdminController::class,'addproperty'])->name('add_property');
 Route::get('/show_properties',[AdminController::class,'show_properties']);
 Route::get('/edit_property/{id}', [AgentController::class, 'editProperty'])->name('edit.property');
-Route::post('/update_property/{id}', [AgentController::class, 'update'])->name('update_property');
+Route::post('/update_property/{id}', [AgentController::class, 'update'])->name('property.update');
+
 
 
 // Route::get('/property/{id}', [AgentController::class, 'edit'])->name('property.edit');
@@ -90,5 +91,5 @@ Route::get('/user_contact', [AgentController::class, 'showContactPage'])->name('
 Route::post('/agent_Message', [AgentController::class, 'sendAgentMessage']);
 
 // agebt
-Route::get('/fetch_task',[AgentController::class,'fetchtask']);
+Route::get('fetch_task', [AgentController::class, 'fetchTasks']);
 require __DIR__.'/auth.php';

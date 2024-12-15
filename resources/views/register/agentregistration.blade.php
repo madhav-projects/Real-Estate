@@ -209,13 +209,14 @@
                             <input class="form-control" id="companyageRealtron" name="age_of_company" type="text" placeholder="Age of Company" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="fileuploadRealtron">Company License</label>
-                            <input class="form-control" id="fileuploadRealtron" name="upload_file" type="file" accept=".pdf" required>
-                            <div class="invalid-feedback">
-                                Please upload a PDF file.
-                            </div>
-                        </div>
-                    </div>
+                <label for="fileuploadRealtron">Company License</label>
+                <input class="form-control" id="fileuploadRealtron" name="upload_file" type="file" required>
+                <div class="invalid-feedback">
+                    Please upload a file.
+                </div>
+            </div>
+
+                                </div>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="profileimageRealtron">Company Profile</label>

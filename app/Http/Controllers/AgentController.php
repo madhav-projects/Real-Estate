@@ -244,23 +244,30 @@ public function update(Request $request, $id)
     
 
 
-    public function fetchtask()
-    {
-        $user = Auth::user(); // Get the authenticated user
-        $assigntask = Assigntask::where('agent_name', $user->name)->get(); // Fetch assigned tasks
-        // return response()->json($assigntask);
+public function fetchTasks()
+{
+    $user = Auth::user(); // Get the authenticated user
+    
+    // Fetch tasks assigned to the authenticated user
+    $assigntask = Assigntask::where('agent_name', $user->name)->get();
 
-        // Return the fetched categories in JSON format along with a custom message
-        if (request()->expectsjson()) {
-            return response()->json([
-                'message' => 'Properties fetched successfully',
-                'assigntask' => $assigntask,
-            ]);
-        } else {
-            return view('agents.task', compact('assigntask'));
-        }
+    // Debugging: Log the tasks and the user
+    \Log::info('Authenticated User:', ['user' => $user]);
+    \Log::info('Assigned Tasks:', ['tasks' => $assigntask]);
 
+    // Handle JSON and non-JSON responses
+    if (request()->expectsJson()) {
+        return response()->json([
+            'message' => 'Tasks fetched successfully',
+            'assigntask' => $assigntask,
+        ]);
     }
+
+    // For non-JSON requests, return the view with the data
+    return view('agents.task', compact('assigntask'));
+}
+
+
     public function showContactPage()
     {
         return view('user.user_contact'); // Ensure this view is created in resources/views

@@ -65,6 +65,7 @@ Route::get('/generate/{id}', [AgentController::class, 'showGeneratePage'])->name
 
 Route::get('/user_contact', [AgentController::class, 'showContactPage']);
 Route::post('/agent_Message', [AgentController::class, 'sendAgentMessage']);
+Route::get('fetch_task', [AgentController::class, 'fetchTasks']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

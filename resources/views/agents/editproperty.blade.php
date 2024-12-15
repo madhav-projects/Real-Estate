@@ -11,6 +11,7 @@
             font-family: 'Arial', sans-serif;
             background-size: cover;
             background-position: center;
+            background-image: url('/images/bgagent.png');
             background-attachment: fixed;
         }
         .container { margin-top: 50px; }
