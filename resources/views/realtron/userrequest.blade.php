@@ -96,7 +96,7 @@
 
                     if (response && response.selleruser && response.agent) {
                         var agentOptions = response.agent.map(function(agent) {
-                            return '<option value="' + agent.id + '">' + agent.username + ', ' + agent.city + '</option>';
+                            return '<option value="' + agent.id + '">' + agent.username + '</option>';
                         }).join('');
 
                         response.selleruser.forEach(function(selleruser) {
